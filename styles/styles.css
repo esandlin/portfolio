@@ -1,5 +1,5 @@
 html {
-	background-color: darkgray;
+	background-color: brown;
     background-image: url(../images/bg_wood_1.jpg);
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
@@ -13,6 +13,22 @@ html {
 	max-width: 65%;
 	padding: 5em 5em 5em 5em;
 	box-shadow: 10px 5em 5em black;
+}
+
+#pic {
+	width: 4cm;
+	height: 4cm;
+	margin-bottom: 0.7cm;
+	border-radius: 50%;
+	border: 0.15cm solid white;
+	object-fit: cover;
+	object-position: 50% 50%;
+}
+.container {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	height: 100%;
 }
 
 canvas {
