@@ -27,6 +27,7 @@ html {
 .container {
 	display: flex;
 	flex-direction: row;
+    flex-wrap: wrap;
 	width: 100%;
 	height: 100%;
 }
@@ -208,4 +209,9 @@ div.desc {
 	.column {
 		width: 100%;
 	}
+}
+
+h4 p{
+    padding: 0;
+    margin: 0;
 }
