@@ -38,6 +38,10 @@ canvas {
 	margin: 0 auto;
 }
 
+.exception  {
+    background-color: crimson;
+}
+
 ul {
 	list-style-type: none;
 	margin: 0;
