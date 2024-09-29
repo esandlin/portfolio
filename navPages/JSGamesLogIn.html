@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="cleartype" content="on">
     <meta name="author" content="Eric Sandlin">
+    <script src="../javaScript/JSGamesLogin.js"></script>
   </head>
   <body class="wrapper">
     <header>
@@ -20,11 +21,8 @@
           <a href="../index.html">Home</a>
         </li>
         <li>
-          <a href="JSGamesLogIn.html">JavaScript Games</a>
+          <a href="JSGamesLogIn.html">Login</a>
         </li>
-        <!--<li>
-          <a href="GDTA.html">Game Development Testing Area</a>
-        </li>-->
         <li>
           <a href="contact.html">Contact</a>
         </li>
@@ -36,9 +34,14 @@
         </li>
       </ul>
     </header>
-    <h1>Eric Sandlin's Portfolio</h1>
-    <p>Attached to my interactive protfolio website you will find javaScript games.</p>
-    <form action="action_page.php" method="post">
+      
+    <h1>Eric Sandlin's Game Development Testing Area</h1><br/>
+    <h2>Authorized Personnel Only</h2><br/>
+    <h2>Enter Passcode to Access the Link</h2>
+    <input type="password" id="passcode" placeholder="Enter passcode" />
+    <button onclick="checkPasscode()">Submit</button>
+      
+      <!--<form action="action_page.php" method="post">
       <div class="imgcontainer">
         <img src="img_avatar2.png" alt="Avatar" class="avatar">
       </div>
@@ -70,10 +73,13 @@
       </div>
       <br>
       <br>
-    </form>
+        <div>
+            <h4>The buttons below will be deleted after backend is up.</h4>
+            <a href="JSGames.html"><button class="exception">Go to JS Games</button></a>
+            <a href="GDTA.html"><button class="exception">Go to GDTA</button></a>
+        </div>
+    </form>-->
+      
     <footer>&copy; Copyright 2024</footer>
-      <h4>The buttons below will be deleted after backend is up.</h4>
-      <a href="JSGames.html"><button class="exception">Go to JS Games</button></a>
-      <a href="GDTA.html"><button class="exception">Go to GDTA</button></a>
   </body>
 </html>
