@@ -23,9 +23,9 @@ My proficiency spans across a wide array of programming languages, frameworks, a
 
 ## Portfolio Highlights
 
-- **Project A:** Led the development of a scalable e-commerce platform from conception to deployment, resulting in a [X]% increase in sales within the first quarter of launch.
-- **Project B:** Engineered a real-time data analytics dashboard using [technology], providing actionable insights that optimized operational efficiency by [X]%.
-- **Project C:** Contributed to an open-source project [Project Name/Link] aimed at [brief description], garnering [X] stars and [X] forks on GitHub.
+- **Project A:** A responsive portfolio site built with HTML, CSS, and JavaScript.
+- **Project B:** Web-based games built using JavaScript.
+- **Project C:** A Java based stand along applicaton
 
 ## Passion for Collaboration
 
@@ -33,4 +33,4 @@ I thrive in collaborative environments where diverse perspectives converge to dr
 
 ## Let's Connect
 
-I am passionate about leveraging technology to solve real-world problems and would love to discuss how I can contribute to your next project. Feel free to reach out via [Email/LinkedIn/Portfolio Link] to explore potential opportunities for collaboration.
+I am passionate about leveraging technology to solve real-world problems and would love to discuss how I can contribute to your next project. Feel free to reach out via www.ericsandlin.com/contact/ to explore potential opportunities for collaboration.
