@@ -51,11 +51,12 @@ img {
 	border-radius: 50%;
 	border: 0.15cm solid white;
 	object-fit: cover;
+	 50% 50%;
 }
 
 .leftPanel {
 	width: 27%;
-	background-color: #000;
+	background-color: #ADD8E6;
 	padding: 0.7cm;
 	display: flex;
 	flex-direction: column;
