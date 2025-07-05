@@ -1,136 +1,83 @@
-// Define constants
-var CANVAS_WIDTH = 400;
-var CANVAS_HEIGHT = 400;
-var CELL_SIZE = 20;
-var INITIAL_LENGTH = 5;
-var GAME_SPEED = 100;
-// Define directions
-var UP = 0;
-var DOWN = 1;
-var LEFT = 2;
-var RIGHT = 3;
-// Initialize variables
-var canvas;
-var ctx;
-var snake;
-var food;
-var direction;
-// Initialize the game
-function init() {
-	canvas = document.getElementById('snakeCanvas');
-	ctx = canvas.getContext('2d');
-	canvas.width = CANVAS_WIDTH;
-	canvas.height = CANVAS_HEIGHT;
-	direction = RIGHT;
-	snake = [];
-	for (var i = 0; i < INITIAL_LENGTH; i++) {
-		snake.push({
-			x: i,
-			y: 0
-		});
-	}
-	generateFood();
-	// Start the game loop
-	setInterval(gameLoop, GAME_SPEED);
-}
-// Main game loop
-function gameLoop() {
-	update();
-	draw();
-}
-// Update game state
-function update() {
-	// Move the snake
-	var head = {
-		x: snake[0].x,
-		y: snake[0].y
-	};
-	switch (direction) {
-		case UP:
-			head.y--;
-			break;
-		case DOWN:
-			head.y++;
-			break;
-		case LEFT:
-			head.x--;
-			break;
-		case RIGHT:
-			head.x++;
-			break;
-	}
-	// Check for collisions
-	if (head.x < 0 || head.x >= CANVAS_WIDTH / CELL_SIZE || head.y < 0 || head.y >= CANVAS_HEIGHT / CELL_SIZE || checkCollision(head, snake)) {
-		// Game over
-		init();
-		return;
-	}
-	// Check for food
-	if (head.x === food.x && head.y === food.y) {
-		// Grow the snake
-		snake.unshift(head);
-		generateFood();
-	} else {
-		// Move the snake
-		snake.pop();
-		snake.unshift(head);
-	}
-}
-// Generate food at a random position
-function generateFood() {
-	var x = Math.floor(Math.random() * (CANVAS_WIDTH / CELL_SIZE));
-	var y = Math.floor(Math.random() * (CANVAS_HEIGHT / CELL_SIZE));
-	food = {
-		x: x,
-		y: y
-	};
-}
-// Draw the game
-function draw() {
-	// Clear the canvas
-	ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-	// Draw the snake
-	ctx.fillStyle = '#00FF00';
-	snake.forEach(function(segment) {
-		ctx.fillRect(segment.x * CELL_SIZE, segment.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-	});
-	// Draw the food
-	ctx.fillStyle = '#FF0000';
-	ctx.fillRect(food.x * CELL_SIZE, food.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-}
-// Check if the snake collides with itself
-function checkCollision(head, array) {
-	for (var i = 0; i < array.length; i++) {
-		if (head.x === array[i].x && head.y === array[i].y) {
-			return true;
-		}
-	}
-	return false;
-}
-// Handle key presses
-document.addEventListener('keydown', function(event) {
-	switch (event.keyCode) {
-		case 38: // Up arrow
-			if (direction !== DOWN) {
-				direction = UP;
-			}
-			break;
-		case 40: // Down arrow
-			if (direction !== UP) {
-				direction = DOWN;
-			}
-			break;
-		case 37: // Left arrow
-			if (direction !== RIGHT) {
-				direction = LEFT;
-			}
-			break;
-		case 39: // Right arrow
-			if (direction !== LEFT) {
-				direction = RIGHT;
-			}
-			break;
-	}
-});
-// Start the game
-init();
+
+    const canvas = document.getElementById('snakeCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Positions for two stick figures
+    const staticFigure = { x: 100, y: 200, color: 'blue' };
+    const movingFigure = { x: 300, y: 200, color: 'red' };
+
+    const moveAmount = 20;
+
+    // Touch coordinates
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    // Draw function
+    function drawStickFigure(x, y, color) {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 3;
+
+      // Head
+      ctx.beginPath();
+      ctx.arc(x, y - 30, 10, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Body
+      ctx.beginPath();
+      ctx.moveTo(x, y - 20);
+      ctx.lineTo(x, y + 20);
+      ctx.stroke();
+
+      // Arms
+      ctx.beginPath();
+      ctx.moveTo(x - 15, y);
+      ctx.lineTo(x + 15, y);
+      ctx.stroke();
+
+      // Legs
+      ctx.beginPath();
+      ctx.moveTo(x, y + 20);
+      ctx.lineTo(x - 10, y + 40);
+      ctx.moveTo(x, y + 20);
+      ctx.lineTo(x + 10, y + 40);
+      ctx.stroke();
+    }
+
+    // Redraw canvas
+    function drawScene() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawStickFigure(staticFigure.x, staticFigure.y, staticFigure.color);
+      drawStickFigure(movingFigure.x, movingFigure.y, movingFigure.color);
+    }
+
+    // Touch Handlers
+    canvas.addEventListener('touchstart', (e) => {
+      const touch = e.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    });
+
+    canvas.addEventListener('touchend', (e) => {
+      const touch = e.changedTouches[0];
+      const dx = touch.clientX - touchStartX;
+      const dy = touch.clientY - touchStartY;
+
+      if (Math.abs(dx) > Math.abs(dy)) {
+        if (dx > 30) {
+          movingFigure.x += moveAmount; // swipe right
+        } else if (dx < -30) {
+          movingFigure.x -= moveAmount; // swipe left
+        }
+      } else {
+        if (dy > 30) {
+          movingFigure.y += moveAmount; // swipe down
+        } else if (dy < -30) {
+          movingFigure.y -= moveAmount; // swipe up
+        }
+      }
+
+      drawScene();
+    });
+
+    // Initial draw
+    drawScene();
