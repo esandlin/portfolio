@@ -2,105 +2,93 @@
 <html lang="en">
 
 <head>
-  <title>Professional Portfolio</title>
-  <link rel="stylesheet" href="styles/index.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="A SE portfolio for Eric Sandlin">
-  <meta name="keywords" content="Eric, Sandlin, eric, sandlin, portfolio, Portfolio, SE portfolio">
+  <meta name="keywords" content="Eric Sandlin, portfolio, software engineering">
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="cleartype" content="on">
   <meta name="author" content="Eric Sandlin">
+
+  <title>Professional Portfolio</title>
+
+  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
 </head>
-<div class="container-fluid">
+
 <body class="wrapper">
+
   <header>
     <nav>
       <ul>
-        <li>
-          <a href="index.html">Home</a>
-        </li>
-        <li>
-          <a href="navPages/JSGamesLogIn.html">Login</a>
-        </li>
-        <li>
-          <a href="navPages/contact.html">Contact</a>
-        </li>
-        <li>
-          <a href="navPages/resumes.html" target="_blank">Résumé</a>
-        </li>
-        <li>
-          <a href="navPages/certifications.html">Certifications</a>
-        </li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="navPages/JSGamesLogIn.html">Login</a></li>
+        <li><a href="navPages/contact.html">Contact</a></li>
+        <li><a href="navPages/resumes.html" target="_blank">Résumé</a></li>
+        <li><a href="navPages/certifications.html">Certifications</a></li>
       </ul>
     </nav>
   </header>
 
-  <div>
-    <h1>Eric Sandlin's Portfolio</h1>
-    <img class="img-responsive rounded-circle" id="pic" src="images/img_me.jpg" alt="avatar">
-    <p>Industrial | Engineering | Maintenance | Technician </p>
-  </div>
+  <main>
+    <h1 class="text-center">Eric Sandlin's Portfolio </h1>
+    <img class="img-responsive" id="pic" src="images/img_me.jpg" alt="avatar">
+    <p class="text-center">Industrial | Engineering | Maintenance | Technician</p>
 
-  <section id="about" class="container">
-    
-    <section>
-        <h2>Welcome to my Interactive Portfolio</h2>
-        <p>Designed to showcase my talents and accomplishments. Here, you'll find:</p>
-        <ul>
-            <li><strong>Work Projects</strong>: Detailed insights into the challenges I've tackled and the innovative solutions I've implemented.</li>
-            <li><strong>Work History</strong>: A comprehensive overview of my career path and professional milestones.</li>
-            <li><strong>Resumes</strong>: Up-to-date resumes tailored to highlight my expertise and achievements.</li>
-            <li><strong>Contact Information</strong>: Convenient ways to reach out to me for questions or potential collaborations.</li>
-        </ul>
+    <section id="about">
+      <h2>Welcome to my Interactive Portfolio</h2>
+      <p>Designed to showcase my talents and accomplishments. Here, you'll find:</p>
+      <ul>
+        <li><strong>Work Projects</strong>: Challenges tackled and solutions implemented.</li>
+        <li><strong>Work History</strong>: A timeline of my professional experience.</li>
+        <li><strong>Resumes</strong>: Highlighting skills and qualifications.</li>
+        <li><strong>Contact Info</strong>: Reach out for questions or opportunities.</li>
+      </ul>
+
+      <p>This site is built to share my journey and connect with like-minded professionals and potential employers.</p>
+      <p>Employers needing immediate responses can contact me via the <strong>Contact Me</strong> section.</p>
     </section>
 
-    <section>
-        <p>This site is designed not only to share my journey but also to connect with like-minded professionals and potential employers. If you have any questions or would like to discuss opportunities, feel free to use the <strong>"Contact Me"</strong> section.</p>
-        <p>For employers needing immediate responses, please contact me directly through my private phone number provided in the <strong>"Contact Me"</strong> section.</p>
+    <section id="skills">
+      <h2>Skills</h2>
+      <ul class="skills-list">
+        <li>HTML &amp; CSS</li>
+        <li>JavaScript</li>
+        <li>C &amp; C&#43;&#43;</li>
+        <li>Java</li>
+        <li>Python</li>
+        <li>UI/UX Design</li>
+      </ul>
     </section>
 
-    <footer>
-      <p>Thank you for visiting, and I hope you enjoy exploring my portfolio!</p>
-    </footer>
-  </section>
-
-  <section id="skills" class="container">
-    <h2>Skills</h2>
-    <ul class="skills-list">
-      <li>HTML &amp; CSS</li>
-      <li>JavaScript</li>
-      <li>C &amp; C&#43;&#43;</li>
-      <li>Java</li>
-      <li>Python</li>
-      <li>UI/UX Design</li>
-    </ul>
-  </section>
-
-  <section class="container">
-    <h2>Projects</h2>
-    <div class="project-grid">
-      <div class="project">
-        <h3>Project One</h3>
-        <p>A responsive portfolio site built with HTML, CSS, and JavaScript.</p>
-        <a href="#">View Project</a>
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="project-grid">
+        <div class="project">
+          <h3>Project One</h3>
+          <p>Responsive portfolio site built with HTML, CSS, and JavaScript.</p>
+          <a href="#">View Project</a>
+        </div>
+        <div class="project">
+          <h3>Project Two</h3>
+          <p>Web-based games built using JavaScript.</p>
+          <a href="navPages/JSGamesLogIn.html">View Project</a>
+        </div>
+        <div class="project">
+          <h3>Project Three</h3>
+          <p>Java-based standalone CRM application.</p>
+          <a href="#">View Project</a>
+        </div>
       </div>
-      <div class="project">
-        <h3>Project Two</h3>
-        <p>Web-based games built using JavaScript</p>
-        <a href="navPages/JSGamesLogIn.html">View Project</a>
-      </div>
-      <div class="project">
-        <h3>Project Three</h3>
-        <p>A Java based stand along CRM applicaton</p>
-        <a href="#">View Project</a>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
+  <footer>
+    <p>Thank you for visiting! I hope you enjoy exploring my portfolio.</p>
+  </footer>
 </body>
-</div>
 </html>
