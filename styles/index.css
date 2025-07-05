@@ -12,6 +12,10 @@
         background-color: #808080;
     }
 
+    ul {
+    	list-style-type: none; /* Remove bullets */
+    }
+
     header ul {
       padding: 0;
       list-style-type: none;
