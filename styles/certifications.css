@@ -1,0 +1,135 @@
+/* Global box-sizing */
+* {
+  box-sizing: border-box;
+}
+
+/* Navigation bar */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #007BFF;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+li {
+  flex: 1 0 auto;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+/* Gallery styles */
+div.gallery {
+  border: 1px solid #ccc;
+  margin-top: 2em;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+/* Layout wrapper */
+.wrapper {
+  background-color: #808080;
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 5em;
+  box-shadow: 10px 5em 5em black;
+}
+
+/* Flexible container */
+.container {
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* Avatar container */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+/* Responsive image columns */
+.responsive,
+.column {
+  padding: 0 6px;
+  float: left;
+  width: 24.99999%;
+}
+
+/* Clear floats */
+.clearfix::after,
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Section padding */
+#projects {
+  padding: 40px 0;
+}
+
+/* Media Queries for Mobile */
+@media screen and (max-width: 768px) {
+  .responsive,
+  .column {
+    width: 50%;
+    padding: 5px;
+  }
+
+  .wrapper {
+    margin: 0 5%;
+    padding: 2em;
+  }
+
+  li {
+    flex: 100%;
+  }
+
+  li a {
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .responsive,
+  .column {
+    width: 100%;
+    padding: 5px 0;
+  }
+
+  .wrapper {
+    padding: 1em;
+  }
+
+  li a {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
