@@ -1,0 +1,150 @@
+/* Base Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: #808080;
+
+}
+
+body.wrapper {
+  background-color: ghostwhite;
+  padding: 2em 1em;
+  margin: 0 auto;
+  max-width: 800px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+header {
+  margin-bottom: 1em;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #333;
+  list-style: none;
+}
+
+.nav li {
+  margin: 0.5em;
+}
+
+.nav a {
+  display: block;
+  padding: 0.75em 1em;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.nav a:hover {
+  background-color: #111;
+}
+
+/* Content and Forms */
+.content {
+  text-align: center;
+  padding: 1em;
+}
+
+form {
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 1.5em;
+  background-color: #fff;
+  margin-top: 1em;
+  text-align: left;
+}
+
+fieldset {
+  border: none;
+  margin-bottom: 1em;
+}
+
+label {
+  display: block;
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="file"],
+textarea {
+  width: 100%;
+  padding: 0.75em;
+  margin-top: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.checkbox-label {
+  display: block;
+  margin-bottom: 1em;
+  font-size: 0.9em;
+}
+
+.checkbox-label input {
+  margin-right: 0.5em;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 1em;
+  font-size: 1.1em;
+  background-color: #04AA6D;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #038a5c;
+}
+
+/* Responsive Behavior */
+@media (max-width: 768px) {
+  body.wrapper {
+    padding: 1em;
+  }
+
+  .nav {
+    flex-direction: column;
+  }
+
+  .nav li {
+    margin: 0.25em 0;
+  }
+
+  form {
+    padding: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5em;
+  }
+
+  .submit-button {
+    font-size: 1em;
+    padding: 0.8em;
+  }
+
+  label {
+    font-size: 1em;
+  }
+}
