@@ -23,7 +23,7 @@ li a {
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 0.875em 1em; /* 14px 16px */
   text-decoration: none;
 }
 
@@ -33,12 +33,12 @@ li a:hover {
 
 /* Gallery styles */
 div.gallery {
-  border: 1px solid #ccc;
+  border: 0.0625em solid #ccc; /* 1px */
   margin-top: 2em;
 }
 
 div.gallery:hover {
-  border: 1px solid #777;
+  border: 0.0625em solid #777;
 }
 
 div.gallery img {
@@ -47,7 +47,7 @@ div.gallery img {
 }
 
 div.desc {
-  padding: 15px;
+  padding: 0.9375em; /* 15px */
   text-align: center;
 }
 
@@ -55,14 +55,14 @@ div.desc {
 .wrapper {
   background-color: #808080;
   margin: 0 auto;
-  max-width: 1000px;
+  max-width: 62.5em; /* 1000px */
   padding: 5em;
-  box-shadow: 10px 5em 5em black;
+  box-shadow: 0.625em 5em 5em black; /* 10px 80px 80px */
 }
 
 /* Flexible container */
 .container {
-  padding: 16px;
+  padding: 1em; /* 16px */
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -71,13 +71,13 @@ div.desc {
 /* Avatar container */
 .imgcontainer {
   text-align: center;
-  margin: 24px 0 12px 0;
+  margin: 1.5em 0 0.75em 0; /* 24px 0 12px 0 */
 }
 
 /* Responsive image columns */
 .responsive,
 .column {
-  padding: 0 6px;
+  padding: 0 0.375em; /* 6px */
   float: left;
   width: 24.99999%;
 }
@@ -92,15 +92,15 @@ div.desc {
 
 /* Section padding */
 #projects {
-  padding: 40px 0;
+  padding: 2.5em 0; /* 40px */
 }
 
 /* Media Queries for Mobile */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48em) { /* 768px */
   .responsive,
   .column {
     width: 50%;
-    padding: 5px;
+    padding: 0.3125em; /* 5px */
   }
 
   .wrapper {
@@ -113,15 +113,15 @@ div.desc {
   }
 
   li a {
-    padding: 10px;
+    padding: 0.625em; /* 10px */
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 30em) { /* 480px */
   .responsive,
   .column {
     width: 100%;
-    padding: 5px 0;
+    padding: 0.3125em 0; /* 5px 0 */
   }
 
   .wrapper {
@@ -129,7 +129,7 @@ div.desc {
   }
 
   li a {
-    font-size: 14px;
-    padding: 8px;
+    font-size: 0.875em; /* 14px */
+    padding: 0.5em; /* 8px */
   }
 }

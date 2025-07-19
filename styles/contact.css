@@ -7,16 +7,15 @@
 
 html {
   background-color: #808080;
-
 }
 
 body.wrapper {
   background-color: ghostwhite;
   padding: 2em 1em;
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 50em; /* 800px */
   font-family: Arial, sans-serif;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0.9375em rgba(0, 0, 0, 0.3); /* 15px */
 }
 
 header {
@@ -40,7 +39,7 @@ header {
   padding: 0.75em 1em;
   color: white;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 0.3125em; /* 5px */
   text-align: center;
   transition: background-color 0.3s;
 }
@@ -56,8 +55,8 @@ header {
 }
 
 form {
-  border: 2px solid #ddd;
-  border-radius: 10px;
+  border: 0.125em solid #ddd; /* 2px */
+  border-radius: 0.625em; /* 10px */
   padding: 1.5em;
   background-color: #fff;
   margin-top: 1em;
@@ -82,8 +81,8 @@ textarea {
   width: 100%;
   padding: 0.75em;
   margin-top: 0.5em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 0.0625em solid #ccc; /* 1px */
+  border-radius: 0.3125em; /* 5px */
 }
 
 textarea {
@@ -107,7 +106,7 @@ textarea {
   background-color: #04AA6D;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.3125em; /* 5px */
   cursor: pointer;
 }
 
@@ -116,7 +115,7 @@ textarea {
 }
 
 /* Responsive Behavior */
-@media (max-width: 768px) {
+@media (max-width: 48em) { /* 768px */
   body.wrapper {
     padding: 1em;
   }
@@ -134,7 +133,7 @@ textarea {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 30em) { /* 480px */
   h1 {
     font-size: 1.5em;
   }
