@@ -14,14 +14,20 @@
   box-shadow: 0.625em 5em 5em black; /* 10px 80px 80px */
 }
 
-/* NAVIGATION */
+/* Navigation bar */
 ul {
-  list-style: none;
-  background-color: #007BFF;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
+  background-color: #007BFF;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+li {
+  flex: 1 0 auto;
 }
 
 li a {
@@ -30,12 +36,12 @@ li a {
   text-align: center;
   padding: 0.875em 1em; /* 14px 16px */
   text-decoration: none;
-  transition: background 0.3s;
 }
 
 li a:hover {
   background-color: #111;
 }
+
 
 /* IMAGE STYLES */
 img.avatar {
@@ -99,3 +105,94 @@ img.avatar {
   width: 33.33%;
   padding: 0.3125em; /* 5px */
 }
+
+//+++++++++++++
+    /* Responsive Utilities */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background-color: #333;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    ul li {
+      margin: 0;
+    }
+
+    ul li a {
+      display: block;
+      color: white;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    ul li a:hover {
+      background-color: #111;
+    }
+
+    h4 {
+      text-align: center;
+      margin: 1.5em 0;
+      font-size: 1.2em;
+    }
+
+    .resume-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .resume-card {
+      flex: 1 1 calc(33.333% - 40px);
+      max-width: 300px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .resume-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .resume-card figcaption {
+      padding: 10px;
+      font-size: 0.9em;
+    }
+
+    .resume-card a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .resume-card a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .resume-card {
+        flex: 1 1 calc(50% - 40px);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .resume-card {
+        flex: 1 1 100%;
+      }
+    }

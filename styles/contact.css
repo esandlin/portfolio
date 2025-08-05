@@ -18,33 +18,31 @@ body.wrapper {
   box-shadow: 0 0 0.9375em rgba(0, 0, 0, 0.3); /* 15px */
 }
 
-header {
-  margin-bottom: 1em;
-}
-
-.nav {
+/* Navigation bar */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #007BFF;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: #333;
-  list-style: none;
 }
 
-.nav li {
-  margin: 0.5em;
+li {
+  flex: 1 0 auto;
 }
 
-.nav a {
+li a {
   display: block;
-  padding: 0.75em 1em;
   color: white;
-  text-decoration: none;
-  border-radius: 0.3125em; /* 5px */
   text-align: center;
-  transition: background-color 0.3s;
+  padding: 0.875em 1em; /* 14px 16px */
+  text-decoration: none;
 }
 
-.nav a:hover {
+li a:hover {
   background-color: #111;
 }
 

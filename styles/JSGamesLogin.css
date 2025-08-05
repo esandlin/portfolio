@@ -7,6 +7,45 @@ body, html {
   background-color: #808080;
 }
 
+/* Layout wrapper */
+.wrapper {
+  background-color: #808080;
+  margin: 0 auto;
+  max-width: 62.5em; /* 1000px */
+  padding: 5em;
+  box-shadow: 0.625em 5em 5em black; /* 10px 80px 80px */
+}
+
+/* Navigation bar */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #007BFF;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+li {
+  flex: 1 0 auto;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 0.875em 1em; /* 14px 16px */
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+
+/*
 header nav ul {
   display: flex;
   flex-direction: column;
@@ -24,7 +63,7 @@ header nav ul li a {
   display: block;
   width: 100%;
   padding: 0.75em; /* 12px */
-  color: white;
+/*  color: white;
   background-color: #333;
   text-decoration: none;
 }
@@ -32,7 +71,7 @@ header nav ul li a {
 header nav ul li a:hover {
   background-color: #111;
 }
-
+**/
 main {
   padding: 1.25em; /* 20px */
 }
