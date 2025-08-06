@@ -52,6 +52,10 @@ nav li a:hover {
     margin-top: 0.5em;
 }
 
+ul {
+        list-style-type: none;
+}
+
 img#pic {
     max-width: 200px;
     height: auto;
@@ -96,3 +100,4 @@ footer {
         margin: 0.625em;
     }
 }
+
