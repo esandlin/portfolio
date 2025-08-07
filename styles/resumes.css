@@ -5,15 +5,28 @@
     padding: 0;
 }
 
+body,
+html {
+    font-family: Arial, sans-serif;
+    padding: 0.9375em;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #808080;
+}
+
 /* Responsive Container Wrapper */
 .wrapper {
-    background-color: #808080;
+    background-color: #e8e8e8;
     margin: 0 auto;
-    max-width: 60em;
-    /* 960px */
-    padding: 3em;
+    max-width: 62.5em;
+    /* 1000px */
+    /*padding: 5em;*/
     box-shadow: 0.625em 5em 5em black;
     /* 10px 80px 80px */
+    font-family: Arial, sans-serif;
+    padding: 0.9375em;
+    text-align: center;
 }
 
 /* IMAGE STYLES */

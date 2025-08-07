@@ -5,9 +5,33 @@
   padding: 0;
 }
 
+body,
+html {
+    font-family: Arial, sans-serif;
+    padding: 0.9375em;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #808080;
+}
+
+/* Layout wrapper */
+.wrapper {
+    background-color: #e8e8e8;
+    margin: 0 auto;
+    max-width: 62.5em;
+    /* 1000px */
+    /*padding: 5em;*/
+    box-shadow: 0.625em 5em 5em black;
+    /* 10px 80px 80px */
+    font-family: Arial, sans-serif;
+    padding: 0.9375em;
+    text-align: center;
+}
+
 body {
   font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
+  background-color: #e8e8e8;
   color: #333;
   line-height: 1.6;
   padding: 1em; /* 16px */

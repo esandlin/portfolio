@@ -2,6 +2,16 @@
  *  @ author - eric sandlin
 */
 
+body,
+html {
+    font-family: Arial, sans-serif;
+    padding: 0.9375em;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #808080;
+}
+
 /* Layout wrapper */
 .wrapper {
     background-color: #e8e8e8;
