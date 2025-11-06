@@ -1,63 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- Declares the document as HTML5 -->
+
+<html lang="en" data-theme="light">
+<!-- Sets the document language to English and applies a light theme via data attribute -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta http-equiv="cleartype" content="on">
-    <meta name="author" content="Eric Sandlin">
-    <title>Home Page</title>
+    <!-- Sets character encoding for the document to UTF-8 -->
+    <meta charset="UTF-8" />
+
+    <!-- Ensures compatibility mode is disabled for older IE browsers -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Enables responsive design by controlling layout on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Basic SEO metadata for description and keywords -->
+    <meta name="description" content="A SE portfolio for Eric Sandlin" />
+    <meta name="keywords" content="Eric Sandlin, portfolio" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta http-equiv="cleartype" content="on" />
+    <meta name="author" content="Eric Sandlin" />
+
+    <!-- Open Graph metadata for link previews on social media -->
+    <meta property="og:title" content="Eric Sandlin – Portfolio">
+    <meta property="og:image" content="path-to-profile.jpg">
+    <meta property="og:description" content="22+ year Navy veteran and engineer specializing in maintenance, leadership and tech.">
+    <meta property="og:url" content="https://ericsandlin.com">
+
+    <!-- Title displayed in the browser tab -->
+    <title>Game Login</title>
+
+    <!-- Custom CSS for styling this login page -->
     <link rel="stylesheet" href="../styles/JSGamesLogin.css">
-    <script src="../javaScript/JSGamesLogin.js" defer></script>
+
 </head>
 
 <body class="wrapper">
+    <!-- Main wrapper for site layout -->
+
+    <!-- Header section containing hamburger menu and site navigation -->
     <header role="banner">
+        <!-- Hamburger icon used for toggling navigation (especially on mobile) -->
         <div class="menu-icon" id="menu-toggle">
             <span></span>
             <span></span>
             <span></span>
         </div>
 
+        <!-- Navigation links -->
         <nav class="nav" id="nav-menu">
             <ul>
+                <!-- Navigation items linking to various site sections -->
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="JSGamesLogIn.html">Login</a></li>
-                <li><a href="contact.html">Contact</a></li>
                 <li><a href="resumes.html" target="_blank">Résumé</a></li>
                 <li><a href="certifications.html">Certifications</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Main content area -->
     <main>
+        <!-- Page title and warning message -->
         <h1>Eric Sandlin's Game Development Testing Area</h1>
         <h2>Authorized Personnel Only</h2>
         <h2>Enter Passcode to Access the Link</h2>
 
+        <!-- Passcode form for access control -->
         <form id="passcodeForm">
+            <!-- Password input field with placeholder -->
             <input type="password" id="passcode" placeholder="Enter passcode" required />
+
+            <!-- Submit button -->
             <button type="submit">Submit</button>
         </form>
     </main>
 
+    <!-- Footer with copyright -->
     <footer>
         &copy; 2024 Eric Sandlin
     </footer>
 
     <script>
-        // Add event listener to handle both button click and Enter key
+        // JavaScript that handles passcode submission on Enter key or button click
         document.getElementById('passcodeForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent form reload
-            checkPasscode(); // Call your existing validation function
+            e.preventDefault(); // Prevent page reload on submit
+            checkPasscode(); // Custom function to validate passcode (defined in external JS file)
         });
     </script>
 </body>
+
+<!-- Footer containing navigation JavaScript -->
 <footer>
-    <script src="../javaScript/nav.js"></script>
+    <!-- JavaScript functionality for login page, loaded after HTML parses-->
+    <script src="../javaScript/nav.js" defer></script>
 </footer></html>
