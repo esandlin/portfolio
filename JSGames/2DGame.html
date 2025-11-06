@@ -1,41 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<!-- Declares this document as HTML5 -->
+
+<html lang="en" data-theme="light">
+<!-- Root element: sets language to English and includes a data attribute for theme (light/dark mode toggle) -->
+
+<head>
+    <!-- Title shown in the browser tab -->
     <title>2D Game</title>
+
+    <!-- External stylesheet for shared/global styling rules -->
     <link rel="stylesheet" href="../styles/styles.css">
+
+    <!-- Character encoding: UTF-8 covers most characters in modern languages -->
     <meta charset="utf-8">
+
+    <!-- Compatibility meta tag for IE (note: "IE-edge,chrome=1" might not be properly supported anymore) -->
     <meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1">
+
+    <!-- SEO and accessibility tags (currently left empty) -->
     <meta name="description" content="">
     <meta name="keywords" content="">
+
+    <!-- Mobile optimization tags for better rendering on small devices -->
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
+
+    <!-- Viewport settings for responsive layout across all screen sizes -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Improves text rendering on certain devices/browsers -->
     <meta http-equiv="cleartype" content="on">
+
+    <!-- Author metadata -->
     <meta name="author" content="Eric Sandlin">
-  </head>
-  <body class="wrapper">
+</head>
+
+<body class="wrapper">
+    <!-- Body content starts, wrapped with a class likely used for layout styling -->
+
+    <!-- Simple navigation menu inside the header -->
     <header>
-      <ul>
-        <li>
-          <a href="../index.html">Home</a>
-        </li>
-        <li>
-          <a href="../navPages/JSGamesLogIn.html">Login</a>
-        </li>
-        <li>
-          <a href="../navPages/contact.html">Contact</a>
-        </li>
-        <li>
-          <a href="../navPages/resume.html" target="_blank">Résumé</a>
-        </li>
-        <li>
-          <a href="../navPages/certifications.html">Certifications</a>
-        </li>
-      </ul>
+        <ul>
+            <!-- Navigation link to home page -->
+            <li>
+                <a href="../index.html">Home</a>
+            </li>
+
+            <!-- Link to login page for accessing games -->
+            <li>
+                <a href="../navPages/JSGamesLogIn.html">Login</a>
+            </li>
+
+            <!-- Link to résumé page (opens in a new tab) -->
+            <li>
+                <a href="../navPages/resume.html" target="_blank">Résumé</a>
+            </li>
+
+            <!-- Link to certifications page -->
+            <li>
+                <a href="../navPages/certifications.html">Certifications</a>
+            </li>
+        </ul>
     </header>
+
+    <!-- Heading indicating the purpose of the page -->
     <h1>This is the beginning of a 2D Game</h1>
     <h3>2D Game</h3>
+
+    <!-- Canvas element where the 2D game will be rendered -->
     <canvas id="gameCanvas"></canvas>
+
+    <!-- External JavaScript file for running the 2D game logic -->
     <script src="../javaScript/2DGame.js"></script>
-  </body>
-</html>
+</body></html>

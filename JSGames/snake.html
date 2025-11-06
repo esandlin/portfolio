@@ -1,43 +1,80 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<!-- Declares this as an HTML5 document -->
+
+<html lang="en" data-theme="light">
+<!-- Sets the language to English and includes a data-theme attribute for theme switching (light/dark mode) -->
+
+<head>
+    <!-- The title that appears on the browser tab -->
     <title>Snake Game</title>
+
+    <!-- Link to the main stylesheet for shared styles across the site -->
     <link rel="stylesheet" href="../styles/styles.css">
+
+    <!-- Character encoding set to UTF-8 to support all characters -->
     <meta charset="utf-8">
+
+    <!-- Directs Internet Explorer to use the latest rendering engine -->
     <meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1">
+
+    <!-- SEO metadata (currently blank; recommended to fill for search engine indexing) -->
     <meta name="description" content="">
     <meta name="keywords" content="">
+
+    <!-- Ensures proper layout and scaling on mobile devices -->
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Improves font rendering on certain Windows browsers -->
     <meta http-equiv="cleartype" content="on">
+
+    <!-- Author of the page -->
     <meta name="author" content="Eric Sandlin">
-  </head>
-  <body class="wrapper">
+</head>
+
+<body class="wrapper">
+    <!-- Wrapper class likely provides consistent layout or max-width styling -->
+
+    <!-- Navigation bar (unordered list of links) -->
     <header>
-      <ul>
-        <li>
-          <a href="../index.html">Home</a>
-        </li>
-        <li>
-          <a href="../navPages/JSGamesLogIn.html">Login</a>
-        </li>
-        <li>
-          <a href="../navPages/contact.html">Contact</a>
-        </li>
-        <li>
-          <a href="../navPages/resume.html" target="_blank">Résumé</a>
-        </li>
-        <li>
-          <a href="../navPages/certifications.html">Certifications</a>
-        </li>
-      </ul>
+        <ul>
+            <!-- Link to the home page -->
+            <li>
+                <a href="../index.html">Home</a>
+            </li>
+
+            <!-- Link to a login-protected game area -->
+            <li>
+                <a href="../navPages/JSGamesLogIn.html">Game Login</a>
+            </li>
+
+            <!-- Résumé page, opens in a new tab -->
+            <li>
+                <a href="../navPages/resume.html" target="_blank">Résumé</a>
+            </li>
+
+            <!-- Link to certifications page -->
+            <li>
+                <a href="../navPages/certifications.html">Certifications</a>
+            </li>
+        </ul>
     </header>
+
+    <!-- Game section headings -->
     <h1>This is the beginning of a 2D Game</h1>
     <h1>JS Games</h1>
+
+    <!-- Horizontal rule for visual separation -->
     <hr>
+
+    <!-- Specific sub-heading for the Snake game -->
     <h3>Snake Game</h3>
+
+    <!-- Canvas element where the Snake game will be drawn -->
     <canvas id="snakeCanvas" width="600" height="400"></canvas>
+    <!-- Canvas size is explicitly defined with width and height attributes -->
+
+    <!-- JavaScript file that contains the logic and rendering code for the Snake game -->
     <script src="../javaScript/snakeCanvas.js"></script>
-  </body>
-</html>
+</body></html>

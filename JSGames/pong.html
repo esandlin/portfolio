@@ -1,40 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<!-- Declares the document type as HTML5 -->
+
+<html lang="en" data-theme="light">
+<!-- Sets the language to English and defines a custom data attribute for light/dark theme toggling -->
+
+<head>
+    <!-- Title displayed in browser tab -->
     <title>Pong Game</title>
+
+    <!-- Link to external stylesheet for layout and visual styling -->
     <link rel="stylesheet" href="../styles/styles.css">
+
+    <!-- Character encoding: UTF-8 allows wide character support including symbols -->
     <meta charset="utf-8">
+
+    <!-- Compatibility for Internet Explorer and Chrome rendering -->
     <meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1">
+
+    <!-- SEO meta tags (currently empty, can be filled for better discoverability) -->
     <meta name="description" content="">
     <meta name="keywords" content="">
+
+    <!-- Enables optimization for mobile/handheld devices -->
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
+
+    <!-- Ensures responsive layout on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Improves text rendering for some browsers -->
     <meta http-equiv="cleartype" content="on">
+
+    <!-- Metadata for author information -->
     <meta name="author" content="Eric Sandlin">
-  </head>
-  <body class="wrapper">
+</head>
+
+<body class="wrapper">
+    <!-- Body begins. Wrapper class likely applies common layout styling -->
+
+    <!-- Header section with site navigation -->
     <header>
-      <ul>
-        <li>
-          <a href="../index.html">Home</a>
-        </li>
-        <li>
-          <a href="../navPages/JSGamesLogIn.html">Login</a>
-        </li>
-        <li>
-          <a href="../navPages/contact.html">Contact</a>
-        </li>
-        <li>
-          <a href="../navPages/resume.html" target="_blank">Résumé</a>
-        </li>
-        <li>
-          <a href="../navPages/certifications.html">Certifications</a>
-        </li>
-      </ul>
+        <ul>
+            <!-- Link to main homepage -->
+            <li>
+                <a href="../index.html">Home</a>
+            </li>
+
+            <!-- Link to the game login page (likely for restricted access) -->
+            <li>
+                <a href="../navPages/JSGamesLogIn.html">Game Login</a>
+            </li>
+
+            <!-- Résumé page link (opens in a new tab) -->
+            <li>
+                <a href="../navPages/resume.html" target="_blank">Résumé</a>
+            </li>
+
+            <!-- Link to certifications overview -->
+            <li>
+                <a href="../navPages/certifications.html">Certifications</a>
+            </li>
+        </ul>
     </header>
+
+    <!-- Game title or section heading -->
     <h3>Pong</h3>
+
+    <!-- HTML5 canvas element used for rendering the Pong game -->
     <canvas id="pongCanvas"></canvas>
+
+    <!-- External JavaScript file that contains game logic for drawing and interactivity -->
     <script src="../javaScript/pongCanvas.js"></script>
-  </body>
-</html>
+</body></html>
