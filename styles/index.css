@@ -1,214 +1,279 @@
-/**
- *  @ author - eric sandlin
-*/
+:root {
+    --primary: #333333;
+    --text-dark: #000000;   /* ✅ Proper black text for readability */
+    --bg-light: #fdfaf6;
+    --bg-hover: #e9ecef;
+    --bg-card: #000;
+    --box-shadow: rgba(0, 0, 0, 0.1);
+    --btn-bg: linear-gradient(135deg, var(--primary), #3399ff);
+    --btn-bg-hover: linear-gradient(135deg, #005f6a, var(--primary));
+    --footer-bg: #f8f9fa;
+}
 
-body,
-html {
-    font-family: Arial, sans-serif;
-    padding: 0.9375em;
+html[data-theme='dark'] {
+    --primary: #FFD700;
+    --text-dark: #FFD700;
+    --bg-light: #1e1e1e;
+    --bg-hover: #FFD700;
+    --bg-card: #2a2a2a;
+    --box-shadow: rgba(0, 0, 0, 0.3);
+    --btn-bg: linear-gradient(135deg, #007C91, #3399ff);
+    --btn-bg-hover: linear-gradient(135deg, #005f6a, #007C91);
+    --footer-bg: #121212;
+}
+
+html,
+body {
     margin: 0;
     padding: 0;
-    text-align: center;
-    background-color: #808080;
-}
-
-/* Responsive Container Wrapper */
-.wrapper {
-    background-color: #e8e8e8;
-    margin: 0 auto;
-    max-width: 62.5em;
-    /* 1000px */
-    /*padding: 5em;*/
-    box-shadow: 0.625em 5em 5em black;
-    /* 10px 80px 80px */
     font-family: Arial, sans-serif;
-    padding: 0.9375em;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
     text-align: center;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* menu icon hamburger */
-.menu-icon {
-    width: 30px;
-    height: 25px;
-    margin: 0.5em auto;
-    position: relative;
-    cursor: pointer;
-    z-index: 1001;
-    display: block;
+#intro {
+    text-align: justify;
+    padding-left: 10%;
+    padding-right: 10%
 }
 
-.menu-icon span {
-    display: block;
-    height: 4px;
+/* Base icon styling */
+.logo-container img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* login and signup at top right */
+.floating-auth-buttons {
+  position: absolute; /* <-- changed from fixed */
+  top: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  z-index: 1000; /* still high so it's on top of content */
+}
+
+
+.floating-auth-buttons button {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* logout button */
+#logout-btn {
+  font-weight: 600;
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+#logout-btn:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.center-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+
+/* LIGHT MODE GLOW (Silver) */
+html[data-theme='light'] .logo-container img:hover {
+  box-shadow: 0 0 20px rgba(192, 192, 192, 0.8),
+              0 0 40px rgba(192, 192, 192, 0.6),
+              0 0 60px rgba(192, 192, 192, 0.4);
+  transform: scale(1.05);
+}
+
+/* DARK MODE GLOW (Gold) */
+html[data-theme='dark'] .logo-container img:hover {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8),
+              0 0 40px rgba(255, 215, 0, 0.6),
+              0 0 60px rgba(255, 215, 0, 0.4);
+  transform: scale(1.05);
+}
+
+.wrapper {
+  position: relative; /* ✅ This is needed for the absolute buttons to be positioned inside it */
+  margin: 0 auto;
+  max-width: 1000px;
+  background-color: var(--bg-light);
+  box-shadow: 10px 80px 80px black;
+  padding: 1em;
+}
+
+
+header {
+    background-color: var(--bg-light);
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 5px var(--box-shadow);
     width: 100%;
-    background-color: #111;
-    margin: 6px 0;
-    border-radius: 2px;
-    transition: all 0.4s ease-in-out;
+    z-index: 1000;
 }
 
-/* Animated "X" effect */
-.menu-icon.active span:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
+.theme-toggle {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
 }
 
-.menu-icon.active span:nth-child(2) {
+.logo-container img {
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: opacity 0.3s, transform 0.3s;
+    margin-left: 0.5rem;
+}
+
+#dark-logo,
+#light-logo {
+    display: none;
     opacity: 0;
 }
 
-.menu-icon.active span:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
-}
-
-/* Override nav defaults for mobile */
-.nav {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    background: #000;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    padding: 1em 0;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-    transition: right 0.4s ease;
-
-}
-
-.nav.open {
-    display: flex;
-}
-
-.nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-}
-
-.nav li {
-    margin: 20px 0;
-}
-
-.nav a {
-    text-decoration: none;
-    color: #333;
-    font-size: 18px;
-}
-
-/* Navigation bar */
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #007BFF;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-nav li {
-    flex: 1 0 auto;
-}
-
-nav li a {
-    display: block;
-    color: #fff;
-    text-align: center;
-    padding: 0.875em 1em;
-    /* 14px 16px */
-    text-decoration: none;
-}
-
-nav li a:hover {
-    background-color: #111;
-    color: #fff;
-    text-decoration: none;
-}
-
-.btn-primary {
-    margin: .25em;
-}
-
-img#pic {
-    max-width: 200px;
-    height: auto;
-    display: block;
-    margin: 15px auto;
-    border-radius: 50%;
-}
-
-.project-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.9375em;
-}
-
-.project {
-    max-width: 18.75em;
-    border: 1px solid #ccc;
-    padding: 0.9375em;
-    border-radius: 0.625em;
-    background-color: #f9f9f9;
-}
-
-.project h3 {
-    margin-top: 0;
-}
-
-footer {
-    margin-top: 1.875em;
-    font-size: 0.875em;
-    color: #555;
-}
-
-ul {
-    list-style-type: none;
-}
-
-@media (min-width: 48em) {
-    .project-grid {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .project {
-        margin: 0.625em;
-    }
-
-    /* Moble version */
-    .menu-icon {
-        display: none;
-
-    }
-
-    .nav {
-        position: static;
-        display: flex !important;
-        background-color: #007BFF;
-        flex-direction: row;
-        justify-content: center;
-        padding: 0;
-    }
-
-    .nav ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-}
-
-/*
-.tag-cloud {
+html[data-theme='light'] #light-logo {
     display: inline-block;
-    color: white;
-    padding: .5em 1.25em;
-    border-radius: 1.5625em;
-    background-color: #2196F3;
-    margin-top: 0.5em;
-}  */
+    opacity: 1;
+    filter: drop-shadow(0 0 4px rgba(181, 183, 187, 0.5));
+}
+
+html[data-theme='dark'] #dark-logo {
+    display: inline-block;
+    opacity: 1;
+    filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5));
+}
+
+/* removes bullet points */
+ul {
+list-style-type: none; /* Removes bullet points */
+padding: 0; /* Removes default padding */
+margin: 0; /* Removes default margin */
+}
+
+/* centers the icon */
+.center-icon {
+  left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  padding: 2em;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 0 10px #000;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-content input,
+.modal-content button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Footer */
+footer {
+    font-size: 0.875em;
+    color: var(--text-dark);
+    background-color: var(--footer-bg);
+    padding: 1rem 0;
+}
+
+/* Desktop nav */
+@media (min-width: 768px) {
+    
+}
+
+.auth-forms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem; /* adds spacing below the logo */
+  gap: 1.2rem; /* space between login and sign up buttons */
+}
+
+
+/* The glow from the icon */
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 215, 0, 1);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  }
+}
+
+@keyframes glowPulseW {
+  0% {
+    box-shadow: 0 0 20px rgba(192, 192, 192, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(173, 216, 230, 1);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(192, 192, 192, 0.8);
+  }
+}
+
+html[data-theme='dark'] .logo-container img:hover {
+  animation: glowPulse 1.2s infinite ease-in-out;
+}
+
+html[data-theme='light'] .logo-container img:hover {
+  animation: glowPulseW 1.2s infinite ease-in-out;
+}
+
