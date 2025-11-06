@@ -1,163 +1,172 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- Declares the document as HTML5 -->
+<html lang="en" data-theme="light">
+<!-- Root element with language set to English and a data attribute for theme -->
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A SE portfolio for Eric Sandlin">
-    <meta name="keywords" content="Eric Sandlin, portfolio, software engineering">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta http-equiv="cleartype" content="on">
-    <meta name="author" content="Eric Sandlin">
-    <title>Professional Portfolio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles/index.css">
+    <!-- Metadata for character encoding, compatibility, and responsiveness -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- SEO-related meta tags -->
+    <meta name="description" content="A SE portfolio for Eric Sandlin" />
+    <meta name="keywords" content="Eric Sandlin, portfolio" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta http-equiv="cleartype" content="on" />
+    <meta name="author" content="Eric Sandlin" />
+
+    <!-- Open Graph tags for better sharing on social platforms -->
+    <meta property="og:title" content="Eric Sandlin – Portfolio">
+    <meta property="og:image" content="path-to-profile.jpg">
+    <meta property="og:description" content="22+ year Navy veteran and engineer specializing in maintenance, leadership and tech.">
+    <meta property="og:url" content="https://ericsandlin.com">
+
+    <!-- Page title -->
+    <title>Eric Sandlin – Portfolio</title>
+
+    <!-- Bootstrap CSS for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom CSS styles -->
+    <link rel="stylesheet" href="styles/index.css" />
 </head>
 
-<body class="wrapper">
-    <header role="banner">
-        <div class="menu-icon" id="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
+<body>
+    <div class="wrapper">
+        <!-- Site Header -->
+        <header>
+            <!-- Hamburger icon for toggling navigation (assumed to be implemented in JS) -->
+            <div class="menu-icon" id="menu-toggle" aria-label="Toggle navigation" tabindex="0"></div>
+
+            <!-- Theme toggle button (light/dark mode switch) -->
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                <div class="logo-container d-flex align-items-center">
+                    <div class="center-icon">
+                        <!-- Icons for light and dark mode -->
+                        <img src="images/Icon_2.png" alt="Light Mode Logo" id="light-logo" />
+                        <img src="images/Icon.png" alt="Dark Mode Logo" id="dark-logo" />
+                    </div>
+                </div>
+            </button>
+        </header>
+
+        <!-- Floating authentication buttons (fixed or floating on screen) -->
+        <div class="floating-auth-buttons">
+            <button class="btn btn-outline-primary" id="open-login">Login</button>
+            <button class="btn btn-outline-primary" id="open-signup">Sign Up</button>
+            <button class="btn btn-outline-danger" id="logout-btn" style="display: none;">Logout</button>
         </div>
 
-        <nav class="nav" id="nav-menu">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="navPages/JSGamesLogIn.html">Login</a></li>
-                <li><a href="navPages/contact.html">Contact</a></li>
-                <li><a href="navPages/resumes.html" target="_blank">Résumé</a></li>
-                <li><a href="navPages/certifications.html">Certifications</a></li>
-            </ul>
-        </nav>
-    </header>
+        <!-- Main content area -->
+        <main class="auth-forms">
 
-    <main>
-        <h1 class="text-center">Eric Sandlin's Portfolio </h1>
-        <img class="img-responsive" id="pic" src="images/img_me.jpg" alt="avatar">
-        <p class="text-center">Industrial | Engineering | Maintenance | Technician</p>
-
-        <p>U.S Navy veteran engineering professional with over 22 years of hands-on and leadership experience in industrial maintenance, 
-            military HVAC&R systems, PLC automation, and cross-functional team management. 
-            Skilled in troubleshooting, lean operations, predictive maintenance, and project delivery across high-demand manufacturing and logistics environments. 
-            Holds a B.S. in Software Engineering, multiple CompTIA and OSHA certifications, and is pursuing a Master of Science in Engineering Management. 
-            Adept at bridging technical execution with strategic leadership in operations, reliability, and facility engineering roles.</p>
-
-        <!-- About -->
-        <section id="about">
-            <h2>Welcome to my Interactive Portfolio</h2>
-            <p>Designed to showcase my talents and accomplishments. Here, you'll find:</p>
-            <ul>
-                <li><strong>Work Projects</strong>: Challenges tackled and solutions implemented.</li>
-                <li><strong>Work History</strong>: A timeline of my professional experience.</li>
-                <li><strong>Resumes</strong>: Highlighting skills and qualifications.</li>
-                <li><strong>Contact Info</strong>: Reach out for questions or opportunities.</li>
-            </ul>
-            <p>This site is built to share my journey and connect with like-minded professionals and potential employers.</p>
-            <p>Employers needing immediate responses can contact me via the <strong>Contact Me</strong> section.</p>
-        </section>
-
-        <!-- Projects -->
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="project-grid">
-                <div class="project">
-                    <h3>Project One</h3>
-                    <p>Responsive portfolio site built with HTML, CSS, and JavaScript.</p>
-                    <a href="#">View Project</a>
-                </div>
-                <div class="project">
-                    <h3>Project Two</h3>
-                    <p>Web-based games built using JavaScript.</p>
-                    <a href="navPages/JSGamesLogIn.html">View Project</a>
-                </div>
-                <div class="project">
-                    <h3>Project Three</h3>
-                    <p>Java-based standalone CRM application.</p>
-                    <a href="#">View Project</a>
+            <!-- LOGIN MODAL -->
+            <div class="modal" id="login-modal">
+                <div class="modal-content">
+                    <!-- Close button for the modal -->
+                    <span class="close" id="close-login">&times;</span>
+                    <h2>Login</h2>
+                    <!-- Login form using passcode -->
+                    <form id="login-form">
+                        <input type="password" id="passcode-input" placeholder="Enter Passcode" required />
+                        <button type="submit">Login</button>
+                    </form>
                 </div>
             </div>
-        </section>
-    </main>
 
-  <!-- Shared Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalTitle">Skills</h5>
-        </div>
-        <div class="modal-body" id="modalBody">
-          <!-- Text will be inserted here -->
-        </div>
-      </div>
+            <!-- SIGNUP MODAL -->
+            <div class="modal" id="signup-modal">
+                <div class="modal-content">
+                    <!-- Close button for the modal -->
+                    <span class="close" id="close-signup">&times;</span>
+                    <h2>Sign Up</h2>
+                    <!-- Signup form posts to external demo endpoint -->
+                    <form id="signup-form" method="post" action="https://register-demo.freecodecamp.org">
+                        <input type="text" placeholder="Full Name" required />
+                        <input type="email" placeholder="Email" required />
+                        <input type="password" placeholder="Password" required />
+                    </form>
+                    <!-- Possibly redundant submit input -->
+                    <input class="submit-button" type="submit" value="Submit">
+                </div>
+            </div>
+
+            <!-- Page title and introduction -->
+            <h1>Eric Sandlin's Portfolio</h1>
+            <p class="lead">Industrial Maintenance | Engineering | Management</p>
+            <p id="intro">
+                Welcome — I'm Eric Sandlin, a U.S. Navy veteran and engineering professional
+                with more than 22 years of experience in industrial maintenance, 
+                technical operations, and team leadership. 
+                My background combines deep hands-on knowledge with proven leadership 
+                in high-performance environments.
+            </p>
+
+            <!-- About Section -->
+            <section id="about" class="my-5">
+                <h2>Explore my Interactive Portfolio</h2>
+                <p>This site is designed to highlight my skills, experience, and career achievements. Within these pages, you’ll find:</p>
+                <ul>
+                    <li><strong>Project Highlights</strong>– Real-world challenges I’ve solved with innovative and practical engineering solutions.</li>
+                    <li><strong>Career Timeline</strong>- A detailed overview of my professional journey across military and civilian sectors.</li>
+                    <li><strong>Résumé Library</strong>– Role-specific résumés tailored to various positions in engineering, maintenance, and technical management.</li>
+                    <li><strong>Certifications &amp; Credentials</strong>- A showcase of my industry-recognized certifications and technical qualifications.</li>
+                </ul>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="my-5">
+                <h2>Accomplishments</h2>
+                <div class="row">
+                    <!-- Project 1 -->
+                    <div class="col-md-4">
+                        <div class="project card p-3">
+                            <h3>Academics &amp; Skills</h3>
+                            <p>Showcase for qualifications, degrees, and certifications</p>
+                            <a href="navPages/certifications.html" class="btn btn-outline-primary">Degrees &amp; Certs</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="col-md-4">
+                        <div class="project card p-3">
+                            <h3>Résumé Portfolio</h3>
+                            <p>Responsive display case for all my Résumé</p>
+                            <a href="navPages/resumes.html" class="btn btn-outline-primary">View Résumé</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="col-md-4">
+                        <div class="project card p-3">
+                            <h3>JS Game Project</h3>
+                            <p>Web-based javaScript touchscreen games for mobile</p>
+                            <a href="navPages/JSGames.html" class="btn btn-outline-primary">JS Projects</a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+        <!-- Empty footer for future site info, links, or contact details -->
+        <footer>
+            <small>
+                <p>This site is built to share my journey and connect with professionals and potential employers. All rights reservied</p>
+                <p>
+                    &copy; 2024 Eric Sandlin. All rights reserved.<br>
+                    This website and all its contents, including but not limited to text, graphics, images, designs, logos, downloadable files, and code, are the intellectual property of Eric Sandlin unless otherwise stated. Unauthorized reproduction, distribution, modification, or use of any content, in whole or in part, without prior written consent is strictly prohibited.<br>
+                    All trademarks, service marks, and trade names are the property of their respective owners.<br>
+                    This site may contain links to external websites for reference purposes. Eric Sandlin is not responsible for the content or practices of those external sites.<br>
+                    This portfolio is provided for informational and professional demonstration purposes only. No part of this site may be construed as a contractual offer or guarantee of service.
+                </p>
+            </small>
+        </footer>
     </div>
-  </div>
 
-           <!-- Skills -->
-  <h2>Skills</h2>
-  <section id="skills">
-            <!-- Button -->
+    <!-- External JavaScript file controlling navigation and interactivity -->
+    <script src="javaScript/nav.js"></script>
+</body>
 
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned HTML while attending college at Arazona State University where I minored in moble and web development. Specificaly, GIT 215 Introduction to Web Authoring">HTML</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned CSS while attending college at Arazona State University where I minored in moble and web development. Specificaly, GIT 215 Introduction to Web Authoring">CSS</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned JavaScript while attending college at Arazona State University where I minored in moble and web development. Specificaly, GIT 215 Introduction to Web Authoring">JavaScript</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned C and C++ while attending college at Arazona State University where I majored in Software Engineering. Specificaly, SER 486 Embedded C Programming and CST 100 Object-Oriented Software development">C/C++</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned Java while attending college at Arazona State University where I majored in Software Engineering. Specificaly, SER 221 Programming languages and their execution environments.">Java</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned Python while attending college at Arazona State University where I majored in Software Engineering. Specificaly, CST 100 Object-Oriented software development.">Python</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned UI/UX Design while attending college at Arazona State University where I minored in moble and web development. Specificaly, GIT 215 Introduction to Web Authoring">UI/UX Design</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned SQL while attending college at Arazona State University where I majored in Software Engineering. Specificaly, SER 322 Database Management.">SQL</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned Engineering concepts while in the United States Navy engineering department as well as attending Arazona State University for Software Engineering.">Engineering</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I have worked as directly in shipboard maintenance and industrial maintenance for the last 22 years. 9 years United States Navy and 13 years civilian manufacturing">Maintenance</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I have leadership experience gained while serving in the military as well as the maintenance supervisor for Von Drehle corperation and maintenance manager for MSS Steel Tubes LLC.">leadership</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I become familar with Allen-Bradley PLCs while working at Kruger Tissue and in FedEx's electronics shop.">Allen-Bradley PLC</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I become familar with RSLogix 5000 while working at Kruger Tissue and in FedEx's electronics shop.">RSLogix 5000</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I become familar with FactoryTalk while working on the HMIs at Kruger Tissue and while in FedEx's electronics shop.">FactoryTalk</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I got instrumentation experience at Kruger Tissue and while in FedEx's electronics shop.">instrumentation</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I got CMMS: SAP experience as a maintenance supervisor at Von Drehle and as a maintenance manager at MSS Steel Tubes LLC.">CMMS: SAP</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I got CMMS: eMaint experience as a maintenance supervisor at Von Drehle and as a maintenance manager at MSS Steel Tubes LLC.">CMMS: eMaint</button>
-      <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I got CMMS: eMaint experience as a maintenance supervisor at Von Drehle and as a maintenance manager at MSS Steel Tubes LLC.">Infraspeak</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I become proficient in technical writing while serving in the United States Navy as a shop planner writing formal work packages.">technical writing</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I have decades of experience with fabercaton using shop equipment and hand tools.">fabercation</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I become proficient in SOP writing as a maintenance supervisor and maintenance manager. I was responsible for writing and reviewing all maintentance SOPs.">SOP creation</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="My core responsibility throughout my career is safety and Lock out tag out is an essential safety program.">LOTO Safety</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I am currently attending the University of Memphis for Applied Lean Leadership graduate certificate.">lean manufacturing</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I have over 20 years experence troubleshooting marine equipment and industrial equipment.">troubleshooting</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I have currently worked for 2 years at FedEx's electronic shop located in Memphis, TN.">electronics</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I personally taught over 300 student in thermodynamic's lab EM300 at the United States Naval Acadment located in Anapolis, Maryland.">technical training</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I utilized team supervision while serving in the U.S. Navy, as a maintenance supervisor at Von Drehle, and during my time as maintenance manager at MSS Steel Tubes.">team supervision</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned control systems while working at FedEx's Electronic shop in Memphis Tennessee'">control systems</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="While studing for compTIA's Network+ certification I learned about networking">networking</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="Quality management is important to me because I take pride in everything I do.">quality management</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="Teaching at the United States Naval acadmey improved my communication skills for talking in public and at large crowds.">communication</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="Troublshooting is an example of me being analytialc.">analytialc</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="As a maintenace supervisor and maintance manager I was responsible schedualing and organizing all preventive maintenance for our assets.">preventive maintenance</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="As an Industrial Maintenance Technician (IMT) on shift I was responsible for reacting to all maintanence calls, quick repairs, and maintaning equipment uptime">reactive maintenance</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="As a maintenace supervisor and maintance manager I was responsible schedualing and organizing all predictive maintenance for our assets.">predictive maintenance</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I attended San Deigo City College for HVAC&R where I got my universial EPA licences. I preformed industrial HVAC&R work while serving in the United States Navy onboard the USS Kitty Hawk (CV-63).">HVAC&R</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I have over 22 years of experence with instillation, troubleshooting, and maintenace with pneumatic equipment.">pneumatics</button>
-<button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I have over 22 years of experence with instillation, troubleshooting, and maintenace with hydraulic equipment.">hydraulics</button>
-    </section>
-
-    <footer>
-        <p>Thank you for visiting! I hope you enjoy exploring my portfolio.</p>
-    </footer>
-     <!-- Bootstrap 5 JS with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- JavaScript to Change Modal Text -->
-  <script>
-    // Get all buttons with the class "my-btn"
-    document.querySelectorAll('.my-btn').forEach(button => {
-      button.addEventListener('click', function () {
-        const message = this.getAttribute('data-message');
-        document.getElementById('modalBody').textContent = message;
-      });
-    });
-  </script>
-  <script src="javaScript/nav.js"></script>
-</body></html>
-
+</html>
