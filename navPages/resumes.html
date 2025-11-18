@@ -30,17 +30,23 @@
             <span></span>
         </div>
 
-       <!-- Theme toggle button (light/dark mode switch) -->
-            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
-                <div class="logo-container d-flex align-items-center">
-                    <div class="center-icon">
-                        <!-- Icons for light and dark mode -->
-                        <img src="../images/Icon_2.png" alt="Light Mode Logo" id="light-logo" />
-                        <img src="../images/Icon.png" alt="Dark Mode Logo" id="dark-logo" />
-                    </div>
+        <!-- Theme toggle button (light/dark mode switch) -->
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle color theme">
+            <div class="logo-container d-flex align-items-center">
+                <div class="center-icon">
+                    <!-- Icons for light and dark mode -->
+                    <img src="../images/Icon_2.png" alt="Light Mode Logo" id="light-logo" />
+                    <img src="../images/Icon.png" alt="Dark Mode Logo" id="dark-logo" />
                 </div>
-            </button>
-       
+
+                <!-- Elegant mode label -->
+                <span class="mode-label">
+                    <span id="light-label">Light Mode</span>
+                    <span id="dark-label">Dark Mode</span>
+                </span>
+            </div>
+        </button>
+
         <nav class="nav" id="nav-menu">
             <ul>
                 <li><a href="../index.html">Home</a></li>
@@ -114,10 +120,108 @@
             </figure>
         </section>
     </main>
-
     <footer>
+
+        <small>
+            <!-- Skills section with dynamic modals -->
+            <section id="skills" class="my-5">
+                <h2>Skills</h2>
+
+                <!-- Skills represented by buttons that open a modal with descriptive text -->
+                <div class="d-flex flex-wrap gap-2">
+                    <!-- Example of a skill button using Bootstrap modals and data attributes -->
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned HTML while attending college at Arazona State University where I minored in moble and web development. Specificaly, GIT 215 Introduction to Web Authoring">HTML</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned CSS while attending college at Arazona State University where I minored in moble and web development. Specificaly, GIT 215 Introduction to Web Authoring">CSS</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned JavaScript while attending college at Arazona State University where I minored in moble and web development. Specificaly, GIT 215 Introduction to Web Authoring">JavaScript</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned C and C++ while attending college at Arazona State University where I majored in Software Engineering. Specificaly, SER 486 Embedded C Programming and CST 100 Object-Oriented Software development">C/C++</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned Java while attending college at Arazona State University where I majored in Software Engineering. Specificaly, SER 221 Programming languages and their execution environments.">Java</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned Python while attending college at Arazona State University where I majored in Software Engineering. Specificaly, CST 100 Object-Oriented software development.">Python</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned UI/UX Design while attending college at Arazona State University where I minored in moble and web development. Specificaly, GIT 215 Introduction to Web Authoring">UI/UX Design</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned SQL while attending college at Arazona State University where I majored in Software Engineering. Specificaly, SER 322 Database Management.">SQL</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned Engineering concepts while in the United States Navy engineering department as well as attending Arazona State University for Software Engineering.">Engineering</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I have worked as directly in shipboard maintenance and industrial maintenance for the last 22 years. 9 years United States Navy and 13 years civilian manufacturing">Maintenance</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I have leadership experience gained while serving in the military as well as the maintenance supervisor for Von Drehle corperation and maintenance manager for MSS Steel Tubes LLC.">leadership</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I become familar with Allen-Bradley PLCs while working at Kruger Tissue and in FedEx's electronics shop.">Allen-Bradley PLC</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I become familar with RSLogix 5000 while working at Kruger Tissue and in FedEx's electronics shop.">RSLogix 5000</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I become familar with FactoryTalk while working on the HMIs at Kruger Tissue and while in FedEx's electronics shop.">FactoryTalk</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I got instrumentation experience at Kruger Tissue and while in FedEx's electronics shop.">instrumentation</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I got CMMS: SAP experience as a maintenance supervisor at Von Drehle and as a maintenance manager at MSS Steel Tubes LLC.">CMMS: SAP</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I got CMMS: eMaint experience as a maintenance supervisor at Von Drehle and as a maintenance manager at MSS Steel Tubes LLC.">CMMS: eMaint</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I got CMMS: eMaint experience as a maintenance supervisor at Von Drehle and as a maintenance manager at MSS Steel Tubes LLC.">Infraspeak</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I become proficient in technical writing while serving in the United States Navy as a shop planner writing formal work packages.">technical writing</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I have decades of experience with fabercaton using shop equipment and hand tools.">fabercation</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I become proficient in SOP writing as a maintenance supervisor and maintenance manager. I was responsible for writing and reviewing all maintentance SOPs.">SOP creation</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="My core responsibility throughout my career is safety and Lock out tag out is an essential safety program.">LOTO Safety</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I am currently attending the University of Memphis for Applied Lean Leadership graduate certificate.">lean manufacturing</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I have over 20 years experence troubleshooting marine equipment and industrial equipment.">troubleshooting</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I have currently worked for 2 years at FedEx's electronic shop located in Memphis, TN.">electronics</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I personally taught over 300 student in thermodynamic's lab EM300 at the United States Naval Acadment located in Anapolis, Maryland.">technical training</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I utilized team supervision while serving in the U.S. Navy, as a maintenance supervisor at Von Drehle, and during my time as maintenance manager at MSS Steel Tubes.">team supervision</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I learned control systems while working at FedEx's Electronic shop in Memphis Tennessee'">control systems</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="While studing for compTIA's Network+ certification I learned about networking">networking</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="Quality management is important to me because I take pride in everything I do.">quality management</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="Teaching at the United States Naval acadmey improved my communication skills for talking in public and at large crowds.">communication</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="Troublshooting is an example of me being analytialc.">analytialc</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="As a maintenace supervisor and maintance manager I was responsible schedualing and organizing all preventive maintenance for our assets.">preventive maintenance</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="As an Industrial Maintenance Technician (IMT) on shift I was responsible for reacting to all maintanence calls, quick repairs, and maintaning equipment uptime">reactive maintenance</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="As a maintenace supervisor and maintance manager I was responsible schedualing and organizing all predictive maintenance for our assets.">predictive maintenance</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I attended San Deigo City College for HVAC&R where I got my universial EPA licences. I preformed industrial HVAC&R work while serving in the United States Navy onboard the USS Kitty Hawk (CV-63).">HVAC&R</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I have over 22 years of experence with instillation, troubleshooting, and maintenace with pneumatic equipment.">pneumatics</button>
+                    <button type="button" class="btn btn-primary my-btn" data-bs-toggle="modal" data-bs-target="#myModal" data-message="I have over 22 years of experence with instillation, troubleshooting, and maintenace with hydraulic equipment.">hydraulics</button>
+
+                    <!-- [Many more buttons follow, structured the same way...] -->
+                    <!-- Each contains a personalized message about where and how the skill was acquired -->
+                </div>
+            </section>
+        </small>
+
+        <!-- Modal definition for showing detailed skill messages -->
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Skill Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modalBody">
+                        <!-- Text inserted dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap's JavaScript for modal and other interactive components -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Script to populate modal with message from clicked button -->
+        <script>
+            // Attach click event to each skill button
+            document.querySelectorAll('.my-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const message = this.getAttribute('data-message');
+                    document.getElementById('modalBody').textContent = message;
+                });
+            });
+
+        </script>
+
+        <script>
+            // Attach click event to each skill button
+            document.querySelectorAll('.my-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const message = this.getAttribute('data-message');
+                    document.getElementById('modalBody').textContent = message;
+                });
+            });
+
+        </script>
+
         <!-- NEW: script to wire dropdown to resume preview -->
         <script src="../javaScript/nav.js"></script>
+
+        <!-- Script to populate modal with message from clicked button -->
+
+
     </footer>
 </body>
 
