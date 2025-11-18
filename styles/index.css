@@ -1,124 +1,82 @@
+/* ============================================================
+   GLOBAL THEME & RESET
+   Shared by: index.html, resumes.html, certifications.html
+   ============================================================ */
+
+/* Theme variables */
 :root {
-    --primary: #333333;
-    --text-dark: #000000;   /* ✅ Proper black text for readability */
+    --text-color: #000000;
     --bg-light: #fdfaf6;
-    --bg-hover: #e9ecef;
-    --bg-card: #000;
     --box-shadow: rgba(0, 0, 0, 0.1);
-    --btn-bg: linear-gradient(135deg, var(--primary), #3399ff);
-    --btn-bg-hover: linear-gradient(135deg, #005f6a, var(--primary));
     --footer-bg: #f8f9fa;
 }
 
+/* Dark mode overrides via data-theme on <html> */
 html[data-theme='dark'] {
-    --primary: #FFD700;
-    --text-dark: #FFD700;
+    --text-color: #FFD700;
     --bg-light: #1e1e1e;
-    --bg-hover: #FFD700;
-    --bg-card: #2a2a2a;
     --box-shadow: rgba(0, 0, 0, 0.3);
-    --btn-bg: linear-gradient(135deg, #007C91, #3399ff);
-    --btn-bg-hover: linear-gradient(135deg, #005f6a, #007C91);
     --footer-bg: #121212;
 }
 
+/* Global reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Base page styling */
 html,
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
     background-color: var(--bg-light);
-    color: var(--text-dark);
+    color: var(--text-color);
     text-align: center;
     transition: background-color 0.3s, color 0.3s;
 }
 
+/* Shared wrapper container
+   - index.html: <div class="wrapper">
+   - resumes.html: <body class="wrapper">
+   - certifications.html: <body class="wrapper">
+*/
+.wrapper {
+    position: relative;          /* Needed for floating auth buttons on index.html */
+    margin: 0 auto;
+    max-width: 1000px;
+    background-color: var(--bg-light);
+    box-shadow: 10px 80px 80px black;
+    padding: 1em;
+}
+
+/* Global list reset (used in About section, nav menus, etc.) */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Global headings (safe for all pages) */
+h1 {
+    text-align: center;
+    margin: 1.25em 0;
+    font-size: 2rem;
+}
+
+/* Intro paragraph on index.html */
 #intro {
     text-align: justify;
     padding-left: 10%;
-    padding-right: 10%
+    padding-right: 10%;
 }
 
-/* Base icon styling */
-.logo-container img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-/* login and signup at top right */
-.floating-auth-buttons {
-  position: absolute; /* <-- changed from fixed */
-  top: 1.5rem;
-  right: 1.5rem;
-  display: flex;
-  gap: 0.75rem;
-  z-index: 1000; /* still high so it's on top of content */
-}
-
-
-.floating-auth-buttons button {
-  font-size: 0.9rem;
-  padding: 0.4rem 0.9rem;
-  border-radius: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* logout button */
-#logout-btn {
-  font-weight: 600;
-  border-color: #dc3545;
-  color: #dc3545;
-}
-
-#logout-btn:hover {
-  background-color: #dc3545;
-  color: white;
-}
-
-.logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem;
-}
-
-.center-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-}
-
-
-/* LIGHT MODE GLOW (Silver) */
-html[data-theme='light'] .logo-container img:hover {
-  box-shadow: 0 0 20px rgba(192, 192, 192, 0.8),
-              0 0 40px rgba(192, 192, 192, 0.6),
-              0 0 60px rgba(192, 192, 192, 0.4);
-  transform: scale(1.05);
-}
-
-/* DARK MODE GLOW (Gold) */
-html[data-theme='dark'] .logo-container img:hover {
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8),
-              0 0 40px rgba(255, 215, 0, 0.6),
-              0 0 60px rgba(255, 215, 0, 0.4);
-  transform: scale(1.05);
-}
-
-.wrapper {
-  position: relative; /* ✅ This is needed for the absolute buttons to be positioned inside it */
-  margin: 0 auto;
-  max-width: 1000px;
-  background-color: var(--bg-light);
-  box-shadow: 10px 80px 80px black;
-  padding: 1em;
-}
-
+/* ============================================================
+   HEADER, LOGO & THEME TOGGLE
+   Used on all pages (index, resumes, certifications)
+   ============================================================ */
 
 header {
     background-color: var(--bg-light);
@@ -132,6 +90,7 @@ header {
     z-index: 1000;
 }
 
+/* Theme toggle button (dark/light mode switch) */
 .theme-toggle {
     cursor: pointer;
     background: none;
@@ -141,21 +100,38 @@ header {
     align-items: center;
 }
 
-.logo-container img {
-    width: 20%;
-    height: 20%;
-    border-radius: 50%;
-    object-fit: cover;
-    transition: opacity 0.3s, transform 0.3s;
-    margin-left: 0.5rem;
+/* Logo wrapper */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+/* Centering of icon group */
+.center-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+/* Circular logo images (light and dark variants) */
+.logo-container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.3s;
+}
+
+/* Hide both logos by default */
 #dark-logo,
 #light-logo {
     display: none;
     opacity: 0;
 }
 
+/* Show correct logo based on theme */
 html[data-theme='light'] #light-logo {
     display: inline-block;
     opacity: 1;
@@ -168,112 +144,394 @@ html[data-theme='dark'] #dark-logo {
     filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5));
 }
 
-/* removes bullet points */
-ul {
-list-style-type: none; /* Removes bullet points */
-padding: 0; /* Removes default padding */
-margin: 0; /* Removes default margin */
+/* Glow animations for the logo */
+@keyframes glowPulse {
+    0%   { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+    50%  { box-shadow: 0 0 40px rgba(255, 215, 0, 1); }
+    100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
 }
 
-/* centers the icon */
-.center-icon {
-  left: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@keyframes glowPulseW {
+    0%   { box-shadow: 0 0 20px rgba(192, 192, 192, 0.8); }
+    50%  { box-shadow: 0 0 40px rgba(173, 216, 230, 1); }
+    100% { box-shadow: 0 0 20px rgba(192, 192, 192, 0.8); }
 }
+
+/* Apply glow animation on hover, depending on theme */
+html[data-theme='dark'] .logo-container img:hover {
+    animation: glowPulse 1.2s infinite ease-in-out;
+    transform: scale(1.05);
+}
+
+html[data-theme='light'] .logo-container img:hover {
+    animation: glowPulseW 1.2s infinite ease-in-out;
+    transform: scale(1.05);
+}
+
+/* ============================================================
+   FLOATING AUTH BUTTONS (INDEX LOGIN/SIGNUP/LOGOUT)
+   Used only on index.html
+   ============================================================ */
+
+.floating-auth-buttons {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    z-index: 1000;
+}
+
+.floating-auth-buttons button {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Logout button styling */
+#logout-btn {
+    font-weight: 600;
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+#logout-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Main auth forms container on index.html */
+.auth-forms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem; /* spacing below the logo / header */
+    gap: 1.2rem;      /* spacing between sections */
+}
+
+/* ============================================================
+   MODAL STYLING (login & signup on index.html)
+   ============================================================ */
 
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0; top: 0;
-  width: 100vw; height: 100vh;
-  background-color: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
+    display: none; /* shown via JS */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-content {
-  background-color: var(--bg-light);
-  color: var(--text-dark);
-  padding: 2em;
-  border-radius: 8px;
-  max-width: 400px;
-  width: 100%;
-  position: relative;
-  box-shadow: 0 0 10px #000;
+    background-color: var(--bg-light);
+    color: var(--text-color);
+    padding: 2em;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 0 10px #000;
+    text-align: left;
 }
 
 .modal-content h2 {
-  margin-top: 0;
+    margin-top: 0;
 }
 
 .modal-content input,
 .modal-content button {
-  width: 100%;
-  margin-top: 10px;
+    width: 100%;
+    margin-top: 10px;
 }
 
+/* Close (X) in the modal */
 .close {
-  position: absolute;
-  top: 10px; right: 15px;
-  font-size: 20px;
-  cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
 }
 
-/* Footer */
+/* ============================================================
+   NAVIGATION MENU (HAMBURGER + RESPONSIVE NAV)
+   Used on resumes.html & certifications.html (safe for index.html)
+   ============================================================ */
+
+/* Hamburger icon (3 lines) */
+.menu-icon {
+    width: 30px;
+    height: 25px;
+    margin: 0.5em auto;
+    position: relative;
+    cursor: pointer;
+    z-index: 1001;
+    display: block;
+}
+
+/* Each bar in the hamburger */
+.menu-icon span {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background-color: #000;
+    margin: 6px 0;
+    border-radius: 2px;
+    transition: all 0.4s ease-in-out;
+}
+
+/* Animated "X" effect on toggle */
+.menu-icon.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.menu-icon.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-icon.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Mobile navigation panel */
+.nav {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: #808080;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em 0;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: right 0.4s ease;
+}
+
+/* Displayed when JS adds .open */
+.nav.open {
+    display: flex;
+}
+
+/* Nav list */
+.nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+/* Nav items */
+.nav li {
+    margin: 20px 0;
+}
+
+/* Nav links */
+.nav a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    padding: 0.875em 1em; /* 14px 16px */
+}
+
+.nav a:hover {
+    background-color: #111;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Desktop nav behavior */
+@media (min-width: 48em) {
+    .menu-icon {
+        display: none;
+    }
+
+    .nav {
+        position: static;
+        display: flex !important;
+        background-color: #808080;
+        flex-direction: row;
+        justify-content: center;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav li {
+        margin: 0;
+    }
+}
+
+/* ============================================================
+   RESUME DROPDOWN & PREVIEW CARD
+   Used on resumes.html
+   ============================================================ */
+
+/* Dropdown container for resume list */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+/* Dropdown button */
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+/* Links inside dropdown content */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Hover highlight in dropdown */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change button color on hover */
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+/* Highlight selected resume option (JS adds .active) */
+.dropdown-content a.active {
+    background-color: #e0e0e0;
+    font-weight: bold;
+}
+
+/* Main content area on resumes.html: center the resume card */
+main.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;  /* keep top aligned */
+    padding-top: 20px;
+}
+
+/* Big single resume preview */
+.resume-card {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.resume-card img {
+    max-width: 90%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   CERTIFICATIONS GRID
+   Used on certifications.html
+   ============================================================ */
+
+/* Space around each row; Bootstrap's .row is already display:flex */
+.row {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Base (mobile-first): ONE column per row
+   - Each .column takes full width so certs stack vertically.
+*/
+.row .column {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    flex: 1 1 100%;
+    max-width: 600px;   /* keeps them from stretching too wide on huge screens in narrow rows */
+}
+
+/* Large screens: 4-across grid, like the old certifications.css
+   - On screens ≥ 48em (~768px), each .column is 25% of the row.
+*/
+@media (min-width: 48em) {
+    .row .column {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+}
+
+/* Certification card appearance */
+.row .column figure {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 0.5em;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    text-align: center;
+}
+
+/* Certificate images */
+.row .column img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Caption under each certificate */
+.row .column figcaption {
+    padding: 0.75em;
+    font-size: 0.95rem;
+}
+
+/* Keep headings on certifications page readable */
+#skills h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Optional: small adjustment to skill buttons (they're already Bootstrap .btn) */
+.my-btn {
+    white-space: nowrap;
+}
+
+/* ============================================================
+   FOOTER
+   Shared footer styling for all pages
+   ============================================================ */
+
 footer {
     font-size: 0.875em;
-    color: var(--text-dark);
+    color: var(--text-color);
     background-color: var(--footer-bg);
     padding: 1rem 0;
 }
-
-/* Desktop nav */
-@media (min-width: 768px) {
-    
-}
-
-.auth-forms {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 3rem; /* adds spacing below the logo */
-  gap: 1.2rem; /* space between login and sign up buttons */
-}
-
-
-/* The glow from the icon */
-@keyframes glowPulse {
-  0% {
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(255, 215, 0, 1);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
-  }
-}
-
-@keyframes glowPulseW {
-  0% {
-    box-shadow: 0 0 20px rgba(192, 192, 192, 0.8);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(173, 216, 230, 1);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(192, 192, 192, 0.8);
-  }
-}
-
-html[data-theme='dark'] .logo-container img:hover {
-  animation: glowPulse 1.2s infinite ease-in-out;
-}
-
-html[data-theme='light'] .logo-container img:hover {
-  animation: glowPulseW 1.2s infinite ease-in-out;
-}
-

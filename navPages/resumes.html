@@ -1,23 +1,11 @@
 <!DOCTYPE html>
-<!-- Declares the document type as HTML5 -->
-
 <html lang="en" data-theme="light">
-<!-- Root HTML element with English language and a custom data-theme attribute -->
 
 <head>
-    <!-- UTF-8 character encoding for broad character support -->
     <meta charset="utf-8">
-
-    <!-- Title displayed in the browser tab -->
     <title>Resumes</title>
-
-    <!-- Internet Explorer compatibility -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <!-- Enables responsive scaling on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- SEO and mobile metadata -->
     <meta name="description" content="A SE portfolio for Eric Sandlin" />
     <meta name="keywords" content="Eric Sandlin, portfolio" />
     <meta name="HandheldFriendly" content="True" />
@@ -25,35 +13,34 @@
     <meta http-equiv="cleartype" content="on" />
     <meta name="author" content="Eric Sandlin" />
 
-    <!-- Open Graph tags for social sharing -->
     <meta property="og:title" content="Eric Sandlin – Portfolio">
     <meta property="og:image" content="path-to-profile.jpg">
     <meta property="og:description" content="22+ year Navy veteran and engineer specializing in maintenance, leadership and tech.">
     <meta property="og:url" content="https://ericsandlin.com">
 
-    <!-- Bootstrap CSS for grid and responsive layout -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Custom resume page styles -->
-    <link rel="stylesheet" href="../styles/resumes.css">
-
-    <!-- Alternative global stylesheet commented out -->
-    <!-- <link rel="stylesheet" href="../styles/index.css" /> -->
+    <link rel="stylesheet" href="../styles/index.css">
 </head>
 
 <body class="wrapper">
-    <!-- Wrapper class for page layout styling -->
-
-    <!-- Site header with nav and hamburger menu -->
     <header role="banner">
         <div class="menu-icon" id="menu-toggle">
-            <!-- Hamburger icon (likely interactive via JS) -->
             <span></span>
             <span></span>
             <span></span>
         </div>
 
-        <!-- Site-wide navigation links -->
+       <!-- Theme toggle button (light/dark mode switch) -->
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+                <div class="logo-container d-flex align-items-center">
+                    <div class="center-icon">
+                        <!-- Icons for light and dark mode -->
+                        <img src="../images/Icon_2.png" alt="Light Mode Logo" id="light-logo" />
+                        <img src="../images/Icon.png" alt="Dark Mode Logo" id="dark-logo" />
+                    </div>
+                </div>
+            </button>
+       
         <nav class="nav" id="nav-menu">
             <ul>
                 <li><a href="../index.html">Home</a></li>
@@ -62,134 +49,76 @@
         </nav>
     </header>
 
-    <!-- Main content of the resumes page -->
+    <!-- DROPDOWN -->
+    <div class="dropdown">
+        <button class="dropbtn">
+            <span id="dropbtn-label"><strong>Résumé</strong></span>
+        </button>
+        <div class="dropdown-content">
+
+            <!-- Example: Industrial Mechanic (your current master) -->
+            <a href="#" class="resume-option active" data-img="../images/resume_img_SE.png" data-html="../list_Resumes/Master_Résumé.html" data-pdf="../list_Resumes/PDF_resumes/Master_Résumé.pdf" data-title="Master Résumé" data-alt="Master_Résumé Thumbnail">
+                <strong><i>Master Résumé</i></strong>
+            </a>
+
+            <!-- You can adjust these paths/names to your real files -->
+            <a href="#" class="resume-option" data-img="../images/resume_img_SE.png" data-html="../list_Resumes/Industrial_Mechanic_Resume.html" data-pdf="../list_Resumes/PDF_resumes/Industrial%20Mechanic%20Resume.pdf" data-title="Industrial Mechanic Resume" data-alt="Industrial Mechanic Resume Thumbnail">
+                <strong><i>Industrial Mechanic</i></strong>
+            </a>
+
+            <a href="#" class="resume-option" data-img="../images/resume_img_SE.png" data-html="../list_Resumes/Software_Engineer_Resume.html" data-pdf="../list_Resumes/PDF_resumes/Software%20Engineer%20Resume.pdf" data-title="Software Engineer Resume" data-alt="Software Engineer Resume Thumbnail">
+                <strong><i>Software Engineer</i></strong>
+            </a>
+
+            <a href="#" class="resume-option" data-img="../images/resume_img_SE.png" data-html="../list_Resumes/HVAC&R_Resume.html" data-pdf="../list_Resumes/PDF_resumes/HVAC&R%20Resume.pdf" data-title="HVAC&R Resume" data-alt="HVAC&R Resume Thumbnail">
+                <strong><i>HVAC&amp;R Resume</i></strong>
+            </a>
+
+            <a href="#" class="resume-option" data-img="../images/resume_img_SE.png" data-html="../list_Resumes/Instrumentation_Tech_Resume.html" data-pdf="../list_Resumes/PDF_resumes/Instrumentation%20Tech%20Resume.pdf" data-title="Instrumentation Tech Resume" data-alt="Instrumentation Tech Resume Thumbnail">
+                <strong><i>Instrumentation Tech Resume</i></strong>
+            </a>
+
+            <a href="#" class="resume-option" data-img="../images/resume_img_SE.png" data-html="../list_Resumes/Electronics_Tech_Resume.html" data-pdf="../list_Resumes/PDF_resumes/Electronics%20Tech%20Resume.pdf" data-title="Electronics Tech Resume" data-alt="Electronics Tech Resume Thumbnail">
+                <strong><i>Electronics Tech Resume</i></strong>
+            </a>
+
+            <a href="#" class="resume-option" data-img="../images/resume_img_SE.png" data-html="../list_Resumes/Computer_Information_Systems_Tech_Resume.html" data-pdf="../list_Resumes/PDF_resumes/Computer%20Information%20Systems%20Tech%20Resume.pdf" data-title="Computer Information Systems Tech Resume" data-alt="Computer Information Systems Tech Resume Thumbnail">
+                <strong><i>Computer Information Systems Tech Resume</i></strong>
+            </a>
+
+            <a href="#" class="resume-option" data-img="../images/resume_img_SE.png" data-html="../list_Resumes/Reliability_Maintenance_Manager_Resume.html" data-pdf="../list_Resumes/PDF_resumes/Reliability%20and%20Maintenance%20Manager%20Resume.pdf" data-title="Reliability and Maintenance Manager Resume" data-alt="Reliability and Maintenance Manager Resume Thumbnail">
+                <strong><i>Reliability and Maintenance Manager Resume</i></strong>
+            </a>
+
+            <a href="#" class="resume-option" data-img="../images/resume_img_SE.png" data-href="../list_Resumes/Foreign_Service.html" data-pdf=" ../list_Resumes/PDF_resumes/Foreign%20Service%20Resume.pfd" data-title="Foreign Service Officer Resume" data-alt="Foreign Service Officer Resume Thumbnail">
+                <strong><i>Foreign Service Officer Resume</i></strong>
+            </a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
     <main class="wrapper">
-        <!-- Intro text above resume thumbnails -->
-        <h4>Click hyperlink for printable PDFs</h4>
-
-        <!-- Resume display area using grid layout -->
-        <section class="resume-grid">
-            <!-- Each resume is wrapped in a <figure> element -->
-
-            <!-- Industrial Mechanic Resume -->
+        <section>
+            <!-- Big centered resume preview -->
             <figure class="resume-card">
-                <a href="../list_Resumes/Industrial_Mechanic_Resume.html" target="_blank">
-                    <img src="../images/resume_img_SE.png" alt="Industrial Mechanic Resume Thumbnail">
+                <a id="resume-html-link" href="../list_Resumes/Master_Résumé.html" target="_blank">
+                    <img id="resume-preview" src="../images/resume_img_SE.png" alt="Master Résumé Thumbnail">
                 </a>
                 <figcaption>
                     <small>
-                        <!-- PDF version of resume -->
-                        <a href="../list_Resumes/PDF_resumes/Industrial%20Mechanic%20Resume.pdf">
-                            <i>Industrial Mechanic Resume</i>
+                        <a id="resume-pdf-link" href="../list_Resumes/PDF_resumes/Master_Résumé.pdf" target="_blank">
+                            <i id="resume-title">Master Résumé</i>
                         </a>
                     </small>
                 </figcaption>
             </figure>
-
-            <!-- Software Engineer Resume -->
-            <figure class="resume-card">
-                <a href="../list_Resumes/Software_Engineer_Resume.html" target="_blank">
-                    <img src="../images/resume_img_SE.png" alt="Software Engineer Resume Thumbnail">
-                </a>
-                <figcaption>
-                    <small>
-                        <a href="../list_Resumes/PDF_resumes/Software%20Engineer%20Resume.pdf">
-                            <i>Software Engineer Resume</i>
-                        </a>
-                    </small>
-                </figcaption>
-            </figure>
-
-            <!-- HVAC&R Resume -->
-            <figure class="resume-card">
-                <a href="../list_Resumes/HVAC&R_Resume.html" target="_blank">
-                    <img src="../images/HVACR_img.png" alt="HVAC&R Resume Thumbnail">
-                </a>
-                <figcaption>
-                    <small>
-                        <a href="../list_Resumes/PDF_resumes/HVAC&R%20Resume.pdf">
-                            <i>HVAC&R Resume</i>
-                        </a>
-                    </small>
-                </figcaption>
-            </figure>
-
-            <!-- Instrumentation Tech Resume -->
-            <figure class="resume-card">
-                <a href="../list_Resumes/Instrumentation_Tech_Resume.html" target="_blank">
-                    <img src="../images/resume_img_SE.png" alt="Instrumentation Tech Resume Thumbnail">
-                </a>
-                <figcaption>
-                    <small>
-                        <a href="../list_Resumes/PDF_resumes/Instrumentation%20Tech%20Resume.pdf">
-                            <i>Instrumentation Tech Resume</i>
-                        </a>
-                    </small>
-                </figcaption>
-            </figure>
-
-            <!-- Electronics Tech Resume -->
-            <figure class="resume-card">
-                <a href="../list_Resumes/Electronics_Tech_Resume.html" target="_blank">
-                    <img src="../images/resume_img_SE.png" alt="Electronics Tech Resume Thumbnail">
-                </a>
-                <figcaption>
-                    <small>
-                        <a href="../list_Resumes/PDF_resumes/Electronics%20Tech%20Resume.pdf">
-                            <i>Electronics Tech Resume</i>
-                        </a>
-                    </small>
-                </figcaption>
-            </figure>
-
-            <!-- Computer Information Systems Tech Resume -->
-            <figure class="resume-card">
-                <a href="../list_Resumes/Computer_Information_Systems_Tech_Resume.html" target="_blank">
-                    <img src="../images/CTI_Resume.png" alt="Computer Information Systems Tech Resume Thumbnail">
-                </a>
-                <figcaption>
-                    <small>
-                        <a href="../list_Resumes/PDF_resumes/Computer%20Information%20Systems%20Tech%20Resume.pdf">
-                            <i>Computer Information Systems Tech Resume</i>
-                        </a>
-                    </small>
-                </figcaption>
-            </figure>
-
-            <!-- Reliability and Maintenance Manager Resume -->
-            <figure class="resume-card">
-                <a href="../list_Resumes/Reliability_Maintenance_Manager_Resume.html" target="_blank">
-                    <img src="../images/resume_img_SE.png" alt="Reliability and Maintenance Manager Resume Thumbnail">
-                </a>
-                <figcaption>
-                    <small>
-                        <a href="../list_Resumes/PDF_resumes/Reliability%20and%20Maintenance%20Manager%20Resume.pdf">
-                            <i>Reliability and Maintenance Manager Resume</i>
-                        </a>
-                    </small>
-                </figcaption>
-            </figure>
-
-            <!-- Foreign Service Resume -->
-            <figure class="resume-card">
-                <a href="../list_Resumes/Foreign_Service.html" target="_blank">
-                    <img src="../images/resume_img_SE.png" alt="Foreign Serivce Resume Thumbnail">
-                </a>
-                <figcaption>
-                    <small>
-                        <a href="../list_Resumes/PDF_resumes/Foreign%20Service%20Resume.pfd">
-                            <i>Foreign Service Officer Resume</i>
-                        </a>
-                    </small>
-                </figcaption>
-            </figure>
-
         </section>
     </main>
+
+    <footer>
+        <!-- NEW: script to wire dropdown to resume preview -->
+        <script src="../javaScript/nav.js"></script>
+    </footer>
 </body>
 
-<!-- Footer that includes navigation toggle script -->
-<footer>
-    <script src="../javaScript/nav.js"></script>
-</footer></html>
-
+</html>
