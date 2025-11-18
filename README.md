@@ -1,5 +1,5 @@
 # 🎯 Eric Sandlin – Software Engineer Portfolio
-
+ 
 ![Portfolio Banner](https://your-portfolio-banner-image-link.com)
 
 > **“Engineering real-world solutions through code, creativity, and continuous innovation.”**
