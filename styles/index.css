@@ -52,6 +52,79 @@ body {
     padding: 1em;
 }
 
+ /* Embedded CSS additions for form layout */
+
+    main.contact-wrapper {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: var(--bg-light);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    form.contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    form input,
+    form select,
+    form textarea {
+        padding: 0.75rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+        background-color: white;
+        color: black;
+    }
+
+    html[data-theme="dark"] form input,
+    html[data-theme="dark"] form select,
+    html[data-theme="dark"] form textarea {
+        background-color: #2c2c2c;
+        color: #eee;
+        border-color: #444;
+    }
+
+    form textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    button[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        padding: 0.75rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .hidden-field {
+        display: none;
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 2rem;
+        font-size: 0.85rem;
+        color: var(--text-color);
+    }
+
 /* Global list reset (used in About section, nav menus, etc.) */
 ul {
     list-style-type: none;
@@ -616,4 +689,34 @@ footer {
     color: var(--text-color);
     background-color: var(--footer-bg);
     padding: 1rem 0;
+}
+
+/* ============================================================
+   Social Media icons
+   ============================================================ */
+/* ✅ Social Media Icon Styles */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.social-icons a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  background-color: #555;
+  transform: scale(1.1);
 }
