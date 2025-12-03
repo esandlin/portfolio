@@ -1,15 +1,32 @@
 <!DOCTYPE html>
-<!-- Declares the document as HTML5 -->
+<!-- Declares HTML5 document -->
 <html lang="en" data-theme="light">
-<!-- Root element with language set to English and a data attribute for theme -->
+<!-- Root element of the HTML document; sets language to English and adds a custom data attribute for theme switching -->
 
 <head>
-    <!-- Metadata for character encoding, compatibility, and responsiveness -->
+    <!-- ✅ Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css" crossorigin="anonymous">
+
+
+    <!-- Page title shown in browser tab -->
+    <title>Contact Eric Sandlin</title>
+
+    <!-- Bootstrap CSS for responsive design and components 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />-->
+
+    <!-- Alternative stylesheet commented out -->
+    <link rel="stylesheet" href="../styles/index.css" />
+
+    <!-- Charset definition for Unicode characters -->
     <meta charset="UTF-8" />
+
+    <!-- Compatibility with older versions of IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Ensures mobile responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- SEO-related meta tags -->
+    <!-- SEO and social media tags -->
     <meta name="description" content="A SE portfolio for Eric Sandlin" />
     <meta name="keywords" content="Eric Sandlin, portfolio" />
     <meta name="HandheldFriendly" content="True" />
@@ -17,25 +34,18 @@
     <meta http-equiv="cleartype" content="on" />
     <meta name="author" content="Eric Sandlin" />
 
-    <!-- Open Graph tags for better sharing on social platforms -->
+    <!-- Open Graph meta tags for better social sharing -->
     <meta property="og:title" content="Eric Sandlin – Portfolio">
     <meta property="og:image" content="path-to-profile.jpg">
     <meta property="og:description" content="22+ year Navy veteran and engineer specializing in maintenance, leadership and tech.">
     <meta property="og:url" content="https://ericsandlin.com">
-
-    <!-- Page title -->
-    <title>Portfolio</title>
-
-    <!-- Bootstrap CSS for styling -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Custom CSS styles -->
-    <link rel="stylesheet" href="../styles/index.css" />
 </head>
 
+
 <body>
-    <div class="wrapper">
-        <!-- Site Header -->
-        <!-- Site header including navigation menu -->
+    <!-- The main content of the page begins -->
+
+    <!-- Site header including navigation menu -->
     <header role="banner">
         <!-- Hamburger icon for toggling the nav menu (mobile-friendly) -->
         <div class="menu-icon" id="menu-toggle">
@@ -67,83 +77,76 @@
                 <!-- Link to homepage -->
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="resumes.html">Résumé</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
                 <li><a href="certifications.html">Certifications</a></li>
                 <li><a href="aboutMe.html">About Eric Sandlin</a></li>
-                <li><a href="contactMe.html">Contact Me</a></li>
             </ul>
         </nav>
+
     </header>
+    <main class="contact-wrapper">
 
-        <!-- Main content area -->
-        <main class="auth-forms">
+        <!-- 💡 Social Media Icons -->
+        <div class="social-icons">
+            <a href="https://facebook.com/eric.sandlin" target="_blank" title="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://instagram.com/eesandlin" target="_blank" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://linkedin.com/in/eric-sandlin" target="_blank" title="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://x.com/Eric__Sandlin" target="_blank" title="X (Twitter)">
+                <i class="fab fa-x-twitter"></i>
+            </a>
+        </div>
 
-            <!-- Projects Section -->
-            <section id="projects" class="my-5">
-                <h2>Projects</h2>
-                <div class="row">
-                    <!-- Project 1 -->
-                    <div class="col-md-4">
-                        <div class="project card p-3">
-                            <h3>Lean Six Sigma Projects</h3>
-                            <p>Process Improvment Projects</p>
-                            <a href="navPages/certifications.html" class="btn btn-outline-primary">View Efficiency Projects</a>
-                        </div>
-                    </div>
 
-                    <!-- Project 2 -->
-                    <div class="col-md-4">
-                        <div class="project card p-3">
-                            <h3>Architectural Library</h3>
-                            <p>"Reports, Blueprints, and Documentation"</p>
-                            <a href="navPages/resumes.html" class="btn btn-outline-primary">View Lean Projects</a>
-                        </div>
-                    </div>
+        <h1>Contact Eric Sandlin</h1>
+        <p>If you're a recruiter, potential employer, or just want to connect — fill out the form below and I'll respond as soon as possible.</p>
 
-                    <!-- Project 3 -->
-                    <div class="col-md-4">
-                        <div class="project card p-3">
-                            <h3>Technical Projects</h3>
-                            <p>Industrial Manufacturing Projects.</p>
-                            <a href="navPages/JSGames.html" class="btn btn-outline-primary">See Past Projects</a>
-                        </div>
-                    </div>
+        <form class="contact-form" action="https://formspree.io/f/mgvgyjnj" method="POST">
+            <div class="form-group">
+                <label for="name">Full Name*</label>
+                <input type="text" id="name" name="name" required placeholder="Jane Doe">
+            </div>
 
-                </div>
+            <div class="form-group">
+                <label for="email">Email Address*</label>
+                <input type="email" id="email" name="_replyto" required placeholder="you@example.com">
+            </div>
 
-                <div class="row">
-                    <!-- Project 4 -->
-                    <div class="col-md-4">
-                        <div class="project card p-3">
-                            <h3>Software Projects</h3>
-                            <p>Responsive Software Projects.</p>
-                            <a href="../navPages/JSGames.html" class="btn btn-outline-primary">Explore Developer Area</a>
-                        </div>
-                    </div>
+            <div class="form-group">
+                <label for="subject">Subject*</label>
+                <input type="text" id="subject" name="subject" required placeholder="Job Opportunity at X Company">
+            </div>
 
-                    <!-- Project 5 -->
-                    <div class="col-md-4">
-                        <div class="project card p-3">
-                            <h3>Engineering Projects</h3>
-                            <p>Inventive Emerging Technologies</p>
-                            <a href="../navPages/JSGamesLogIn.html" class="btn btn-outline-primary">Authorized Personnel Only</a>
-                        </div>
-                    </div>
+            <div class="form-group">
+                <label for="messageType">Message Type*</label>
+                <select id="messageType" name="type" required>
+                    <option value="">-- Select a Message Type --</option>
+                    <option value="job_offer">Job Offer</option>
+                    <option value="contract_work">Contract Work</option>
+                    <option value="general">General Inquiry</option>
+                    <option value="feedback">Feedback</option>
+                </select>
+            </div>
 
-                    <!-- Project 6 -->
-                    <div class="col-md-4">
-                        <div class="project card p-3">
-                            <h3>Writing Portfolio</h3>
-                            <p>A collection of Creative Content.</p>
-                            <a href="navPages/JSGames.html" class="btn btn-outline-primary">Explore Projects</a>
-                        </div>
-                    </div>
+            <div class="form-group">
+                <label for="message">Message*</label>
+                <textarea id="message" name="message" required placeholder="Write your message here..."></textarea>
+            </div>
 
-                </div>
+            <!-- Honeypot spam protection -->
+            <div class="hidden-field">
+                <label>Leave this field blank:</label>
+                <input type="text" name="_gotcha">
+            </div>
 
-            </section>
-        </main>
+            <button type="submit">Send Message</button>
+        </form>
 
-        <!-- footer for future site info, links, or contact details -->
         <footer>
             <small>
                 <p>This site is built to share my journey and connect with professionals and potential employers.</p>
@@ -170,12 +173,21 @@
                     </div>
                 </details>
             </small>
+
+
+            <!-- Custom JS for navigation (e.g., hamburger toggle) -->
+            <script src="../javaScript/nav.js"></script>
+
+
+            <!-- 
+    Bootstrap's JavaScript for modal and other interactive components -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+            <!-- NEW: script to wire dropdown to resume preview -->
+            <script src="../javaScript/nav.js"></script>
+
         </footer>
-
-    </div>
-    <!-- External JavaScript file controlling navigation and interactivity -->
-    <script src="../javaScript/nav.js"></script>
-
+    </main>
 </body>
 
 </html>
