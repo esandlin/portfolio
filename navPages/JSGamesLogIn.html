@@ -62,7 +62,7 @@
     <!-- Main content area -->
     <main>
         <!-- Page title and warning message -->
-        <h1>Eric Sandlin's Game Development Testing Area</h1>
+        <h1>Portfolio of Projects</h1>
         <h2>Authorized Personnel Only</h2>
         <h2>Enter Passcode to Access the Link</h2>
 
@@ -74,11 +74,26 @@
             <!-- Submit button -->
             <button type="submit">Submit</button>
         </form>
+
+        <section class="legal-banner">
+            <h3>🔒 Private Access Disclaimer</h3>
+            <p>This section of the website is restricted and accessible only to authorized individuals with a valid password. By entering, you agree to the following terms:</p>
+            <ul>
+                <li>All materials within this area are confidential and intended solely for the authorized viewer.</li>
+                <li>No part of this content may be copied, shared, downloaded, distributed, or disclosed without prior written permission from Eric Sandlin.</li>
+                <li>Access credentials (passwords or links) must not be shared with others.</li>
+                <li>Any unauthorized access, use, or attempt to bypass access controls may result in legal action.</li>
+                <li>Eric Sandlin assumes no liability for any damages arising from unauthorized access or misuse of this content.</li>
+                <li>If you have received access in error or no longer require it, please notify Eric Sandlin immediately and refrain from viewing further.</li>
+            </ul>
+        </section>
+
+
     </main>
 
-    <!-- Footer with copyright -->
+    <!-- Footer with no copyright (legal warnign above)-->
     <footer>
-        &copy; 2024 Eric Sandlin
+        
     </footer>
 
     <script>
@@ -87,6 +102,7 @@
             e.preventDefault(); // Prevent page reload on submit
             checkPasscode(); // Custom function to validate passcode (defined in external JS file)
         });
+
     </script>
 </body>
 
@@ -94,4 +110,6 @@
 <footer>
     <!-- JavaScript functionality for login page, loaded after HTML parses-->
     <script src="../javaScript/nav.js" defer></script>
-</footer></html>
+</footer>
+
+</html>
