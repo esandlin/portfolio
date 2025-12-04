@@ -1,0 +1,151 @@
+/* Fullscreen layout to simulate book pages */
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: #fdfaf6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* === Book Cover Styling === */
+#cover-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right, #f9f6f0, #dcd2c8);
+    font-family: 'Georgia', serif;
+}
+
+.cover-content {
+    text-align: center;
+    padding: 2rem;
+    border: 2px solid #444;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 0.5rem;
+}
+
+.book-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.book-subtitle {
+    font-style: italic;
+    margin-bottom: 2rem;
+    font-size: 1.25rem;
+}
+
+.book-author {
+    margin-bottom: 3rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.open-book-btn {
+    padding: 0.75em 1.5em;
+    font-size: 1.1rem;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .open-book-btn:hover {
+        background-color: #222;
+    }
+
+/* Book container */
+.book-container {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    height: 80vh;
+    background: #f3f0e9;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    overflow: hidden;
+    padding: 2em 1em;
+}
+
+/* Page layout */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    z-index: 0;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+    .page.active {
+        opacity: 1;
+        transform: translateX(0%);
+        z-index: 1;
+    }
+
+/* Controls */
+.pagination-controls {
+    margin-top: 2rem;
+}
+
+button {
+    padding: 0.6em 1.2em;
+    font-size: 1rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    margin: 0 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    button:disabled {
+        background-color: #bbb;
+        cursor: not-allowed;
+    }
+
+
+.toc-list {
+    list-style: none;
+    padding: 1rem 0;
+}
+
+    .toc-list li {
+        margin: 0.75rem 0;
+    }
+
+    .toc-list button {
+        font-size: 1.2rem;
+        background: none;
+        border: none;
+        color: #2a2a2a;
+        cursor: pointer;
+        text-align: left;
+        transition: color 0.3s;
+    }
+
+.toc-list button:hover {
+            color: #007acc;
+            text-decoration: underline;
+        }
+
+img {
+    max-width: 2em;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
