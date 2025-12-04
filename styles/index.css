@@ -5,7 +5,7 @@
 
 /* Theme variables */
 :root {
-    --text-color: #000000;
+    --text-color: #000;
     --bg-light: #fdfaf6;
     --box-shadow: rgba(0, 0, 0, 0.1);
     --footer-bg: #f8f9fa;
@@ -38,13 +38,39 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* Shared wrapper container
-   - index.html: <div class="wrapper">
-   - resumes.html: <body class="wrapper">
-   - certifications.html: <body class="wrapper">
-*/
+/* The hero image */
+[data-theme='dark'] .hero-image {
+    /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/Icon.png");
+
+    /* Set a specific height */
+    height: 50%;
+
+    /* Position and center the image to scale nicely on all screens */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+/* The hero image */
+[data-theme='light'] .hero-image {
+    /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/images/Icon_2.png");
+
+    /* Set a specific height */
+    height: 50%;
+
+    /* Position and center the image to scale nicely on all screens */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
 .wrapper {
-    position: relative;          /* Needed for floating auth buttons on index.html */
+    position: relative;
+    /* Needed for floating auth buttons on index.html */
     margin: 0 auto;
     max-width: 1000px;
     background-color: var(--bg-light);
@@ -52,78 +78,78 @@ body {
     padding: 1em;
 }
 
- /* Embedded CSS additions for form layout */
+/* Embedded CSS additions for form layout */
 
-    main.contact-wrapper {
-        max-width: 800px;
-        margin: 2rem auto;
-        padding: 2rem;
-        background: var(--bg-light);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-    }
+main.contact-wrapper {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--bg-light);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
 
-    form.contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
+form.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 
-    form input,
-    form select,
-    form textarea {
-        padding: 0.75rem;
-        font-size: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        width: 100%;
-        background-color: white;
-        color: black;
-    }
+form input,
+form select,
+form textarea {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    background-color: white;
+    color: black;
+}
 
-    html[data-theme="dark"] form input,
-    html[data-theme="dark"] form select,
-    html[data-theme="dark"] form textarea {
-        background-color: #2c2c2c;
-        color: #eee;
-        border-color: #444;
-    }
+html[data-theme="dark"] form input,
+html[data-theme="dark"] form select,
+html[data-theme="dark"] form textarea {
+    background-color: #2c2c2c;
+    color: #eee;
+    border-color: #444;
+}
 
-    form textarea {
-        min-height: 150px;
-        resize: vertical;
-    }
+form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
 
-    button[type="submit"] {
-        background-color: #007bff;
-        color: white;
-        padding: 0.75rem;
-        font-size: 1rem;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-    button[type="submit"]:hover {
-        background-color: #0056b3;
-    }
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
 
-    .form-group {
-        display: flex;
-        flex-direction: column;
-    }
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
 
-    .hidden-field {
-        display: none;
-    }
+.hidden-field {
+    display: none;
+}
 
-    footer {
-        text-align: center;
-        margin-top: 2rem;
-        font-size: 0.85rem;
-        color: var(--text-color);
-    }
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: var(--text-color);
+}
 
 /* Global list reset (used in About section, nav menus, etc.) */
 ul {
@@ -190,8 +216,8 @@ header {
 
 /* Circular logo images (light and dark variants) */
 .logo-container img {
-    width: 100px;
-    height: 100px;
+    width: 3em;
+    height: 3em;
     border-radius: 50%;
     object-fit: cover;
     transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.3s;
@@ -217,28 +243,44 @@ html[data-theme='dark'] #dark-logo {
     filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5));
 }
 
-html[data-theme='dark'] .legal-banner {
-  background-color: #2c2c2c;
-  border-left-color: #ffb74d;
-  color: #eee;
+html[data-theme='light'] .legal-banner {
+    background-color: #2c2c2c;
+    border-left-color: #ffb74d;
+    color: #eee;
 }
 
 html[data-theme='dark'] .legal-banner h3 {
-  color: #ffcc80;
+    color: #ffcc80;
 }
 
 
 /* Glow animations for the logo */
 @keyframes glowPulse {
-    0%   { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
-    50%  { box-shadow: 0 0 40px rgba(255, 215, 0, 1); }
-    100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+    0% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(255, 215, 0, 1);
+    }
+
+    100% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
 }
 
 @keyframes glowPulseW {
-    0%   { box-shadow: 0 0 20px rgba(192, 192, 192, 0.8); }
-    50%  { box-shadow: 0 0 40px rgba(173, 216, 230, 1); }
-    100% { box-shadow: 0 0 20px rgba(192, 192, 192, 0.8); }
+    0% {
+        box-shadow: 0 0 20px rgba(192, 192, 192, 0.8);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(173, 216, 230, 1);
+    }
+
+    100% {
+        box-shadow: 0 0 20px rgba(192, 192, 192, 0.8);
+    }
 }
 
 /* Apply glow animation on hover, depending on theme */
@@ -256,70 +298,70 @@ html[data-theme='light'] .logo-container img:hover {
    FOOTER LEGAL TEXT
    ============================================================ */
 footer {
-  font-size: 0.875em;
-  background-color: var(--footer-bg);
-  color: var(--text-color);
-  padding: 1rem;
-  text-align: center;
+    font-size: 0.875em;
+    background-color: var(--footer-bg);
+    color: var(--text-color);
+    padding: 1rem;
+    text-align: center;
 }
 
 .legal-disclaimer {
-  margin-top: 1em;
-  text-align: left;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+    margin-top: 1em;
+    text-align: left;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .legal-disclaimer summary {
-  cursor: pointer;
-  font-weight: bold;
-  color: var(--text-color);
-  padding: 0.5em;
-  background-color: rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
-  transition: background-color 0.3s;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--text-color);
+    padding: 0.5em;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
 .legal-disclaimer summary:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .legal-text {
-  padding: 0.75em 1em;
-  font-size: 0.85em;
-  line-height: 1.5em;
-  background-color: rgba(0, 0, 0, 0.03);
-  border-radius: 4px;
-  margin-top: 0.5em;
+    padding: 0.75em 1em;
+    font-size: 0.85em;
+    line-height: 1.5em;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-radius: 4px;
+    margin-top: 0.5em;
 }
 
 .legal-banner {
-  background-color: #fff8e1;
-  border-left: 6px solid #ff9800;
-  padding: 1.5em 1.25em;
-  margin: 2em auto;
-  max-width: 800px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  font-size: 0.95rem;
-  color: #333;
+    background-color: #fff8e1;
+    border-left: 6px solid #ff9800;
+    padding: 1.5em 1.25em;
+    margin: 2em auto;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-size: 0.95rem;
+    color: #333;
 }
 
 .legal-banner h3 {
-  margin-top: 0;
-  font-size: 1.2rem;
-  color: #d84315;
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #d84315;
 }
 
 .legal-banner ul {
-  margin: 1em 0 0 1.5em;
-  padding-left: 0;
+    margin: 1em 0 0 1.5em;
+    padding-left: 0;
 }
 
 .legal-banner li {
-  margin-bottom: 0.6em;
-  line-height: 1.5em;
+    margin-bottom: 0.6em;
+    line-height: 1.5em;
 }
 
 
@@ -362,16 +404,18 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 3rem; /* spacing below the logo / header */
-    gap: 1.2rem;      /* spacing between sections */
+    margin-top: 3rem;
+    /* spacing below the logo / header */
+    gap: 1.2rem;
+    /* spacing between sections */
 }
 
 /* ============================================================
    MODAL STYLING (login & signup on index.html)
    ============================================================ */
-
 .modal {
-    display: none; /* shown via JS */
+    display: none;
+    /* shown via JS */
     position: fixed;
     z-index: 9999;
     left: 0;
@@ -381,19 +425,46 @@ footer {
     background-color: rgba(0, 0, 0, 0.6);
     justify-content: center;
     align-items: center;
+    padding-top: 60px;
+    overflow: auto;
 }
+
+/*
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+*/
 
 .modal-content {
     background-color: var(--bg-light);
     color: var(--text-color);
     padding: 2em;
     border-radius: 8px;
-    max-width: 400px;
+    max-width: 900px;
     width: 100%;
     position: relative;
     box-shadow: 0 0 10px #000;
     text-align: left;
+    margin: auto;
 }
+
+/*
+.modal-content {
+    position: relative;
+    margin: auto;
+    padding: 0;
+    max-width: 900px;
+}
+*/
 
 .modal-content h2 {
     margin-top: 0;
@@ -411,7 +482,59 @@ footer {
     top: 10px;
     right: 15px;
     font-size: 20px;
+    font-size: 40px;
+    font-weight: bold;
     cursor: pointer;
+}
+
+/*
+.close {
+  position: absolute;
+  top: 30px;
+  right: 45px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}*/
+
+/* Certification Modal Styles */
+.mySlides {
+    display: none;
+}
+
+.mySlides img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 40px;
+    user-select: none;
+    transition: 0.3s;
+}
+
+.prev:hover,
+.next:hover {
+    color: #FFD700;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
 }
 
 /* ============================================================
@@ -493,7 +616,8 @@ footer {
     text-decoration: none;
     color: #fff;
     font-size: 18px;
-    padding: 0.875em 1em; /* 14px 16px */
+    padding: 0.875em 1em;
+    /* 14px 16px */
 }
 
 .nav a:hover {
@@ -594,7 +718,8 @@ footer {
 main.wrapper {
     display: flex;
     justify-content: center;
-    align-items: flex-start;  /* keep top aligned */
+    align-items: flex-start;
+    /* keep top aligned */
     padding-top: 20px;
 }
 
@@ -630,7 +755,8 @@ main.wrapper {
     display: flex;
     justify-content: center;
     flex: 1 1 100%;
-    max-width: 600px;   /* keeps them from stretching too wide on huge screens in narrow rows */
+    max-width: 600px;
+    /* keeps them from stretching too wide on huge screens in narrow rows */
 }
 
 /* Large screens: 4-across grid, like the old certifications.css
@@ -696,27 +822,27 @@ footer {
    ============================================================ */
 /* ✅ Social Media Icon Styles */
 .social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
 }
 
 .social-icons a {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #333;
-  color: white;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  font-size: 20px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
 }
 
 .social-icons a:hover {
-  background-color: #555;
-  transform: scale(1.1);
+    background-color: #555;
+    transform: scale(1.1);
 }
