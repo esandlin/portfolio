@@ -184,3 +184,34 @@ document.addEventListener('DOMContentLoaded', function () {
             menu.style.display = "none";
         }
     });
+
+// =====================
+// Slideshow 
+// =====================
+function openModal() {
+  document.getElementById("certModal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("certModal").style.display = "none";
+}
+
+let slideIndex = 1;
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  const slides = document.getElementsByClassName("mySlides");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slides[slideIndex - 1].style.display = "block";  
+}
