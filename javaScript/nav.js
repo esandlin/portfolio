@@ -281,6 +281,6 @@ function magnify(imgID, zoom) {
 }
 
 /* Execute the magnify function: */
-magnify("resume-preview", 4);
+magnify("resume-preview", 3);
 /* Specify the id of the image, and the strength of the magnifier glass: */
 
