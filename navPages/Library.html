@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<!-- Declares HTML5 document -->
+<html lang="en" data-theme="light">
+<!-- Root element of the HTML document; sets language to English and adds a custom data attribute for theme switching -->
+<head>
+    <!-- Page title shown in browser tab -->
+    <title>Libraries</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Six Sigma Book</title>
+    <link rel="stylesheet" href="../styles/Library.css">
+
+    <!-- Compatibility with older versions of IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Ensures mobile responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO and social media tags -->
+    <meta name="description" content="A SE portfolio for Eric Sandlin" />
+    <meta name="keywords" content="Eric Sandlin, portfolio" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta http-equiv="cleartype" content="on" />
+    <meta name="author" content="Eric Sandlin" />
+
+    <!-- Open Graph meta tags for better social sharing -->
+    <meta property="og:title" content="Eric Sandlin   Portfolio">
+    <meta property="og:image" content="path-to-profile.jpg">
+    <meta property="og:description" content="22+ year Navy veteran and engineer specializing in maintenance, leadership and tech.">
+    <meta property="og:url" content="https://ericsandlin.com">
+
+</head>
+<body>
+
+    <div class="book-container">
+
+        <section class="page active" id="cover-page">
+            <div class="cover-content">
+                <h1 class="book-title">The Six Sigma Tool Guide</h1>
+                <p class="book-subtitle">Tools for D.M.A.I.C.<br />Define, Measure, Analyze, Improve, and Control <br />&amp;<br /> D.M.A.D.V.<br /> Design, Verify</p>
+                <p class="book-author">By Eric Sandlin</p>
+            </div>
+        </section>
+
+
+        <section class="page" id="toc">
+            <h1> Six Sigma Guide</h1>
+            <h2>Table of Contents</h2>
+            <h3>D.M.A.I.C</h3>
+            <ul class="toc-list">
+                <li><button data-goto="2">1. Define</button></li>
+                <li><button data-goto="3">2. Measure</button></li>
+                <li><button data-goto="4">3. Analyze</button></li>
+                <li><button data-goto="5">4. Improve</button></li>
+                <li><button data-goto="6">5. Control</button></li>
+            </ul><br />
+            <h3>D.M.A.D.V.</h3>
+            <ul class="toc-list">
+                <li><button data-goto="7">6. Design</button></li>
+                <li><button data-goto="8">7. Verify</button></li>
+            </ul>
+        </section>
+
+        <section class="page">
+            <h1>Define</h1>
+            <p>This is the first phase of Six Sigma: Define the problem, goal, and deliverables.</p>
+            <dl>
+                <dt>SIPOC Diagram (Table or SmartArt)</dt>
+                <dd>Maps Suppliers, Inputs, Process, Outputs, Customers</dd>
+                <dd>Create a SIPOC table to understand process boundaries</dd>
+                <dd><a href="../Excels/SIPOC.xlsx"><img src="../images/Excel_icon.png" /></a></dd>
+                <dt>Project Charter Template</dt>
+                <dd>Documents goals, scope, team, and timelines</dd>
+                <dd>Use preformatted Excel templates to define objectives</dd>
+                <dd><a><img /></a></dd>
+                <dt>Voice of the Customer (VOC) Table</dt>
+                <dd>Captures and translates customer needs into CTQs</dd>
+                <dd>Summarize survey or interview data in Excel</dd>
+                <dd><a><img /></a></dd>
+                <dt>CTQ Tree (Hierarchy Chart)</dt>
+                <dd>Converts customer needs into measurable metrics</dd>
+                <dd>Insert SmartArt to visualize CTQ relationships</dd>
+                <dd><a><img /></a></dd>
+                <dt>Gantt Chart (Conditional Formatting)</dt>
+                <dd>Tracks milestones and project progress</dd>
+                <dd>Use date-based conditional formatting for a visual timeline</dd>
+                <dd><a><img /></a></dd>
+                <dt>Pareto Chart (Built-in Chart or Add-in)</dt>
+                <dd>Identifies most frequent issues or causes</dd>
+                <dd>Use Excel’s Pareto template (based on 80/20 rule)</dd>
+                <dd><a><img /></a></dd>
+            </dl>
+        </section>
+
+        <section class="page">
+            <h1>Measure</h1>
+            <p>This is the second phase: Measure current performance, collect relevant data.</p>
+            <dl>
+                <dt>Data Validation / Drop-Down Lists</dt>
+                <dd>Ensures clean, consistent data collection</dd>
+                <dd>Restrict inputs (e.g., “Pass” or “Fail”)</dd>
+                <dd><a><img /></a></dd>
+                <dt>Check Sheet Template</dt>
+                <dd>Tracks frequency of defects or errors</dd>
+                <dd>Create a tally system using COUNTIF formulas</dd>
+                <dd><a href="../Excels/DataCollection.xlsx"><img src="../images/Excel_icon.png" /></a></dd>
+                <dt>Histogram (Data Analysis ToolPak)</dt>
+                <dd>Displays process variation</dd>
+                <dd>Analyze time, defects, or measurement data distribution</dd>
+                <dd><a><img /></a></dd>
+                <dt>Descriptive Statistics Tool</dt>
+                <dd>Calculates mean, median, SD, range</dd>
+                <dd>Summarize process performance metrics</dd>
+                <dd><a><img /></a></dd>
+                <dt>Run Chart / Time Series Chart</dt>
+                <dd>Visualizes trends over time</dd>
+                <dd>Use line charts to plot daily defect counts</dd>
+                <dd><a><img /></a></dd>
+                <dt>Box & Whisker Plot</dt>
+                <dd>Shows variation and outliers</dd>
+                <dd>Compare process steps or shifts</dd>
+                <dd><a><img /></a></dd>
+                <dt>Control Limit Calculation</dt>
+                <dd>Defines process stability</dd>
+                <dd>Use formulas to calculate mean ± 3σ</dd>
+                <dd><a><img /></a></dd>
+            </dl>
+            <p>
+                Key Excel Functions:
+                AVERAGE(), STDEV.P(), MIN(), MAX(), COUNTIF(), FREQUENCY()
+            </p>
+        </section>
+
+        <section class="page">
+            <h1>Analyze</h1>
+            <p>Analyze data and process to identify root causes and variations.</p>
+            <dl>
+                <dt>Pivot Tables</dt>
+                <dd>Summarize and slice large data sets</dd>
+                <dd>Analyze defects by shift, location, or operator</dd>
+                <dd><a><img /></a></dd>
+                <dt>Pareto Chart / Bar Chart</dt>
+                <dd>Highlights major contributors</dd>
+                <dd>Visualize “vital few” causes</dd>
+                <dd><a href="../Excels/Pareto.xlsx"><img src="../images/Excel_icon.png" /></a></dd>
+                <dt>Scatter Plot with Trendline</dt>
+                <dd>Tests correlation between factors</dd>
+                <dd>Plot defect rate vs. temperature or time</dd>
+                <dd><a><img /></a></dd>
+                <dt>Regression Analysis (Data Analysis ToolPak)</dt>
+                <dd>Tests cause-and-effect statistically</dd>
+                <dd>Build linear regression to predict outcomes</dd>
+                <dd><a><img /></a></dd>
+                <dt>ANOVA (Data Analysis ToolPak)</dt>
+                <dd>Compares performance across groups</dd>
+                <dd>Test if multiple machines have different averages</dd>
+                <dd><a><img /></a></dd>
+                <dt>Fishbone (Ishikawa) Diagram</dt>
+                <dd>Identifies root causes</dd>
+                <dd>Create a diagram using shapes or SmartArt</dd>
+                <dd><a><img /></a></dd>
+                <dt>Correlation Function</dt>
+                <dd>Checks relationships between variables</dd>
+                <dd>Quantify association between metrics</dd>
+                <dd><a><img /></a></dd>
+            </dl>
+            <p>
+                Key Excel Functions:
+                CORREL(), RSQ(), LINEST(), T.TEST(), F.TEST()
+            </p>
+        </section>
+
+        <section class="page">
+            <h1>Improve</h1>
+            <p>Develop solutions, optimize performance, reduce defects.</p>
+            <dl>
+                <dt>Brainstorming Matrix / Affinity Diagram</dt>
+                <dd>Organize improvement ideas</dd>
+                <dd>Use categories in a table or color-code ideas</dd>
+                <dd><a><img /></a></dd>
+                <dt>Before-and-After Comparison Charts</dt>
+                <dd>Shows improvement impact</dd>
+                <dd>Use combo charts to compare metrics pre- and post-change</dd>
+                <dd><a><img /></a></dd>
+                <dt>Simulation / What-If Analysis</dt>
+                <dd>Tests process changes virtually</dd>
+                <dd>Use Goal Seek or Data Tables for sensitivity analysis</dd>
+                <dd><a><img /></a></dd>
+                <dt>DOE (Design of Experiments) Basics</dt>
+                <dd>Evaluates effect of variables</dd>
+                <dd>Manually build a 2ⁿ factorial matrix</dd>
+                <dd><a><img /></a></dd>
+                <dt>FMEA Template</dt>
+                <dd>Calculates Risk Priority Numbers (RPN)</dd>
+                <dd>Use columns for Severity, Occurrence, Detection, and RPN formulas</dd>
+                <dd><a href="../Excels/FMEA.xlsx"><img src="../images/Excel_icon.png" /></a></dd>
+                <dt>Cost-Benefit Analysis Table</dt>
+                <dd>Quantifies expected gains</dd>
+                <dd>Compare baseline vs. improved cost outcomes</dd>
+                <dd><a href="../Excels/FMEA.xlsx"><img src="../images/Excel_icon.png" /></a></dd>
+            </dl>
+        </section>
+
+        <section class="page">
+            <h1>Control</h1>
+            <p>Maintain gains through monitoring and standardization.</p>
+            <dl>
+                <dt>Control Charts (X-bar, R, p, u)</dt>
+                <dd>Monitor ongoing process stability</dd>
+                <dd>Plot upper/lower control limits dynamically</dd>
+                <dd><a><img /></a></dd>
+                <dt>Dashboard / KPI Tracker</dt>
+                <dd>Visualize ongoing performance</dd>
+                <dd>Combine charts and conditional formatting for alerts</dd>
+                <dd><a><img /></a></dd>
+                <dt>Checklist / Audit Sheet</dt>
+                <dd>Maintain standardization</dd>
+                <dd>Create a checklist for process compliance</dd>
+                <dd><a><img /></a></dd>
+                <dt>SPC Templates (Statistical Process Control)</dt>
+                <dd>Ongoing control monitoring</dd>
+                <dd>Automate calculations for control limits</dd>
+                <dd><a href="../Excels/SPC.xlsx"><img src="../images/Excel_icon.png" /></a></dd>
+                <dt>Trend Analysis / Forecast Function</dt>
+                <dd>Predict future performance</dd>
+                <dd>Use FORECAST.LINEAR() for time series</dd>
+                <dd><a><img /></a></dd>
+                <dt>Documentation Tracker</dt>
+                <dd>Standardize procedures and ownership</dd>
+                <dd>Maintain control plans, training logs</dd>
+                <dd><a><img /></a></dd>
+            </dl>
+            <p>
+                Key Excel Tools:
+
+                AVERAGEIFS(), STDEV.S(), FORECAST.LINEAR(), TREND(),
+            </p>
+        </section>
+
+        <section class="page">
+            <h1>Design Phase</h1>
+            <p>Maintain gains through monitoring and standardization.</p>
+            <dl>
+                <dt>Control Charts (X-bar, R, p, u)</dt>
+                <dd>Monitor ongoing process stability</dd>
+                <dd>Plot upper/lower control limits dynamically</dd>
+                <dd><a><img /></a></dd>
+            </dl>
+        </section>
+
+        <section class="page">
+            <h1>Verify Phase</h1>
+            <p>Maintain gains through monitoring and standardization.</p>
+            <dl>
+                <dt>Control Charts (X-bar, R, p, u)</dt>
+                <dd>Monitor ongoing process stability</dd>
+                <dd>Plot upper/lower control limits dynamically</dd>
+                <dd><a><img /></a></dd>
+            </dl>
+        </section>
+    </div>
+
+    <div class="pagination-controls">
+        <button id="prevBtn">⬅ Previous</button>
+        <button id="nextBtn">Next ➡</button>
+    </div>
+
+    <script src="../javaScript/bookNav.js"></script>
+</body>
+</html>
