@@ -55,15 +55,9 @@
             <div class="logo-container d-flex align-items-center">
                 <div class="center-icon">
                     <!-- Icons for light and dark mode -->
-                    <img src="../images/Icon_2.png" alt="Light Mode Logo" id="light-logo" />
-                    <img src="../images/Icon.png" alt="Dark Mode Logo" id="dark-logo" />
+                    <img src="../images/darkMode.png" alt="Light Mode Logo" id="light-logo" />
+                    <img src="../images/lightMode.png" alt="Dark Mode Logo" id="dark-logo" />
                 </div>
-
-                <!-- Elegant mode label -->
-                <span class="mode-label">
-                    <span id="light-label">Light Mode</span>
-                    <span id="dark-label">Dark Mode</span>
-                </span>
             </div>
         </button>
 
@@ -74,7 +68,11 @@
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="resumes.html">Résumé</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="aboutMe.html">About Eric Sandlin</a></li>
+                <li class="logo-container"><a href="aboutMe.html">
+                        <!-- Icons for light and dark mode -->
+                        <img src="../images/Icon_2.png" alt="Light Mode Logo" id="light-logo" />
+                        <img src="../images/Icon.png" alt="Dark Mode Logo" id="dark-logo" />
+                    </a></li>
                 <li><a href="contactMe.html">Contact Me</a></li>
             </ul>
         </nav>
@@ -153,9 +151,8 @@
         <!-- Additional certifications -->
         <div class="column">
             <figure style="width:100%">
-                <a href="../certificates/PDS-certificate-ERIC_R_SANDLIN.pdf" target="_blank">
-                    <img src="../images/FEMA_PDS.png" alt="FEMA PSD" style="width:100%">
-                </a>
+                <!-- Image that triggers the modal -->
+                <img src="../images/FEMA_PDS.png" alt="FEMA PSD" style="width:100%" onclick="openModal();currentSlide(1)" class="modal-trigger">
                 <figcaption>
                     <small><i>FEMA Professional Development Series</i></small>
                 </figcaption>
@@ -211,6 +208,58 @@
     <!-- Bootstrap's JavaScript for modal and other interactive components -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Modal Slideshow Container -->
+    <div id="certModal" class="modal">
+        <span class="close cursor" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
 
+            <!-- Slides -->
+            <div class="mySlides">
+                <img src="../images/FEMA_PDS.png" style="width:100%">
+            </div>
+            <div class="mySlides">
+                <img src="../images/FEMA-100.c.png" style="width:100%">
+            </div>
+            <div class="mySlides">
+                <img src="../images/FEMA-120.c.png" style="width:100%">
+            </div>
+            <div class="mySlides">
+                <img src="../images/FEMA-200.c.png" style="width:100%">
+            </div>
+            <div class="mySlides">
+                <img src="../images/FEMA-22.png" style="width:100%">
+            </div>
+            <div class="mySlides">
+                <img src="../images/FEMA-230.e.png" style="width:100%">
+            </div>
+            <div class="mySlides">
+                <img src="../images/FEMA-235.c.png" style="width:100%">
+            </div>
+            <div class="mySlides">
+                <img src="../images/FEMA-240.c.png" style="width:100%">
+            </div>
+            <div class="mySlides">
+                <img src="../images/FEMA-241.c.png" style="width:100%">
+            </div>
+            <div class="mySlides">
+                <img src="../images/FEMA-242.png" style="width:100%">
+            </div>
+            <div class="mySlides">
+                <img src="../images/FEMA-244b.png" style="width:100%">
+            </div>
+            <div class="mySlides">
+                <img src="../images/FEMA-700.b.png" style="width:100%">
+            </div>
+            <div class="mySlides">
+                <img src="../images/FEMA-800.d.png" style="width:100%">
+            </div>
 
-</body></html>
+            <!-- Next/Prev Controls -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+    </div>
+
+</body>
+
+</html>
