@@ -166,6 +166,12 @@ footer {
     color: var(--text-color);
 }
 
+/* Removes the Blue hyperlinks on the into list */
+.into_links {
+    color: inherit;
+    text-decoration: none;
+}
+
 /* Global list reset (used in About section, nav menus, etc.) */
 ul {
     list-style-type: none;
