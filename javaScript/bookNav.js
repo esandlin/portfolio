@@ -20,14 +20,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
 
-    prevBtn.addEventListener('click', () => {
+    if (prevBtn) prevBtn.addEventListener('click', () => {
         if (currentPage > 0) {
             currentPage--;
             showPage(currentPage);
         }
     });
 
-    nextBtn.addEventListener('click', () => {
+    if (nextBtn) nextBtn.addEventListener('click', () => {
         if (currentPage < document.querySelectorAll('.page').length - 1) {
             currentPage++;
             showPage(currentPage);

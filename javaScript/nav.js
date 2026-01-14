@@ -82,10 +82,10 @@ if (signupForm) {
     });
 }
 
-window.onclick = function (event) {
+window.addEventListener("click", function (event) {
     if (loginModal && event.target === loginModal) loginModal.style.display = 'none';
     if (signupModal && event.target === signupModal) signupModal.style.display = 'none';
-};
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('isLoggedIn') === 'true') {
@@ -118,11 +118,8 @@ function checkPasscode() {
     const inputValue = (modalInput && modalInput.value) || (pageInput && pageInput.value) || "";
 
     if (inputValue === correctPasscode) {
-        if (modalInput) {
-            window.location.href = "navPages/GDTA.html";
-        } else {
-            window.location.href = "JSGames.html";
-        }
+        const inNavPages = window.location.pathname.includes("/navPages/");
+        window.location.href = inNavPages ? "GDTA.html" : "navPages/GDTA.html";
     } else {
         alert("Incorrect passcode. Please try again.");
     }
@@ -140,6 +137,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const dropLabel = document.getElementById('dropbtn-label');
 
     if (!options.length || !previewImg || !htmlLink || !pdfLink || !titleEl || !dropLabel) return;
+    // Make dropdown usable on touch/mobile (no hover)
+    const dropBtn = document.querySelector(".dropbtn");
+    if (dropBtn) dropBtn.addEventListener("click", toggleDropdown);
+
 
     options.forEach(option => {
         option.addEventListener('click', function (e) {
@@ -180,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('click', function(e) {
         const btn = document.querySelector('.dropbtn');
         const menu = document.getElementById("resumeDropdownMenu");
+        if (!btn || !menu) return;
         if (!btn.contains(e.target) && !menu.contains(e.target)) {
             menu.style.display = "none";
         }
@@ -281,6 +283,8 @@ function magnify(imgID, zoom) {
 }
 
 /* Execute the magnify function: */
-magnify("resume-preview", 3);
+if (document.getElementById("resume-preview")) {
+    magnify("resume-preview", 3);
+}
 /* Specify the id of the image, and the strength of the magnifier glass: */
 
