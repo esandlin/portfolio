@@ -15,7 +15,7 @@
     <meta charset="utf-8">
 
     <!-- Ensures the latest rendering engine is used in IE and Chrome -->
-    <meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <!-- Meta tags for SEO and mobile responsiveness (currently empty descriptions/keywords) -->
     <meta name="description" content="">
@@ -82,23 +82,51 @@
         <div id="partsMenuTree" class="parts-menu-tree"></div>
     </aside>
 
-    <div class="game-board">
+<div class="game-board">
 
-        <div class="connection-controls">
-            <button id="connectModeBtn" type="button" class="connection-btn">
-                Connect Mode: OFF
-            </button>
+    <div class="connection-controls">
+        <button id="connectModeBtn" type="button" class="connection-btn">
+            Connect Mode: OFF
+        </button>
 
-            <button id="clearLinesBtn" type="button" class="connection-btn">
-                Clear Lines
-            </button>
-        </div>
+        <label for="wireTypeSelect" class="wire-label">Wire Type:</label>
 
-        <div id="dropZone" class="drop-zone">
-            <canvas id="canvas1" width="800" height="500"></canvas>
-        </div>
+        <select id="wireTypeSelect" class="wire-select">
+            <option value="power">24VDC Power</option>
+            <option value="common">0VDC Common</option>
+            <option value="signal">Sensor Signal</option>
+            <option value="safety">Safety Circuit</option>
+            <option value="network">Ethernet / Network</option>
+            <option value="analog">Analog Signal</option>
+            <option value="ac-control">AC Control Power</option>
+            <option value="pneumatic">Pneumatic Line</option>
+            <option value="hydraulic">Hydraulic Line</option>
+        </select>
 
+        <button id="clearLinesBtn" type="button" class="connection-btn">
+            Clear Lines
+        </button>
     </div>
+
+    <div class="wire-legend">
+        <h4>Wire Legend</h4>
+
+        <div><span class="legend-line wire-power"></span>24VDC Power</div>
+        <div><span class="legend-line wire-common"></span>0VDC Common / Ground</div>
+        <div><span class="legend-line wire-signal"></span>Sensor Signal</div>
+        <div><span class="legend-line wire-safety"></span>Safety Circuit</div>
+        <div><span class="legend-line wire-network"></span>Ethernet / Network</div>
+        <div><span class="legend-line wire-analog"></span>Analog Signal</div>
+        <div><span class="legend-line wire-ac-control"></span>AC Control Power</div>
+        <div><span class="legend-line wire-pneumatic"></span>Pneumatic Line</div>
+        <div><span class="legend-line wire-hydraulic"></span>Hydraulic Line</div>
+    </div>
+
+    <div id="dropZone" class="drop-zone">
+        <canvas id="canvas1" width="800" height="500"></canvas>
+    </div>
+
+</div>
 
 </section>
 
