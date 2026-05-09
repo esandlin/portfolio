@@ -69,24 +69,35 @@
     </header>
 
     <!-- Main content heading -->
-    <h1>Game Development Testing Area</h1>
+    <h1>Industrial Automation Control</h1>
 
     <!-- Subtitle for this specific game -->
     <h3>Drag and Drop</h3>
 
-  <section class="game-layout">
+<section class="game-layout">
 
     <aside id="dragMenu" class="drag-menu">
         <h4>Parts Menu</h4>
 
-        <button class="drag-item" data-type="motor">Motor</button>
-        <button class="drag-item" data-type="sensor">Sensor</button>
-        <button class="drag-item" data-type="valve">Valve</button>
-        <button class="drag-item" data-type="gear">Gear</button>
+        <div id="partsMenuTree" class="parts-menu-tree"></div>
     </aside>
 
-    <div id="dropZone" class="drop-zone">
-        <canvas id="canvas1" width="800" height="500"></canvas>
+    <div class="game-board">
+
+        <div class="connection-controls">
+            <button id="connectModeBtn" type="button" class="connection-btn">
+                Connect Mode: OFF
+            </button>
+
+            <button id="clearLinesBtn" type="button" class="connection-btn">
+                Clear Lines
+            </button>
+        </div>
+
+        <div id="dropZone" class="drop-zone">
+            <canvas id="canvas1" width="800" height="500"></canvas>
+        </div>
+
     </div>
 
 </section>
