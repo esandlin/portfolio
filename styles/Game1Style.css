@@ -618,6 +618,34 @@ html[data-theme="light"] .logo-container img:hover {
 }
 
 /* ============================================================
+   SAVE / LOAD / CLEAR BOARD BUTTON STYLING
+   ============================================================ */
+
+.save-btn {
+    background-color: #0d6efd;
+}
+
+.save-btn:hover {
+    background-color: #0b5ed7;
+}
+
+.load-btn {
+    background-color: #6f42c1;
+}
+
+.load-btn:hover {
+    background-color: #5e35a8;
+}
+
+.clear-board-btn {
+    background-color: #6c757d;
+}
+
+.clear-board-btn:hover {
+    background-color: #5c636a;
+}
+
+/* ============================================================
    SNAP-TO-GRID MODE STYLING
    ============================================================ */
 
