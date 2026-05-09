@@ -1,0 +1,490 @@
+/* ============================================================
+   GAME 1 THEME + DRAG/DROP STYLES
+   Combined from index.css theme standards + Game 1 drag/drop CSS
+   ============================================================ */
+
+/* ============================================================
+   GLOBAL THEME VARIABLES
+   ============================================================ */
+:root {
+    --text-color: #000;
+    --bg-light: #fdfaf6;
+    --box-shadow: rgba(0, 0, 0, 0.1);
+    --footer-bg: #f8f9fa;
+
+    --nav-bg: #808080;
+    --nav-hover-bg: #111;
+    --nav-link-color: #fff;
+
+    --panel-bg: #222;
+    --panel-text: #fff;
+    --panel-button-bg: #444;
+    --panel-button-active-bg: #666;
+
+    --drop-bg: #f4f4f4;
+    --drop-border: #333;
+    --drop-label: #777;
+
+    --item-border: #222;
+    --wrapper-shadow: 10px 80px 80px black;
+}
+
+html[data-theme='dark'] {
+    --text-color: #FFD700;
+    --bg-light: #1e1e1e;
+    --box-shadow: rgba(0, 0, 0, 0.3);
+    --footer-bg: #121212;
+
+    --nav-bg: #333;
+    --nav-hover-bg: #000;
+    --nav-link-color: #fff;
+
+    --panel-bg: #121212;
+    --panel-text: #FFD700;
+    --panel-button-bg: #2c2c2c;
+    --panel-button-active-bg: #444;
+
+    --drop-bg: #2c2c2c;
+    --drop-border: #FFD700;
+    --drop-label: #FFD700;
+
+    --item-border: #000;
+    --wrapper-shadow: 10px 80px 80px rgba(0, 0, 0, 0.85);
+}
+
+/* ============================================================
+   GLOBAL RESET + BASE PAGE STYLING
+   ============================================================ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-color);
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body {
+    min-height: 100vh;
+}
+
+.wrapper {
+    position: relative;
+    margin: 0 auto;
+    max-width: 1100px;
+    min-height: 100vh;
+    background-color: var(--bg-light);
+    box-shadow: var(--wrapper-shadow);
+    padding: 1em;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    margin: 1.25em 0;
+    font-size: 2rem;
+}
+
+h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+button {
+    font-family: inherit;
+    touch-action: none;
+}
+
+/* ============================================================
+   HEADER + NAVIGATION THEME
+   Works with either:
+   1. your current <header><ul>...</ul></header>
+   2. the index.css style <nav class="nav"><ul>...</ul></nav>
+   ============================================================ */
+header {
+    background-color: var(--bg-light);
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 5px var(--box-shadow);
+    width: 100%;
+    z-index: 1000;
+}
+
+header ul,
+.nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+header li,
+.nav li {
+    margin: 0;
+}
+
+header a,
+.nav a {
+    display: block;
+    text-decoration: none;
+    color: var(--nav-link-color);
+    background-color: var(--nav-bg);
+    font-size: 18px;
+    padding: 0.875em 1em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header a:hover,
+.nav a:hover {
+    background-color: var(--nav-hover-bg);
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Hamburger icon from index.css theme */
+.menu-icon {
+    width: 30px;
+    height: 25px;
+    margin: 0.5em auto;
+    position: relative;
+    cursor: pointer;
+    z-index: 1001;
+    display: block;
+}
+
+.menu-icon span {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background-color: var(--text-color);
+    margin: 6px 0;
+    border-radius: 2px;
+    transition: all 0.4s ease-in-out;
+}
+
+.menu-icon.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.menu-icon.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-icon.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+.nav {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: var(--nav-bg);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em 0;
+    box-shadow: -2px 0 5px var(--box-shadow);
+    transition: right 0.4s ease;
+}
+
+.nav.open {
+    display: flex;
+}
+
+.nav.open ul {
+    flex-direction: column;
+}
+
+.nav.open li {
+    margin: 20px 0;
+}
+
+@media (min-width: 48em) {
+    .menu-icon {
+        display: none;
+    }
+
+    .nav {
+        position: static;
+        display: flex !important;
+        background-color: var(--nav-bg);
+        flex-direction: row;
+        justify-content: center;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    .nav li {
+        margin: 0;
+    }
+}
+
+/* ============================================================
+   LOGO + THEME TOGGLE SUPPORT FROM INDEX.CSS
+   Safe even if Game 1 does not currently use these elements.
+   ============================================================ */
+.theme-toggle {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-container img {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.3s;
+}
+
+#dark-logo,
+#light-logo,
+.nav-dark-logo,
+.nav-light-logo {
+    display: none;
+    opacity: 0;
+}
+
+html[data-theme='light'] #light-logo,
+html[data-theme='light'] .nav-light-logo {
+    display: inline-block;
+    opacity: 1;
+    filter: drop-shadow(0 0 4px rgba(181, 183, 187, 0.5));
+}
+
+html[data-theme='dark'] #dark-logo,
+html[data-theme='dark'] .nav-dark-logo {
+    display: inline-block;
+    opacity: 1;
+    filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.5));
+}
+
+@keyframes glowPulse {
+    0% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(255, 215, 0, 1);
+    }
+
+    100% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+}
+
+@keyframes glowPulseW {
+    0% {
+        box-shadow: 0 0 20px rgba(192, 192, 192, 0.8);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(173, 216, 230, 1);
+    }
+
+    100% {
+        box-shadow: 0 0 20px rgba(192, 192, 192, 0.8);
+    }
+}
+
+html[data-theme='dark'] .logo-container img:hover {
+    animation: glowPulse 1.2s infinite ease-in-out;
+    transform: scale(1.05);
+}
+
+html[data-theme='light'] .logo-container img:hover {
+    animation: glowPulseW 1.2s infinite ease-in-out;
+    transform: scale(1.05);
+}
+
+/* ============================================================
+   GAME 1 DRAG + DROP LAYOUT
+   ============================================================ */
+.game-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.drag-menu {
+    width: 180px;
+    padding: 15px;
+    background-color: var(--panel-bg);
+    color: var(--panel-text);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px var(--box-shadow);
+}
+
+.drag-menu h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.drag-item {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 12px;
+    background-color: var(--panel-button-bg);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: grab;
+    font-size: 16px;
+    touch-action: none;
+    user-select: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.drag-item:hover {
+    transform: translateY(-1px);
+}
+
+.drag-item:active {
+    cursor: grabbing;
+    background-color: var(--panel-button-active-bg);
+}
+
+.drop-zone {
+    position: relative;
+    width: 800px;
+    height: 500px;
+    border: 3px solid var(--drop-border);
+    background-color: var(--drop-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    touch-action: none;
+    box-shadow: 0 2px 5px var(--box-shadow);
+}
+
+#canvas1 {
+    width: 800px;
+    height: 500px;
+    display: block;
+    background-color: var(--drop-bg);
+    pointer-events: none;
+}
+
+.placed-item,
+.drag-preview {
+    position: absolute;
+    width: 110px;
+    height: 50px;
+    border-radius: 8px;
+    border: 2px solid var(--item-border);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    z-index: 10;
+    box-shadow: 0 2px 5px var(--box-shadow);
+}
+
+.drag-preview {
+    position: fixed;
+    pointer-events: none;
+    opacity: 0.75;
+    z-index: 9999;
+}
+
+.motor {
+    background-color: #2f80ed;
+}
+
+.sensor {
+    background-color: #27ae60;
+}
+
+.valve {
+    background-color: #eb5757;
+}
+
+.gear {
+    background-color: #9b51e0;
+}
+
+/* ============================================================
+   FOOTER THEME SUPPORT
+   ============================================================ */
+footer {
+    font-size: 0.875em;
+    color: var(--text-color);
+    background-color: var(--footer-bg);
+    padding: 1rem 0;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* ============================================================
+   RESPONSIVE GAME LAYOUT
+   Keeps the game usable on smaller screens.
+   ============================================================ */
+@media (max-width: 1050px) {
+    .wrapper {
+        max-width: 100%;
+    }
+
+    .game-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .drag-menu {
+        width: min(800px, 100%);
+    }
+
+    .drag-item {
+        max-width: 220px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .drop-zone,
+    #canvas1 {
+        width: min(800px, 100%);
+    }
+}

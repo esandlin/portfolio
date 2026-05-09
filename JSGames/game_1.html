@@ -9,7 +9,7 @@
     <title>Game 1</title>
 
     <!-- Link to external stylesheet for global styles -->
-    <link rel="stylesheet" href="../styles/styles.css">
+<link rel="stylesheet" href="../styles/Game1Style.css">
 
     <!-- Character encoding: UTF-8 covers most characters and symbols -->
     <meta charset="utf-8">
@@ -72,13 +72,26 @@
     <h1>Game Development Testing Area</h1>
 
     <!-- Subtitle for this specific game -->
-    <h3>JS Game_1</h3>
+    <h3>Drag and Drop</h3>
 
-    <!-- HTML5 Canvas where the JavaScript game will render -->
-    <canvas id="canvas1"></canvas>
+  <section class="game-layout">
 
-    <!-- Script to control game behavior -->
-    <!-- ⚠️ This appears to link to an HTML file, not a JavaScript file. You may want: game_1.js -->
-    <script src="../JSGames/game_1.html"></script>
-    <!-- If this was intended to be a script, it should be: "../JSGames/game_1.js" -->
+    <aside id="dragMenu" class="drag-menu">
+        <h4>Parts Menu</h4>
+
+        <button class="drag-item" data-type="motor">Motor</button>
+        <button class="drag-item" data-type="sensor">Sensor</button>
+        <button class="drag-item" data-type="valve">Valve</button>
+        <button class="drag-item" data-type="gear">Gear</button>
+    </aside>
+
+    <div id="dropZone" class="drop-zone">
+        <canvas id="canvas1" width="800" height="500"></canvas>
+    </div>
+
+</section>
+
+
+<script src="../javaScript/game_1.js"></script>
+
 </body></html>
