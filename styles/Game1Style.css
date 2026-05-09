@@ -447,6 +447,141 @@ html[data-theme='light'] .logo-container img:hover {
     background-color: #9b51e0;
 }
 
+
+/* ============================================================
+   NESTED PARTS MENU
+   ============================================================ */
+
+.parts-menu-tree {
+    text-align: left;
+    max-height: 460px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.parts-category {
+    margin-bottom: 6px;
+}
+
+.parts-category summary {
+    cursor: pointer;
+    padding: 8px 10px;
+    background-color: #333;
+    color: white;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    user-select: none;
+}
+
+.parts-category summary:hover {
+    background-color: #555;
+}
+
+.parts-category[open] > summary {
+    background-color: #555;
+}
+
+.parts-children {
+    margin-left: 12px;
+    margin-top: 6px;
+    border-left: 2px solid rgba(255, 255, 255, 0.25);
+    padding-left: 8px;
+}
+
+.drag-item {
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+/* General dropped item color */
+.part-generic {
+    background-color: #555;
+}
+
+/* Category-based colors */
+.sensor-part {
+    background-color: #2f80ed;
+}
+
+.motor-part {
+    background-color: #9b51e0;
+}
+
+.control-part {
+    background-color: #27ae60;
+}
+
+.safety-part {
+    background-color: #eb5757;
+}
+
+.pneumatic-part {
+    background-color: #f2994a;
+}
+
+.hydraulic-part {
+    background-color: #56ccf2;
+}
+
+.electrical-part {
+    background-color: #f2c94c;
+    color: black;
+}
+
+/* Dark mode support */
+html[data-theme="dark"] .parts-category summary {
+    background-color: #2c2c2c;
+    color: #FFD700;
+}
+
+html[data-theme="dark"] .parts-category summary:hover,
+html[data-theme="dark"] .parts-category[open] > summary {
+    background-color: #444;
+}
+
+/* ============================================================
+   CONNECTION LINE CONTROLS
+   ============================================================ */
+
+.game-board {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.connection-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.connection-btn {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    font-size: 0.95rem;
+    touch-action: none;
+    user-select: none;
+}
+
+.connection-btn:hover {
+    background-color: #555;
+}
+
+.connection-btn.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.placed-item.connection-selected {
+    outline: 4px solid #FFD700;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.9);
+}
+
 /* ============================================================
    FOOTER THEME SUPPORT
    ============================================================ */
