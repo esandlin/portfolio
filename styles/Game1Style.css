@@ -564,6 +564,7 @@ html[data-theme="light"] .logo-container img:hover {
    ============================================================ */
 
 .part-properties-panel {
+    display: none;
     padding: 0.95rem;
     background-color: var(--page-surface);
     color: var(--text-color);
@@ -571,6 +572,10 @@ html[data-theme="light"] .logo-container img:hover {
     border-radius: var(--radius-lg);
     box-shadow: 0 4px 12px var(--box-shadow);
     text-align: left;
+}
+
+.part-properties-panel.panel-visible {
+    display: block;
 }
 
 .properties-header h4 {
@@ -1151,4 +1156,26 @@ footer {
     #canvas1 {
         width: 100%;
     }
+    
+    /* ============================================================
+   PART PROPERTIES PANEL VISIBILITY FIX
+   ============================================================ */
+
+.part-properties-panel {
+    display: none;
+}
+
+.part-properties-panel.panel-visible {
+    display: block;
+}
+
+/* Keep terminal dots clickable above the part label */
+.connection-terminal {
+    z-index: 30;
+}
+
+.placed-item-label {
+    pointer-events: none;
+}
+    
 }
