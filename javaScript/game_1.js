@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const connectModeBtn = document.getElementById("connectModeBtn");
     const clearLinesBtn = document.getElementById("clearLinesBtn");
     const deleteModeBtn = document.getElementById("deleteModeBtn");
+    const snapModeBtn = document.getElementById("snapModeBtn");
     const wireTypeSelect = document.getElementById("wireTypeSelect");
 
     /*
@@ -39,8 +40,22 @@ document.addEventListener("DOMContentLoaded", () => {
         ============================================================
     */
 
-    if (!dropZone || !canvas || !partsMenuTree || !connectModeBtn || !clearLinesBtn || !deleteModeBtn || !wireTypeSelect) {
-        console.error("Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, deleteModeBtn, wireTypeSelect.");
+    if (
+        !dropZone ||
+        !canvas ||
+        !partsMenuTree ||
+        !connectModeBtn ||
+        !clearLinesBtn ||
+        !deleteModeBtn ||
+        !snapModeBtn ||
+        !wireTypeSelect
+    ) {
+        console.error(
+            "Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, deleteModeBtn, snapModeBtn, wireTypeSelect."
+        );
+        console.error(
+            "Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, deleteModeBtn, wireTypeSelect."
+        );
         console.error("Game 1 setup error: one or more required HTML elements are missing.");
         console.error("Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, wireTypeSelect.");
         return;
@@ -59,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
         defaultCanvasHeight: 500,
         itemWidth: 150,
         itemHeight: 60,
+        gridSize: 25,
         previewOpacity: "0.75",
         movingOpacity: "0.4"
     };
@@ -74,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let nextInstanceId = 1;
     let connectMode = false;
     let deleteMode = false;
+    let snapMode = true;
     let selectedTerminal = null;
 
     let activeItem = null;
@@ -501,7 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 {
                     label: "Cylinders",
                     children: [
-                                                {
+                        {
                             label: "Single Acting Cylinder",
                             shortLabel: "Single Cylinder"
                         },
@@ -663,6 +680,7 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.height = CONFIG.defaultCanvasHeight;
 
     buildPartsMenu(partsCatalog, partsMenuTree, []);
+    updateModeButtons();
     renderCanvas();
 
     /*
@@ -681,7 +699,7 @@ document.addEventListener("DOMContentLoaded", () => {
         draggable button that can be moved into the drop zone.
     */
     function buildPartsMenu(items, parentElement, path, inheritedCategoryClass) {
-        items.forEach(item => {
+        items.forEach((item) => {
             const currentPath = path.concat(item.label);
             const categoryClass = item.categoryClass || inheritedCategoryClass || "part-generic";
 
@@ -770,8 +788,41 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderCanvas() {
         clearCanvas();
         drawBoardBackground();
+        drawGrid();
         drawConnections();
         drawConnectModeMessage();
+    }
+
+    /*
+    Draws the visual snap grid on the canvas when Snap Mode is enabled.
+*/
+    function drawGrid() {
+        if (!snapMode) return;
+
+        const gridSize = CONFIG.gridSize;
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+
+        ctx.save();
+
+        ctx.strokeStyle = currentTheme === "dark" ? "rgba(255, 215, 0, 0.16)" : "rgba(0, 0, 0, 0.10)";
+
+        ctx.lineWidth = 1;
+
+        for (let x = 0; x <= canvas.width; x += gridSize) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, canvas.height);
+            ctx.stroke();
+        }
+
+        for (let y = 0; y <= canvas.height; y += gridSize) {
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(canvas.width, y);
+            ctx.stroke();
+        }
+
+        ctx.restore();
     }
 
     /*
@@ -797,18 +848,18 @@ document.addEventListener("DOMContentLoaded", () => {
         Draws a short instruction on the canvas when Connect Mode is on.
     */
     function drawConnectModeMessage() {
-    ctx.font = "16px Arial";
+        ctx.font = "16px Arial";
 
-    if (connectMode) {
-        ctx.fillStyle = "#007bff";
-        ctx.fillText("Connect Mode: tap two terminals to draw a line", 20, 60);
-    }
+        if (connectMode) {
+            ctx.fillStyle = "#007bff";
+            ctx.fillText("Connect Mode: tap two terminals to draw a line", 20, 60);
+        }
 
-    if (deleteMode) {
-        ctx.fillStyle = "#dc3545";
-        ctx.fillText("Delete Mode: tap a part to delete it, or tap a terminal to remove its wires", 20, 60);
+        if (deleteMode) {
+            ctx.fillStyle = "#dc3545";
+            ctx.fillText("Delete Mode: tap a part to delete it, or tap a terminal to remove its wires", 20, 60);
+        }
     }
-}
 
     /*
         Returns the canvas background color based on the current site theme.
@@ -840,7 +891,7 @@ document.addEventListener("DOMContentLoaded", () => {
         Draws all stored wire connections onto the canvas.
     */
     function drawConnections() {
-        connections.forEach(connection => {
+        connections.forEach((connection) => {
             const fromTerminal = getTerminalElement(connection.fromInstanceId, connection.fromTerminalId);
             const toTerminal = getTerminalElement(connection.toInstanceId, connection.toTerminalId);
 
@@ -893,9 +944,7 @@ document.addEventListener("DOMContentLoaded", () => {
         the terminal's own terminal ID.
     */
     function getTerminalElement(instanceId, terminalId) {
-        return dropZone.querySelector(
-            `[data-instance-id="${instanceId}"] [data-terminal-id="${terminalId}"]`
-        );
+        return dropZone.querySelector(`[data-instance-id="${instanceId}"] [data-terminal-id="${terminalId}"]`);
     }
 
     /*
@@ -917,124 +966,138 @@ document.addEventListener("DOMContentLoaded", () => {
             y: (centerY - dropZoneRect.top) * scaleY
         };
     }
-    
+
     /*
     Deletes a dropped part and removes every wire connected to that part.
 */
-function deletePlacedItem(item) {
-    if (!item) return;
+    function deletePlacedItem(item) {
+        if (!item) return;
 
-    const instanceId = item.dataset.instanceId;
+        const instanceId = item.dataset.instanceId;
 
-    removeConnectionsForItem(instanceId);
+        removeConnectionsForItem(instanceId);
 
-    item.remove();
+        item.remove();
 
-    clearConnectionSelection();
-    renderCanvas();
-}
+        clearConnectionSelection();
+        renderCanvas();
+    }
 
-/*
+    /*
     Removes all wire connections connected to a specific dropped part.
 */
-function removeConnectionsForItem(instanceId) {
-    for (let i = connections.length - 1; i >= 0; i--) {
-        const connection = connections[i];
+    function removeConnectionsForItem(instanceId) {
+        for (let i = connections.length - 1; i >= 0; i--) {
+            const connection = connections[i];
 
-        const connectedToItem =
-            connection.fromInstanceId === instanceId ||
-            connection.toInstanceId === instanceId;
+            const connectedToItem = connection.fromInstanceId === instanceId || connection.toInstanceId === instanceId;
 
-        if (connectedToItem) {
-            connections.splice(i, 1);
+            if (connectedToItem) {
+                connections.splice(i, 1);
+            }
         }
     }
-}
 
-/*
+    /*
     Removes all wire connections attached to one specific terminal.
     This lets Delete Mode remove wires from a terminal without deleting the part.
 */
-function removeConnectionsForTerminal(instanceId, terminalId) {
-    for (let i = connections.length - 1; i >= 0; i--) {
-        const connection = connections[i];
+    function removeConnectionsForTerminal(instanceId, terminalId) {
+        for (let i = connections.length - 1; i >= 0; i--) {
+            const connection = connections[i];
 
-        const connectedToTerminal =
-            (
-                connection.fromInstanceId === instanceId &&
-                connection.fromTerminalId === terminalId
-            ) ||
-            (
-                connection.toInstanceId === instanceId &&
-                connection.toTerminalId === terminalId
-            );
+            const connectedToTerminal =
+                (connection.fromInstanceId === instanceId && connection.fromTerminalId === terminalId) ||
+                (connection.toInstanceId === instanceId && connection.toTerminalId === terminalId);
 
-        if (connectedToTerminal) {
-            connections.splice(i, 1);
+            if (connectedToTerminal) {
+                connections.splice(i, 1);
+            }
         }
+
+        clearConnectionSelection();
+        renderCanvas();
     }
 
-    clearConnectionSelection();
-    renderCanvas();
-}
-
-/*
+    /*
     Turns Delete Mode on or off and makes sure Connect Mode is not active
     at the same time.
 */
-function setDeleteMode(isActive) {
-    deleteMode = isActive;
+    function setDeleteMode(isActive) {
+        deleteMode = isActive;
 
-    if (deleteMode) {
-        connectMode = false;
-        clearConnectionSelection();
+        if (deleteMode) {
+            connectMode = false;
+            clearConnectionSelection();
+        }
+
+        updateModeButtons();
+        renderCanvas();
     }
 
-    updateModeButtons();
-    renderCanvas();
-}
-
-/*
+    /*
     Turns Connect Mode on or off and makes sure Delete Mode is not active
     at the same time.
 */
-function setConnectMode(isActive) {
-    connectMode = isActive;
+    function setConnectMode(isActive) {
+        connectMode = isActive;
 
-    if (connectMode) {
-        deleteMode = false;
-        clearConnectionSelection();
+        if (connectMode) {
+            deleteMode = false;
+            clearConnectionSelection();
+        }
+
+        updateModeButtons();
+        renderCanvas();
     }
 
-    updateModeButtons();
-    renderCanvas();
-}
+    /*
+    Turns Snap Mode on or off.
+*/
+    function setSnapMode(isActive) {
+        snapMode = isActive;
 
-/*
+        updateModeButtons();
+        renderCanvas();
+    }
+
+    /*
     Updates the Connect Mode and Delete Mode buttons so the screen
     always shows the current mode clearly.
 */
-function updateModeButtons() {
-    if (connectMode) {
-        connectModeBtn.textContent = "Connect Mode: ON";
-        connectModeBtn.classList.add("active");
-    } else {
-        connectModeBtn.textContent = "Connect Mode: OFF";
-        connectModeBtn.classList.remove("active");
-    }
+    function updateModeButtons() {
+        if (connectMode) {
+            connectModeBtn.textContent = "Connect Mode: ON";
+            connectModeBtn.classList.add("active");
+        } else {
+            connectModeBtn.textContent = "Connect Mode: OFF";
+            connectModeBtn.classList.remove("active");
+        }
 
-    if (deleteMode) {
-        deleteModeBtn.textContent = "Delete Mode: ON";
-        deleteModeBtn.classList.add("active");
-        deleteModeBtn.classList.add("delete-active");
-        dropZone.classList.add("delete-mode");
-    } else {
-        deleteModeBtn.textContent = "Delete Mode: OFF";
-        deleteModeBtn.classList.remove("active");
-        deleteModeBtn.classList.remove("delete-active");
-        dropZone.classList.remove("delete-mode");
+        if (deleteMode) {
+            deleteModeBtn.textContent = "Delete Mode: ON";
+            deleteModeBtn.classList.add("active");
+            deleteModeBtn.classList.add("delete-active");
+            dropZone.classList.add("delete-mode");
+        } else {
+            deleteModeBtn.textContent = "Delete Mode: OFF";
+            deleteModeBtn.classList.remove("active");
+            deleteModeBtn.classList.remove("delete-active");
+            dropZone.classList.remove("delete-mode");
+        }
+
+        if (snapMode) {
+            snapModeBtn.textContent = "Snap Grid: ON";
+            snapModeBtn.classList.add("active");
+            snapModeBtn.classList.add("snap-active");
+            dropZone.classList.add("snap-mode");
+        } else {
+            snapModeBtn.textContent = "Snap Grid: OFF";
+            snapModeBtn.classList.remove("active");
+            snapModeBtn.classList.remove("snap-active");
+            dropZone.classList.remove("snap-mode");
+        }
     }
-}
 
     /*
         ============================================================
@@ -1091,7 +1154,7 @@ function updateModeButtons() {
     function createConnectionTerminals(item) {
         const terminals = getTerminalsForPart(item.dataset.fullPath || item.dataset.label);
 
-        terminals.forEach(terminalInfo => {
+        terminals.forEach((terminalInfo) => {
             const terminal = createTerminalElement(terminalInfo);
             item.appendChild(terminal);
         });
@@ -1128,7 +1191,7 @@ function updateModeButtons() {
 
         if (path.includes("limit switch")) {
             return getSwitchTerminals();
-                    }
+        }
 
         if (path.includes("proximity")) {
             return getThreeWireSensorTerminals();
@@ -1411,6 +1474,39 @@ function updateModeButtons() {
     }
 
     /*
+    Snaps a single number to the nearest grid line.
+*/
+    function snapValueToGrid(value) {
+        return Math.round(value / CONFIG.gridSize) * CONFIG.gridSize;
+    }
+
+    /*
+    Snaps an x/y position to the nearest grid point.
+*/
+    function snapPositionToGrid(x, y) {
+        if (!snapMode) {
+            return {
+                x: x,
+                y: y
+            };
+        }
+
+        return {
+            x: snapValueToGrid(x),
+            y: snapValueToGrid(y)
+        };
+    }
+
+    /*
+    Applies snap-to-grid first, then clamps the item inside the board.
+*/
+    function getFinalDropPosition(x, y) {
+        const snapped = snapPositionToGrid(x, y);
+
+        return clampToDropZone(snapped.x, snapped.y);
+    }
+
+    /*
         ============================================================
         CONNECTION SELECTION FUNCTIONS
         ============================================================
@@ -1482,7 +1578,7 @@ function updateModeButtons() {
         as the same wire.
     */
     function connectionAlreadyExists(newConnection) {
-        return connections.some(existingConnection => {
+        return connections.some((existingConnection) => {
             const sameDirection =
                 existingConnection.fromInstanceId === newConnection.fromInstanceId &&
                 existingConnection.fromTerminalId === newConnection.fromTerminalId &&
@@ -1542,18 +1638,18 @@ function updateModeButtons() {
         Starts moving a part that is already inside the drop zone.
     */
     function startMovingPlacedItem(event) {
-    if (deleteMode) {
-        event.preventDefault();
-        deletePlacedItem(event.currentTarget);
-        return;
-    }
+        if (deleteMode) {
+            event.preventDefault();
+            deletePlacedItem(event.currentTarget);
+            return;
+        }
 
-    if (connectMode) {
-        event.preventDefault();
-        return;
-    }
+        if (connectMode) {
+            event.preventDefault();
+            return;
+        }
 
-    event.preventDefault();
+        event.preventDefault();
 
         isNewItem = false;
         activeItem = event.currentTarget;
@@ -1582,33 +1678,30 @@ function updateModeButtons() {
         - The terminal is used to start or complete a wire connection.
     */
     function handleTerminalPointerDown(event) {
-    const terminal = event.currentTarget;
+        const terminal = event.currentTarget;
 
-    if (deleteMode) {
+        if (deleteMode) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const parentItem = terminal.closest(".placed-item");
+
+            if (!parentItem) return;
+
+            removeConnectionsForTerminal(parentItem.dataset.instanceId, terminal.dataset.terminalId);
+
+            return;
+        }
+
+        if (!connectMode) return;
+
         event.preventDefault();
         event.stopPropagation();
 
-        const parentItem = terminal.closest(".placed-item");
-
-        if (!parentItem) return;
-
-        removeConnectionsForTerminal(
-            parentItem.dataset.instanceId,
-            terminal.dataset.terminalId
-        );
-
-        return;
+        handleConnectionSelection(terminal);
     }
 
-    if (!connectMode) return;
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    handleConnectionSelection(terminal);
-}
-    
-        /*
+    /*
         ============================================================
         DRAG MOVE / DROP FUNCTIONS
         ============================================================
@@ -1684,17 +1777,23 @@ function updateModeButtons() {
     }
 
     /*
-        Places the active dragged item inside the drop zone.
-    */
+    Places the active dragged item inside the drop zone.
+
+    If Snap Mode is ON:
+    - The part snaps to the nearest grid point.
+
+    If Snap Mode is OFF:
+    - The part lands exactly where it was released.
+*/
     function dropActiveItemInsideZone(event) {
         const position = getDropZonePosition(event);
 
         const newX = position.x - offsetX;
         const newY = position.y - offsetY;
-        const clamped = clampToDropZone(newX, newY);
+        const finalPosition = getFinalDropPosition(newX, newY);
 
-        activeItem.style.left = `${clamped.x}px`;
-        activeItem.style.top = `${clamped.y}px`;
+        activeItem.style.left = `${finalPosition.x}px`;
+        activeItem.style.top = `${finalPosition.y}px`;
         activeItem.style.opacity = "1";
 
         if (isNewItem) {
@@ -1759,7 +1858,7 @@ function updateModeButtons() {
     deleteModeBtn.addEventListener("click", () => {
         setDeleteMode(!deleteMode);
     });
-    
+
     /*
     Clears all wire connections from the board.
 */
@@ -1792,12 +1891,21 @@ function updateModeButtons() {
         this listener is attached to the parent menu tree instead of
         attaching a separate listener to every button.
     */
-    partsMenuTree.addEventListener("pointerdown", event => {
+    partsMenuTree.addEventListener("pointerdown", (event) => {
         const partButton = event.target.closest(".drag-item");
 
         if (!partButton) return;
 
         startDraggingNewPart(partButton, event);
+    });
+
+    /*
+    Turns Snap Mode on or off.
+
+    Snap Mode can stay active while using Normal, Connect, or Delete Mode.
+*/
+    snapModeBtn.addEventListener("click", () => {
+        setSnapMode(!snapMode);
     });
 
     /*
