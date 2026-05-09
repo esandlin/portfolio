@@ -559,6 +559,89 @@ html[data-theme="light"] .logo-container img:hover {
     width: min(800px, 100%);
 }
 
+/* ============================================================
+   PART PROPERTIES PANEL
+   ============================================================ */
+
+.part-properties-panel {
+    padding: 0.95rem;
+    background-color: var(--page-surface);
+    color: var(--text-color);
+    border: 1px solid var(--legend-border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 12px var(--box-shadow);
+    text-align: left;
+}
+
+.properties-header h4 {
+    margin: 0 0 0.35rem;
+    font-size: 1rem;
+}
+
+.properties-header p {
+    margin: 0 0 0.85rem;
+    color: var(--muted-text);
+    font-size: 0.9rem;
+    line-height: 1.35;
+}
+
+.properties-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.part-properties-panel label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+.part-properties-panel input,
+.part-properties-panel select,
+.part-properties-panel textarea {
+    width: 100%;
+    padding: 0.65rem 0.7rem;
+    border: 1px solid var(--legend-border);
+    border-radius: var(--radius-sm);
+    background-color: #ffffff;
+    color: #111111;
+    font: inherit;
+}
+
+html[data-theme="dark"] .part-properties-panel input,
+html[data-theme="dark"] .part-properties-panel select,
+html[data-theme="dark"] .part-properties-panel textarea {
+    background-color: #2c2c2c;
+    color: #ffd700;
+    border-color: rgba(255, 215, 0, 0.25);
+}
+
+.properties-notes-label textarea {
+    min-height: 70px;
+    resize: vertical;
+}
+
+.properties-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 0.85rem;
+}
+
+.placed-item.part-selected {
+    outline: 4px solid #0d6efd;
+    box-shadow:
+        0 0 0 4px rgba(13, 110, 253, 0.18),
+        0 0 18px rgba(13, 110, 253, 0.65);
+}
+
+.placed-item-label {
+    white-space: pre-line;
+}
 
 /* ============================================================
    CONNECTION CONTROLS
