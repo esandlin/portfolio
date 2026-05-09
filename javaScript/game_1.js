@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const partsMenuTree = document.getElementById("partsMenuTree");
     const connectModeBtn = document.getElementById("connectModeBtn");
     const clearLinesBtn = document.getElementById("clearLinesBtn");
+    const deleteModeBtn = document.getElementById("deleteModeBtn");
     const wireTypeSelect = document.getElementById("wireTypeSelect");
 
     /*
@@ -38,7 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ============================================================
     */
 
-    if (!dropZone || !canvas || !partsMenuTree || !connectModeBtn || !clearLinesBtn || !wireTypeSelect) {
+    if (!dropZone || !canvas || !partsMenuTree || !connectModeBtn || !clearLinesBtn || !deleteModeBtn || !wireTypeSelect) {
+        console.error("Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, deleteModeBtn, wireTypeSelect.");
         console.error("Game 1 setup error: one or more required HTML elements are missing.");
         console.error("Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, wireTypeSelect.");
         return;
@@ -71,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let nextInstanceId = 1;
     let connectMode = false;
+    let deleteMode = false;
     let selectedTerminal = null;
 
     let activeItem = null;
@@ -794,12 +797,18 @@ document.addEventListener("DOMContentLoaded", () => {
         Draws a short instruction on the canvas when Connect Mode is on.
     */
     function drawConnectModeMessage() {
-        if (!connectMode) return;
+    ctx.font = "16px Arial";
 
+    if (connectMode) {
         ctx.fillStyle = "#007bff";
-        ctx.font = "16px Arial";
         ctx.fillText("Connect Mode: tap two terminals to draw a line", 20, 60);
     }
+
+    if (deleteMode) {
+        ctx.fillStyle = "#dc3545";
+        ctx.fillText("Delete Mode: tap a part to delete it, or tap a terminal to remove its wires", 20, 60);
+    }
+}
 
     /*
         Returns the canvas background color based on the current site theme.
@@ -908,6 +917,124 @@ document.addEventListener("DOMContentLoaded", () => {
             y: (centerY - dropZoneRect.top) * scaleY
         };
     }
+    
+    /*
+    Deletes a dropped part and removes every wire connected to that part.
+*/
+function deletePlacedItem(item) {
+    if (!item) return;
+
+    const instanceId = item.dataset.instanceId;
+
+    removeConnectionsForItem(instanceId);
+
+    item.remove();
+
+    clearConnectionSelection();
+    renderCanvas();
+}
+
+/*
+    Removes all wire connections connected to a specific dropped part.
+*/
+function removeConnectionsForItem(instanceId) {
+    for (let i = connections.length - 1; i >= 0; i--) {
+        const connection = connections[i];
+
+        const connectedToItem =
+            connection.fromInstanceId === instanceId ||
+            connection.toInstanceId === instanceId;
+
+        if (connectedToItem) {
+            connections.splice(i, 1);
+        }
+    }
+}
+
+/*
+    Removes all wire connections attached to one specific terminal.
+    This lets Delete Mode remove wires from a terminal without deleting the part.
+*/
+function removeConnectionsForTerminal(instanceId, terminalId) {
+    for (let i = connections.length - 1; i >= 0; i--) {
+        const connection = connections[i];
+
+        const connectedToTerminal =
+            (
+                connection.fromInstanceId === instanceId &&
+                connection.fromTerminalId === terminalId
+            ) ||
+            (
+                connection.toInstanceId === instanceId &&
+                connection.toTerminalId === terminalId
+            );
+
+        if (connectedToTerminal) {
+            connections.splice(i, 1);
+        }
+    }
+
+    clearConnectionSelection();
+    renderCanvas();
+}
+
+/*
+    Turns Delete Mode on or off and makes sure Connect Mode is not active
+    at the same time.
+*/
+function setDeleteMode(isActive) {
+    deleteMode = isActive;
+
+    if (deleteMode) {
+        connectMode = false;
+        clearConnectionSelection();
+    }
+
+    updateModeButtons();
+    renderCanvas();
+}
+
+/*
+    Turns Connect Mode on or off and makes sure Delete Mode is not active
+    at the same time.
+*/
+function setConnectMode(isActive) {
+    connectMode = isActive;
+
+    if (connectMode) {
+        deleteMode = false;
+        clearConnectionSelection();
+    }
+
+    updateModeButtons();
+    renderCanvas();
+}
+
+/*
+    Updates the Connect Mode and Delete Mode buttons so the screen
+    always shows the current mode clearly.
+*/
+function updateModeButtons() {
+    if (connectMode) {
+        connectModeBtn.textContent = "Connect Mode: ON";
+        connectModeBtn.classList.add("active");
+    } else {
+        connectModeBtn.textContent = "Connect Mode: OFF";
+        connectModeBtn.classList.remove("active");
+    }
+
+    if (deleteMode) {
+        deleteModeBtn.textContent = "Delete Mode: ON";
+        deleteModeBtn.classList.add("active");
+        deleteModeBtn.classList.add("delete-active");
+        dropZone.classList.add("delete-mode");
+    } else {
+        deleteModeBtn.textContent = "Delete Mode: OFF";
+        deleteModeBtn.classList.remove("active");
+        deleteModeBtn.classList.remove("delete-active");
+        dropZone.classList.remove("delete-mode");
+    }
+}
 
     /*
         ============================================================
@@ -1415,12 +1542,18 @@ document.addEventListener("DOMContentLoaded", () => {
         Starts moving a part that is already inside the drop zone.
     */
     function startMovingPlacedItem(event) {
-        if (connectMode) {
-            event.preventDefault();
-            return;
-        }
-
+    if (deleteMode) {
         event.preventDefault();
+        deletePlacedItem(event.currentTarget);
+        return;
+    }
+
+    if (connectMode) {
+        event.preventDefault();
+        return;
+    }
+
+    event.preventDefault();
 
         isNewItem = false;
         activeItem = event.currentTarget;
@@ -1449,13 +1582,32 @@ document.addEventListener("DOMContentLoaded", () => {
         - The terminal is used to start or complete a wire connection.
     */
     function handleTerminalPointerDown(event) {
-        if (!connectMode) return;
+    const terminal = event.currentTarget;
 
+    if (deleteMode) {
         event.preventDefault();
         event.stopPropagation();
 
-        handleConnectionSelection(event.currentTarget);
+        const parentItem = terminal.closest(".placed-item");
+
+        if (!parentItem) return;
+
+        removeConnectionsForTerminal(
+            parentItem.dataset.instanceId,
+            terminal.dataset.terminalId
+        );
+
+        return;
     }
+
+    if (!connectMode) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    handleConnectionSelection(terminal);
+}
+    
         /*
         ============================================================
         DRAG MOVE / DROP FUNCTIONS
@@ -1589,24 +1741,28 @@ document.addEventListener("DOMContentLoaded", () => {
         - Existing parts cannot be dragged.
         - Terminal dots can be clicked/tapped to create wires.
     */
+    /*
+    Turns Connect Mode on or off.
+
+    Connect Mode and Delete Mode cannot be active at the same time.
+*/
     connectModeBtn.addEventListener("click", () => {
-        connectMode = !connectMode;
-
-        if (connectMode) {
-            connectModeBtn.textContent = "Connect Mode: ON";
-            connectModeBtn.classList.add("active");
-        } else {
-            connectModeBtn.textContent = "Connect Mode: OFF";
-            connectModeBtn.classList.remove("active");
-            clearConnectionSelection();
-        }
-
-        renderCanvas();
+        setConnectMode(!connectMode);
     });
 
     /*
-        Clears all wire connections from the board.
-    */
+    Turns Delete Mode on or off.
+
+    Delete Mode removes dropped parts or terminal wires.
+    Connect Mode and Delete Mode cannot be active at the same time.
+*/
+    deleteModeBtn.addEventListener("click", () => {
+        setDeleteMode(!deleteMode);
+    });
+    
+    /*
+    Clears all wire connections from the board.
+*/
     clearLinesBtn.addEventListener("click", () => {
         connections.length = 0;
         clearConnectionSelection();
