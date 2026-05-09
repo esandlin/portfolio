@@ -617,6 +617,44 @@ html[data-theme="light"] .logo-container img:hover {
     font-weight: 800;
 }
 
+/* ============================================================
+   DELETE MODE STYLING
+   ============================================================ */
+
+.delete-btn.active,
+.delete-btn.delete-active {
+    background-color: #dc3545;
+    color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.25);
+}
+
+.drop-zone.delete-mode {
+    border-color: #dc3545;
+    box-shadow:
+        var(--soft-shadow),
+        0 0 0 4px rgba(220, 53, 69, 0.18);
+}
+
+.drop-zone.delete-mode .placed-item {
+    cursor: not-allowed;
+}
+
+.drop-zone.delete-mode .placed-item:hover {
+    outline: 4px solid rgba(220, 53, 69, 0.85);
+    box-shadow:
+        0 0 0 4px rgba(220, 53, 69, 0.18),
+        0 0 18px rgba(220, 53, 69, 0.65);
+}
+
+.drop-zone.delete-mode .connection-terminal {
+    cursor: not-allowed;
+}
+
+.drop-zone.delete-mode .connection-terminal:hover {
+    background-color: #dc3545;
+    border-color: #ffffff;
+    box-shadow: 0 0 12px rgba(220, 53, 69, 0.95);
+}
 
 /* ============================================================
    WIRE LEGEND
