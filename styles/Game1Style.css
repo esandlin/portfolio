@@ -618,6 +618,23 @@ html[data-theme="light"] .logo-container img:hover {
 }
 
 /* ============================================================
+   SNAP-TO-GRID MODE STYLING
+   ============================================================ */
+
+.snap-btn.active,
+.snap-btn.snap-active {
+    background-color: #198754;
+    color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.25);
+}
+
+.drop-zone.snap-mode {
+    box-shadow:
+        var(--soft-shadow),
+        inset 0 0 0 2px rgba(25, 135, 84, 0.25);
+}
+
+/* ============================================================
    DELETE MODE STYLING
    ============================================================ */
 
