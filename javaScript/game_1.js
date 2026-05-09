@@ -702,6 +702,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     buildPartsMenu(partsCatalog, partsMenuTree, []);
     updateModeButtons();
+    clearPartSelection();
     renderCanvas();
 
     /*
@@ -1045,8 +1046,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-    Turns Delete Mode on or off and makes sure Connect Mode is not active
-    at the same time.
+    Turns Delete Mode on or off and makes sure Connect Mode is not active.
 */
     function setDeleteMode(isActive) {
         deleteMode = isActive;
@@ -1054,6 +1054,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (deleteMode) {
             connectMode = false;
             clearConnectionSelection();
+            clearPartSelection();
         }
 
         updateModeButtons();
@@ -1063,6 +1064,8 @@ document.addEventListener("DOMContentLoaded", () => {
     /*
     Turns Connect Mode on or off and makes sure Delete Mode is not active
     at the same time.
+
+    Turns Connect Mode on or off and makes sure Delete Mode is not active.
 */
     function setConnectMode(isActive) {
         connectMode = isActive;
@@ -1070,6 +1073,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (connectMode) {
             deleteMode = false;
             clearConnectionSelection();
+            clearPartSelection();
         }
 
         updateModeButtons();
@@ -1153,7 +1157,7 @@ document.addEventListener("DOMContentLoaded", () => {
         item.style.top = "0px";
 
         addPlacedItemLabel(item);
-        
+
         createConnectionTerminals(item);
         updatePlacedItemLabel(item);
         item.addEventListener("pointerdown", startMovingPlacedItem);
@@ -1661,8 +1665,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-        Starts moving a part that is already inside the drop zone.
-    */
+    Starts moving a part that is already inside the drop zone.
+
+    Normal Mode:
+    - Selects the part.
+    - Allows the part to be moved.
+
+    Connect Mode:
+    - Does not select or move the part.
+    - User must tap terminal dots to connect wires.
+
+    Delete Mode:
+    - Deletes the clicked part.
+*/
     function startMovingPlacedItem(event) {
         if (deleteMode) {
             event.preventDefault();
@@ -1697,14 +1712,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-        Handles pointer down on a connection terminal.
+    Handles pointer down on a connection terminal.
 
-        In normal mode:
-        - The terminal does nothing.
+    Delete Mode:
+    - Removes wires attached to that terminal.
 
-        In Connect Mode:
-        - The terminal is used to start or complete a wire connection.
-    */
+    Connect Mode:
+    - Selects terminals and creates wires.
+
+    Normal Mode:
+    - Does nothing.
+*/
     function handleTerminalPointerDown(event) {
         const terminal = event.currentTarget;
 
@@ -1721,12 +1739,13 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        if (!connectMode) return;
+        if (connectMode) {
+            event.preventDefault();
+            event.stopPropagation();
 
-        event.preventDefault();
-        event.stopPropagation();
-
-        handleConnectionSelection(terminal);
+            handleConnectionSelection(terminal);
+            return;
+        }
     }
 
     /*
@@ -1931,6 +1950,7 @@ document.addEventListener("DOMContentLoaded", () => {
         activeItem = null;
         previewItem = null;
 
+        clearPartSelection();
         removePreview();
         renderCanvas();
     }
@@ -1973,6 +1993,7 @@ document.addEventListener("DOMContentLoaded", () => {
     /*
     Selects a dropped part and loads its saved properties into the
     Part Properties Panel.
+    Selects a dropped part and opens the Part Properties Panel.
 */
     function selectPlacedItem(item) {
         if (!item) return;
@@ -1981,6 +2002,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         selectedPart = item;
         selectedPart.classList.add("part-selected");
+
+        partPropertiesPanel.classList.add("panel-visible");
+        partPropertiesPanel.setAttribute("aria-hidden", "false");
 
         selectedPartPath.textContent = item.dataset.fullPath || item.dataset.label || "Selected Part";
 
@@ -1993,6 +2017,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /*
     Clears the currently selected part and resets the Part Properties Panel.
+
+    Clears the selected part and hides the Part Properties Panel.
 */
     function clearPartSelection() {
         if (selectedPart) {
@@ -2008,6 +2034,9 @@ document.addEventListener("DOMContentLoaded", () => {
         partVoltageSelect.value = "";
         partOutputTypeSelect.value = "";
         partContactTypeSelect.value = "";
+
+        partPropertiesPanel.classList.remove("panel-visible");
+        partPropertiesPanel.setAttribute("aria-hidden", "true");
     }
 
     /*
