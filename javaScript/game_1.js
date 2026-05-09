@@ -29,6 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const clearLinesBtn = document.getElementById("clearLinesBtn");
     const deleteModeBtn = document.getElementById("deleteModeBtn");
     const snapModeBtn = document.getElementById("snapModeBtn");
+    const saveBoardBtn = document.getElementById("saveBoardBtn");
+    const loadBoardBtn = document.getElementById("loadBoardBtn");
+    const clearBoardBtn = document.getElementById("clearBoardBtn");
     const wireTypeSelect = document.getElementById("wireTypeSelect");
 
     /*
@@ -48,8 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
         !clearLinesBtn ||
         !deleteModeBtn ||
         !snapModeBtn ||
+        !saveBoardBtn ||
+        !loadBoardBtn ||
+        !clearBoardBtn ||
         !wireTypeSelect
     ) {
+        console.error("Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, deleteModeBtn, snapModeBtn, saveBoardBtn, loadBoardBtn, clearBoardBtn, wireTypeSelect.");
         console.error(
             "Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, deleteModeBtn, snapModeBtn, wireTypeSelect."
         );
@@ -76,7 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
         itemHeight: 60,
         gridSize: 25,
         previewOpacity: "0.75",
-        movingOpacity: "0.4"
+        movingOpacity: "0.4",
+        storageKey: "industrialAutomationControlBoard"
     };
 
     /*
@@ -1827,6 +1835,273 @@ document.addEventListener("DOMContentLoaded", () => {
         removeDragListeners();
     }
 
+    /*
+    Saves the current board layout to browser localStorage.
+
+    This stores:
+    - Dropped parts
+    - Part positions
+    - Wire connections
+    - Wire type selection
+    - Snap Mode setting
+*/
+function saveBoardToLocalStorage() {
+    const saveData = {
+        version: 1,
+        savedAt: new Date().toISOString(),
+        nextInstanceId: nextInstanceId,
+        settings: {
+            snapMode: snapMode,
+            selectedWireType: wireTypeSelect.value
+        },
+        parts: getSavedParts(),
+        connections: getSavedConnections()
+    };
+
+    localStorage.setItem(CONFIG.storageKey, JSON.stringify(saveData));
+
+    showTemporaryButtonText(saveBoardBtn, "Saved!");
+}
+
+/*
+    Loads the saved board layout from browser localStorage.
+*/
+function loadBoardFromLocalStorage() {
+    const rawSaveData = localStorage.getItem(CONFIG.storageKey);
+
+    if (!rawSaveData) {
+        window.alert("No saved board was found.");
+        return;
+    }
+
+    try {
+        const saveData = JSON.parse(rawSaveData);
+
+        clearBoardFromScreen();
+
+        restoreParts(saveData.parts || []);
+        restoreConnections(saveData.connections || []);
+        restoreSettings(saveData.settings || {});
+
+        nextInstanceId = Math.max(
+            saveData.nextInstanceId || 1,
+            getNextInstanceIdFromPlacedItems()
+        );
+
+        clearConnectionSelection();
+        updateModeButtons();
+        renderCanvas();
+
+        showTemporaryButtonText(loadBoardBtn, "Loaded!");
+    } catch (error) {
+        console.error("Could not load saved board:", error);
+        window.alert("The saved board could not be loaded.");
+    }
+}
+
+/*
+    Clears the visible board without deleting the saved localStorage file.
+*/
+function clearBoardFromScreen() {
+    const placedItems = dropZone.querySelectorAll(".placed-item");
+
+    placedItems.forEach(item => {
+        item.remove();
+    });
+
+    connections.length = 0;
+    selectedTerminal = null;
+    activeItem = null;
+    previewItem = null;
+
+    removePreview();
+    renderCanvas();
+}
+
+/*
+    Clears the current board layout from the screen.
+    This does not erase the saved board in localStorage.
+*/
+function clearBoard() {
+    clearBoardFromScreen();
+    nextInstanceId = 1;
+    showTemporaryButtonText(clearBoardBtn, "Cleared!");
+}
+
+/*
+    Collects all dropped parts currently inside the drop zone.
+*/
+function getSavedParts() {
+    const placedItems = dropZone.querySelectorAll(".placed-item");
+
+    return Array.from(placedItems).map(item => {
+        return {
+            partId: item.dataset.partId || "",
+            fullPath: item.dataset.fullPath || "",
+            categoryClass: item.dataset.categoryClass || "part-generic",
+            label: item.dataset.label || item.textContent.trim(),
+            instanceId: item.dataset.instanceId,
+            left: parseFloat(item.style.left) || 0,
+            top: parseFloat(item.style.top) || 0
+        };
+    });
+}
+
+/*
+    Copies the connection data into a save-friendly format.
+*/
+function getSavedConnections() {
+    return connections.map(connection => {
+        return {
+            fromInstanceId: connection.fromInstanceId,
+            fromTerminalId: connection.fromTerminalId,
+            toInstanceId: connection.toInstanceId,
+            toTerminalId: connection.toTerminalId,
+            wireType: connection.wireType
+        };
+    });
+}
+
+/*
+    Rebuilds all dropped parts from saved data.
+*/
+function restoreParts(savedParts) {
+    savedParts.forEach(savedPart => {
+        const restoredItem = createPlacedItemFromSavedData(savedPart);
+        dropZone.appendChild(restoredItem);
+    });
+}
+
+/*
+    Rebuilds all stored wire connections from saved data.
+*/
+function restoreConnections(savedConnections) {
+    connections.length = 0;
+
+    savedConnections.forEach(connection => {
+        if (isValidSavedConnection(connection)) {
+            connections.push({
+                fromInstanceId: connection.fromInstanceId,
+                fromTerminalId: connection.fromTerminalId,
+                toInstanceId: connection.toInstanceId,
+                toTerminalId: connection.toTerminalId,
+                wireType: connection.wireType || "signal"
+            });
+        }
+    });
+}
+
+/*
+    Restores saved board settings.
+*/
+function restoreSettings(settings) {
+    if (typeof settings.snapMode === "boolean") {
+        snapMode = settings.snapMode;
+    }
+
+    if (settings.selectedWireType && wireTypes[settings.selectedWireType]) {
+        wireTypeSelect.value = settings.selectedWireType;
+    }
+}
+
+/*
+    Creates a dropped part from saved board data.
+*/
+function createPlacedItemFromSavedData(savedPart) {
+    const item = document.createElement("div");
+
+    item.classList.add("placed-item");
+    item.classList.add(savedPart.categoryClass || "part-generic");
+
+    item.dataset.partId = savedPart.partId || "";
+    item.dataset.fullPath = savedPart.fullPath || savedPart.label || "";
+    item.dataset.categoryClass = savedPart.categoryClass || "part-generic";
+    item.dataset.label = savedPart.label || "Part";
+    item.dataset.instanceId = savedPart.instanceId || `part-${nextInstanceId}`;
+
+    if (!savedPart.instanceId) {
+        nextInstanceId += 1;
+    }
+
+    item.title = item.dataset.fullPath;
+    item.style.left = `${savedPart.left || 0}px`;
+    item.style.top = `${savedPart.top || 0}px`;
+
+    addPlacedItemLabel(item);
+    createConnectionTerminals(item);
+
+    item.addEventListener("pointerdown", startMovingPlacedItem);
+
+    return item;
+}
+
+/*
+    Checks whether a saved connection has enough information to restore.
+*/
+function isValidSavedConnection(connection) {
+    return (
+        connection &&
+        connection.fromInstanceId &&
+        connection.fromTerminalId &&
+        connection.toInstanceId &&
+        connection.toTerminalId
+    );
+}
+
+/*
+    Finds the next safe instance number based on currently loaded parts.
+*/
+function getNextInstanceIdFromPlacedItems() {
+    const placedItems = dropZone.querySelectorAll(".placed-item");
+    let highestIdNumber = 0;
+
+    placedItems.forEach(item => {
+        const instanceId = item.dataset.instanceId || "";
+        const match = instanceId.match(/^part-(\d+)$/);
+
+        if (match) {
+            highestIdNumber = Math.max(highestIdNumber, Number(match[1]));
+        }
+    });
+
+    return highestIdNumber + 1;
+}
+
+/*
+    Temporarily changes a button's text to give user feedback.
+*/
+function showTemporaryButtonText(button, temporaryText) {
+    const originalText = button.textContent;
+
+    button.textContent = temporaryText;
+
+    window.setTimeout(() => {
+        button.textContent = originalText;
+    }, 1200);
+}
+    
+    /*
+    Saves the current board layout to localStorage.
+*/
+saveBoardBtn.addEventListener("click", () => {
+    saveBoardToLocalStorage();
+});
+
+/*
+    Loads the saved board layout from localStorage.
+*/
+loadBoardBtn.addEventListener("click", () => {
+    loadBoardFromLocalStorage();
+});
+
+/*
+    Clears the current board from the screen.
+    This does not erase the saved localStorage board.
+*/
+clearBoardBtn.addEventListener("click", () => {
+    clearBoard();
+});
+    
     /*
         ============================================================
         CONTROL BUTTON LISTENERS
