@@ -1,157 +1,207 @@
-<!DOCTYPE html>
+<!doctype html>
 <!-- Declares the document as HTML5 -->
 
 <html lang="en" data-theme="light">
-<!-- Root HTML element with language set to English and a custom data-theme attribute for light/dark mode toggle -->
+    <!-- Root HTML element with language set to English and a custom data-theme attribute for light/dark mode toggle -->
 
-<head>
-    <!-- Title displayed in the browser tab -->
-    <title>Game 1</title>
+    <head>
+        <!-- Title displayed in the browser tab -->
+        <title>Game 1</title>
 
-    <!-- Link to external stylesheet for global styles -->
-<link rel="stylesheet" href="../styles/Game1Style.css">
+        <!-- Link to external stylesheet for global styles -->
+        <link rel="stylesheet" href="../styles/Game1Style.css" />
 
-    <!-- Character encoding: UTF-8 covers most characters and symbols -->
-    <meta charset="utf-8">
+        <!-- Character encoding: UTF-8 covers most characters and symbols -->
+        <meta charset="utf-8" />
 
-    <!-- Ensures the latest rendering engine is used in IE and Chrome -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <!-- Ensures the latest rendering engine is used in IE and Chrome -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- Meta tags for SEO and mobile responsiveness (currently empty descriptions/keywords) -->
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+        <!-- Meta tags for SEO and mobile responsiveness (currently empty descriptions/keywords) -->
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
 
-    <!-- Improves rendering on mobile and handheld devices -->
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
+        <!-- Improves rendering on mobile and handheld devices -->
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
 
-    <!-- Enables responsive layout on all devices -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Enables responsive layout on all devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Enables ClearType text rendering on Windows devices -->
-    <meta http-equiv="cleartype" content="on">
+        <!-- Enables ClearType text rendering on Windows devices -->
+        <meta http-equiv="cleartype" content="on" />
 
-    <!-- Author of the page -->
-    <meta name="author" content="Eric Sandlin">
-</head>
+        <!-- Author of the page -->
+        <meta name="author" content="Eric Sandlin" />
+    </head>
 
-<body class="wrapper">
-    <!-- Wrapper class likely used for consistent layout/styling across pages -->
+    <body class="wrapper">
+        <!-- Wrapper class likely used for consistent layout/styling across pages -->
 
-    <!-- Top navigation bar for internal site navigation -->
-    <header>
-        <ul>
-            <!-- Link to site home page -->
-            <li>
-                <a href="../index.html">Home</a>
-            </li>
+        <!-- Top navigation bar for internal site navigation -->
+        <header>
+            <ul>
+                <!-- Link to site home page -->
+                <li>
+                    <a href="../index.html">Home</a>
+                </li>
 
-            <!-- Link to JS games list page -->
-            <li>
-                <a href="../navPages/JSGames.html">JavaScript Games</a>
-            </li>
+                <!-- Link to JS games list page -->
+                <li>
+                    <a href="../navPages/JSGames.html">JavaScript Games</a>
+                </li>
 
-            <!-- Link to testing area specifically for game development -->
-            <li>
-                <a href="../navPages/GDTA.html">Game Development Testing Area</a>
-            </li>
+                <!-- Link to testing area specifically for game development -->
+                <li>
+                    <a href="../navPages/GDTA.html">Game Development Testing Area</a>
+                </li>
 
-            <!-- Link to résumé page (opens in a new tab) -->
-            <li>
-                <a href="../navPages/resume.html" target="_blank">Résumé</a>
-            </li>
+                <!-- Link to résumé page (opens in a new tab) -->
+                <li>
+                    <a href="../navPages/resume.html" target="_blank">Résumé</a>
+                </li>
 
-            <!-- Link to certifications overview page -->
-            <li>
-                <a href="../navPages/certifications.html">Certifications</a>
-            </li>
-        </ul>
-    </header>
+                <!-- Link to certifications overview page -->
+                <li>
+                    <a href="../navPages/certifications.html">Certifications</a>
+                </li>
+            </ul>
+        </header>
 
-    <!-- Main content heading -->
-    <h1>Industrial Automation Control</h1>
+        <!-- Main content heading -->
+        <h1>Industrial Automation Control</h1>
 
-    <!-- Subtitle for this specific game -->
-    <h3>Drag and Drop</h3>
+        <!-- Subtitle for this specific game -->
+        <h3>Drag and Drop</h3>
 
-<section class="game-layout">
+        <section class="game-layout">
+            <aside id="dragMenu" class="drag-menu">
+                <h4>Parts Menu</h4>
 
-    <aside id="dragMenu" class="drag-menu">
-        <h4>Parts Menu</h4>
+                <div id="partsMenuTree" class="parts-menu-tree"></div>
+            </aside>
 
-        <div id="partsMenuTree" class="parts-menu-tree"></div>
-    </aside>
+            <div class="game-board">
+                <div class="connection-controls">
+                    <button id="connectModeBtn" type="button" class="connection-btn">Connect Mode: OFF</button>
 
-<div class="game-board">
+                    <label for="wireTypeSelect" class="wire-label">Wire Type:</label>
 
-    <div class="connection-controls">
-        <button id="connectModeBtn" type="button" class="connection-btn">
-            Connect Mode: OFF
-        </button>
+                    <select id="wireTypeSelect" class="wire-select">
+                        <option value="power">24VDC Power</option>
+                        <option value="common">0VDC Common</option>
+                        <option value="signal">Sensor Signal</option>
+                        <option value="safety">Safety Circuit</option>
+                        <option value="network">Ethernet / Network</option>
+                        <option value="analog">Analog Signal</option>
+                        <option value="ac-control">AC Control Power</option>
+                        <option value="pneumatic">Pneumatic Line</option>
+                        <option value="hydraulic">Hydraulic Line</option>
+                    </select>
 
-        <label for="wireTypeSelect" class="wire-label">Wire Type:</label>
+                    <button id="clearLinesBtn" type="button" class="connection-btn">Clear Lines</button>
 
-        <select id="wireTypeSelect" class="wire-select">
-            <option value="power">24VDC Power</option>
-            <option value="common">0VDC Common</option>
-            <option value="signal">Sensor Signal</option>
-            <option value="safety">Safety Circuit</option>
-            <option value="network">Ethernet / Network</option>
-            <option value="analog">Analog Signal</option>
-            <option value="ac-control">AC Control Power</option>
-            <option value="pneumatic">Pneumatic Line</option>
-            <option value="hydraulic">Hydraulic Line</option>
-        </select>
+                    <button id="deleteModeBtn" type="button" class="connection-btn delete-btn">Delete Mode: OFF</button>
 
-        <button id="clearLinesBtn" type="button" class="connection-btn">
-            Clear Lines
-        </button>
-        
-        <button id="deleteModeBtn" type="button" class="connection-btn delete-btn">
-            Delete Mode: OFF
-        </button>
-        
-        <button id="snapModeBtn" type="button" class="connection-btn snap-btn active">
-            Snap Grid: ON
-        </button>
-        
-        <button id="saveBoardBtn" type="button" class="connection-btn save-btn">
-            Save Board
-        </button>
+                    <button id="snapModeBtn" type="button" class="connection-btn snap-btn active">Snap Grid: ON</button>
 
-        <button id="loadBoardBtn" type="button" class="connection-btn load-btn">
-            Load Board
-        </button>
+                    <button id="saveBoardBtn" type="button" class="connection-btn save-btn">Save Board</button>
 
-        <button id="clearBoardBtn" type="button" class="connection-btn clear-board-btn">
-            Clear Board
-        </button>
-        
-    </div>
+                    <button id="loadBoardBtn" type="button" class="connection-btn load-btn">Load Board</button>
 
-    <div class="wire-legend">
-        <h4>Wire Legend</h4>
+                    <button id="clearBoardBtn" type="button" class="connection-btn clear-board-btn">Clear Board</button>
+                </div>
 
-        <div><span class="legend-line wire-power"></span>24VDC Power</div>
-        <div><span class="legend-line wire-common"></span>0VDC Common / Ground</div>
-        <div><span class="legend-line wire-signal"></span>Sensor Signal</div>
-        <div><span class="legend-line wire-safety"></span>Safety Circuit</div>
-        <div><span class="legend-line wire-network"></span>Ethernet / Network</div>
-        <div><span class="legend-line wire-analog"></span>Analog Signal</div>
-        <div><span class="legend-line wire-ac-control"></span>AC Control Power</div>
-        <div><span class="legend-line wire-pneumatic"></span>Pneumatic Line</div>
-        <div><span class="legend-line wire-hydraulic"></span>Hydraulic Line</div>
-    </div>
+                <div class="wire-legend">
+                    <h4>Wire Legend</h4>
 
-    <div id="dropZone" class="drop-zone">
-        <canvas id="canvas1" width="800" height="500"></canvas>
-    </div>
+                    <div><span class="legend-line wire-power"></span>24VDC Power</div>
+                    <div><span class="legend-line wire-common"></span>0VDC Common / Ground</div>
+                    <div><span class="legend-line wire-signal"></span>Sensor Signal</div>
+                    <div><span class="legend-line wire-safety"></span>Safety Circuit</div>
+                    <div><span class="legend-line wire-network"></span>Ethernet / Network</div>
+                    <div><span class="legend-line wire-analog"></span>Analog Signal</div>
+                    <div><span class="legend-line wire-ac-control"></span>AC Control Power</div>
+                    <div><span class="legend-line wire-pneumatic"></span>Pneumatic Line</div>
+                    <div><span class="legend-line wire-hydraulic"></span>Hydraulic Line</div>
+                </div>
+                
+                <div id="dropZone" class="drop-zone">
+                    <canvas id="canvas1" width="800" height="500"></canvas>
+                </div>
 
-</div>
+                <section id="partPropertiesPanel" class="part-properties-panel">
+                    <div class="properties-header">
+                        <h4>Part Properties</h4>
+                        <p id="selectedPartPath">Select a dropped part to edit its properties.</p>
+                    </div>
 
-</section>
+                    <div class="properties-grid">
+                        <label>
+                            Tag Name
+                            <input id="partTagInput" type="text" placeholder="Example: LS-101" />
+                        </label>
 
+                        <label>
+                            Voltage
+                            <select id="partVoltageSelect">
+                                <option value="">Not Set</option>
+                                <option value="24VDC">24VDC</option>
+                                <option value="120VAC">120VAC</option>
+                                <option value="240VAC">240VAC</option>
+                                <option value="480VAC">480VAC</option>
+                                <option value="Air">Air / Pneumatic</option>
+                                <option value="Hydraulic">Hydraulic</option>
+                            </select>
+                        </label>
 
-<script src="../javaScript/game_1.js"></script>
+                        <label>
+                            Output Type
+                            <select id="partOutputTypeSelect">
+                                <option value="">Not Set</option>
+                                <option value="PNP">PNP</option>
+                                <option value="NPN">NPN</option>
+                                <option value="Relay">Relay</option>
+                                <option value="Analog 4-20mA">Analog 4-20mA</option>
+                                <option value="Analog 0-10V">Analog 0-10V</option>
+                                <option value="Ethernet">Ethernet</option>
+                                <option value="Pneumatic">Pneumatic</option>
+                                <option value="Hydraulic">Hydraulic</option>
+                            </select>
+                        </label>
 
-</body></html>
+                        <label>
+                            Contact Type
+                            <select id="partContactTypeSelect">
+                                <option value="">Not Set</option>
+                                <option value="NO">Normally Open</option>
+                                <option value="NC">Normally Closed</option>
+                                <option value="NO/NC">NO / NC</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <label class="properties-notes-label">
+                        Notes
+                        <textarea
+                            id="partDescriptionInput"
+                            placeholder="Example: Detects box at end of conveyor."></textarea>
+                    </label>
+
+                    <div class="properties-actions">
+                        <button id="applyPartPropertiesBtn" type="button" class="connection-btn save-btn">
+                            Apply Properties
+                        </button>
+
+                        <button id="clearPartSelectionBtn" type="button" class="connection-btn clear-board-btn">
+                            Clear Selection
+                        </button>
+                    </div>
+                </section>
+
+            </div>
+        </section>
+
+        <script src="../javaScript/game_1.js"></script>
+    </body>
+</html>
