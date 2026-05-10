@@ -1103,7 +1103,7 @@ footer {
     .wrapper {
         padding: 0.75rem;
     }
-    
+
     .wire-label-input {
         width: 100%;
         max-width: none;
@@ -1147,85 +1147,86 @@ footer {
    WIRE LABEL INPUT
    ============================================================ */
 
-.wire-label-input {
-    min-height: 42px;
-    max-width: 260px;
-    padding: 0.65rem 0.9rem;
-    background-color: #ffffff;
-    color: #111111;
-    border: 1px solid var(--legend-border);
-    border-radius: var(--radius-sm);
-    font: inherit;
-    font-weight: 700;
-}
+    .wire-label-input {
+        min-height: 42px;
+        max-width: 260px;
+        padding: 0.65rem 0.9rem;
+        background-color: #ffffff;
+        color: #111111;
+        border: 1px solid var(--legend-border);
+        border-radius: var(--radius-sm);
+        font: inherit;
+        font-weight: 700;
+    }
 
-html[data-theme="dark"] .wire-label-input {
-    background-color: #2c2c2c;
-    color: #ffd700;
-    border-color: rgba(255, 215, 0, 0.25);
-}
+    html[data-theme="dark"] .wire-label-input {
+        background-color: #2c2c2c;
+        color: #ffd700;
+        border-color: rgba(255, 215, 0, 0.25);
+    }
 
-/* ============================================================
+    /* ============================================================
    WIRE PROPERTIES PANEL
    ============================================================ */
 
-.wire-properties-panel {
-    display: none;
-    padding: 0.95rem;
-    background-color: var(--page-surface);
-    color: var(--text-color);
-    border: 1px solid var(--legend-border);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 4px 12px var(--box-shadow);
-    text-align: left;
-}
+    .wire-properties-panel {
+        display: none;
+        padding: 0.95rem;
+        background-color: var(--page-surface);
+        color: var(--text-color);
+        border: 1px solid var(--legend-border);
+        border-radius: var(--radius-lg);
+        box-shadow: 0 4px 12px var(--box-shadow);
+        text-align: left;
+    }
 
-.wire-properties-panel.panel-visible {
-    display: block;
-}
+    .wire-properties-panel.panel-visible {
+        display: block;
+    }
 
-.wire-properties-panel input,
-.wire-properties-panel select {
-    width: 100%;
-    padding: 0.65rem 0.7rem;
-    border: 1px solid var(--legend-border);
-    border-radius: var(--radius-sm);
-    background-color: #ffffff;
-    color: #111111;
-    font: inherit;
-}
+    .wire-properties-panel input,
+    .wire-properties-panel select {
+        width: 100%;
+        padding: 0.65rem 0.7rem;
+        border: 1px solid var(--legend-border);
+        border-radius: var(--radius-sm);
+        background-color: #ffffff;
+        color: #111111;
+        font: inherit;
+    }
 
-html[data-theme="dark"] .wire-properties-panel input,
-html[data-theme="dark"] .wire-properties-panel select {
-    background-color: #2c2c2c;
-    color: #ffd700;
-    border-color: rgba(255, 215, 0, 0.25);
-}
+    html[data-theme="dark"] .wire-properties-panel input,
+    html[data-theme="dark"] .wire-properties-panel select {
+        background-color: #2c2c2c;
+        color: #ffd700;
+        border-color: rgba(255, 215, 0, 0.25);
+    }
 
-/* ============================================================
+    /* ============================================================
    PROPERTY PANEL VISIBILITY CONTROL
    Both panels are hidden until a part or wire is selected.
    ============================================================ */
 
-.part-properties-panel,
-.wire-properties-panel {
-    display: none;
-}
+    .part-properties-panel,
+    .wire-properties-panel {
+        display: none;
+    }
 
-.part-properties-panel.panel-visible,
-.wire-properties-panel.panel-visible {
-    display: block;
-}
+    .part-properties-panel.panel-visible,
+    .wire-properties-panel.panel-visible {
+        display: block;
+    }
 
-/* Keep terminal dots clickable above the part label */
-.connection-terminal {
-    z-index: 30;
-}
+    /* Keep terminal dots clickable above the part label */
+    .connection-terminal {
+        z-index: 30;
+    }
 
-.placed-item-label {
-    pointer-events: none;
-}}
-    /* ============================================================
+    .placed-item-label {
+        pointer-events: none;
+    }
+}
+/* ============================================================
    PROPERTY PANEL VISIBILITY CONTROL
    Both panels are hidden until an item or wire is selected.
    ============================================================ */
@@ -1238,4 +1239,225 @@ html[data-theme="dark"] .wire-properties-panel select {
 .part-properties-panel.panel-visible,
 .wire-properties-panel.panel-visible {
     display: block;
+}
+
+/* ============================================================
+   SPLASH SCREEN
+   Dark-to-light logo transition before showing main interface.
+   ============================================================ */
+
+.splash-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+
+    background-color: #050505;
+    cursor: pointer;
+    overflow: hidden;
+
+    animation: splashBackgroundShift 4s ease-in-out forwards;
+    transition:
+        opacity 0.65s ease,
+        visibility 0.65s ease;
+}
+
+.splash-screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255, 215, 0, 0.16), transparent 32rem),
+        radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.18), transparent 28rem);
+    opacity: 0.9;
+    pointer-events: none;
+}
+
+.splash-screen.splash-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.splash-logo-frame {
+    position: relative;
+    width: min(58vw, 390px);
+    aspect-ratio: 1 / 1;
+    z-index: 1;
+
+    border-radius: 50%;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 4px solid rgba(255, 215, 0, 0.75);
+    box-shadow:
+        0 0 24px rgba(255, 215, 0, 0.45),
+        0 0 60px rgba(255, 215, 0, 0.25);
+}
+
+.splash-logo {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
+
+.splash-logo-dark {
+    opacity: 1;
+    filter: drop-shadow(0 0 22px rgba(255, 215, 0, 0.65)) drop-shadow(0 0 48px rgba(255, 215, 0, 0.35));
+    animation: splashDarkLogoFade 4s ease-in-out forwards;
+}
+
+.splash-logo-light {
+    opacity: 0;
+    filter: drop-shadow(0 0 18px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 36px rgba(255, 255, 255, 0.55));
+    animation: splashLightLogoFade 4s ease-in-out forwards;
+}
+
+.splash-tap-text {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 0.55rem 0.9rem;
+
+    color: #1f2933;
+    background-color: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 999px;
+
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+
+    opacity: 0;
+    animation: splashTapTextFade 4s ease-in-out forwards;
+}
+
+body.splash-active {
+    overflow: hidden;
+}
+
+.splash-screen .splash-logo-frame {
+    animation: splashFrameShift 4s ease-in-out forwards;
+}
+
+@keyframes splashFrameShift {
+    0% {
+        border-color: rgba(255, 215, 0, 0.85);
+        box-shadow:
+            0 0 24px rgba(255, 215, 0, 0.5),
+            0 0 60px rgba(255, 215, 0, 0.28);
+    }
+
+    55% {
+        border-color: rgba(255, 215, 0, 0.7);
+    }
+
+    100% {
+        border-color: rgba(120, 120, 120, 0.55);
+        box-shadow:
+            0 0 22px rgba(0, 0, 0, 0.18),
+            0 0 55px rgba(255, 255, 255, 0.45);
+    }
+}
+
+@keyframes splashBackgroundShift {
+    0% {
+        background-color: #050505;
+    }
+
+    45% {
+        background-color: #0e0d08;
+    }
+
+    68% {
+        background-color: #c8c2a8;
+    }
+
+    100% {
+        background-color: #fdfaf6;
+    }
+}
+
+@keyframes splashDarkLogoFade {
+    0% {
+        opacity: 1;
+        transform: scale(0.94);
+    }
+
+    38% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    58% {
+        opacity: 0;
+        transform: scale(1.04);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.04);
+    }
+}
+
+@keyframes splashLightLogoFade {
+    0% {
+        opacity: 0;
+        transform: scale(0.94);
+    }
+
+    42% {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+
+    68% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes splashTapTextFade {
+    0%,
+    55% {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    75%,
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 700px) {
+    .splash-logo-frame {
+        width: min(78vw, 320px);
+    }
+
+    .splash-tap-text {
+        font-size: 0.85rem;
+    }
 }
