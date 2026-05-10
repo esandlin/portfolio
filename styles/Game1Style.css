@@ -231,67 +231,101 @@ header a:hover,
     transform: translateY(-1px);
 }
 
-/* ============================================================
-   HAMBURGER MENU SUPPORT
-   Safe even if this page does not currently use it.
-   ============================================================ */
-
-.menu-icon {
-    width: 30px;
-    height: 25px;
-    margin: 0.5em auto;
-    position: relative;
-    cursor: pointer;
-    z-index: 1001;
-    display: block;
-}
-
-.menu-icon span {
-    display: block;
-    width: 100%;
-    height: 4px;
-    margin: 6px 0;
-    background-color: var(--text-color);
-    border-radius: 2px;
-    transition: all 0.4s ease-in-out;
-}
-
-.menu-icon.active span:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
-}
-
-.menu-icon.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.menu-icon.active span:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
-}
-
-.nav {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    padding: 1em 0;
-    background: var(--nav-bg);
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-    box-shadow: -2px 4px 10px var(--box-shadow);
-}
-
-.nav.open {
+.drag-item-content {
     display: flex;
+    align-items: center;
+    gap: 0.7rem;
 }
 
-.nav.open ul {
-    flex-direction: column;
+.drag-item-thumb-wrap {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.nav.open li {
-    margin: 0.75rem 0;
+.drag-item-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.drag-item-text {
+    flex: 1;
+    text-align: left;
+}
+
+.placed-item,
+.drag-preview {
+    position: absolute;
+    width: 150px;
+    height: 90px;
+    border: 2px solid var(--item-border);
+    border-radius: var(--radius-md);
+    background-color: #ffffff;
+    overflow: visible;
+    user-select: none;
+    touch-action: none;
+    box-shadow: 0 6px 14px var(--box-shadow);
+}
+
+.placed-item-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-align: center;
+    color: #111111;
+}
+
+html[data-theme="dark"] .placed-item,
+html[data-theme="dark"] .drag-preview {
+    background-color: #2c2c2c;
+}
+
+.placed-item-visual {
+    width: 100%;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.35rem 0 0.35rem;
+    overflow: hidden;
+}
+
+.placed-item-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+}
+
+.placed-item-label {
+    width: 100%;
+    min-height: 28px;
+    padding: 0.2rem 0.4rem 0.35rem;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #111111;
+    pointer-events: none;
+}
+
+html[data-theme="dark"] .placed-item-label {
+    color: #ffd700;
 }
 
 @media (min-width: 48em) {
@@ -904,25 +938,36 @@ html[data-theme="dark"] .part-properties-panel textarea {
 .drag-preview {
     position: absolute;
     width: 150px;
-    height: 60px;
-    color: #ffffff;
+    height: 90px;
+
     border: 2px solid var(--item-border);
     border-radius: var(--radius-md);
+
+    background-color: #ffffff;
+    color: #111111;
+
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+
     cursor: grab;
     font-size: 0.95rem;
     font-weight: 800;
     text-align: center;
+
     user-select: none;
     touch-action: none;
     z-index: 10;
+
+    overflow: visible;
     box-shadow: 0 6px 14px var(--box-shadow);
 }
 
-.placed-item {
-    overflow: visible;
+html[data-theme="dark"] .placed-item,
+html[data-theme="dark"] .drag-preview {
+    background-color: #2c2c2c;
+    color: #ffd700;
 }
 
 .drag-preview {
@@ -932,11 +977,55 @@ html[data-theme="dark"] .part-properties-panel textarea {
     z-index: 9999;
 }
 
+.placed-item-visual {
+    width: 100%;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.35rem 0.35rem 0;
+    overflow: hidden;
+}
+
+.placed-item-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+}
+
+.placed-item-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 0.25rem;
+
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-align: center;
+    color: inherit;
+}
+
 .placed-item-label {
-    position: relative;
-    z-index: 15;
-    padding: 0 0.6rem;
-    line-height: 1.15;
+    width: 100%;
+    min-height: 28px;
+
+    padding: 0.2rem 0.4rem 0.35rem;
+
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+
+    color: inherit;
+    white-space: pre-line;
     pointer-events: none;
 }
 
@@ -1460,4 +1549,30 @@ body.splash-active {
     .splash-tap-text {
         font-size: 0.85rem;
     }
+}
+
+/* ============================================================
+   IMAGE PART DRAG FIX
+   Prevents child image/text elements from stealing pointer events.
+   ============================================================ */
+
+.drag-item-content,
+.drag-item-thumb-wrap,
+.drag-item-thumb,
+.drag-item-text,
+.placed-item-visual,
+.placed-item-image,
+.placed-item-fallback,
+.placed-item-label {
+    pointer-events: none;
+}
+
+/* ============================================================
+   DROPPED PART PLACEHOLDER ICON
+   Used until actual part images are added.
+   ============================================================ */
+
+.placed-item-fallback {
+    font-size: 1.6rem;
+    opacity: 0.75;
 }

@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const loadBoardBtn = document.getElementById("loadBoardBtn");
     const clearBoardBtn = document.getElementById("clearBoardBtn");
     const wireTypeSelect = document.getElementById("wireTypeSelect");
-    const wireLabelInput = document.getElementById("wireLabelInput");
     const wirePropertiesPanel = document.getElementById("wirePropertiesPanel");
     const selectedWireInfo = document.getElementById("selectedWireInfo");
     const wireEditLabelInput = document.getElementById("wireEditLabelInput");
@@ -71,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
         !loadBoardBtn ||
         !clearBoardBtn ||
         !wireTypeSelect ||
-        !wireLabelInput ||
         !wirePropertiesPanel ||
         !selectedWireInfo ||
         !wireEditLabelInput ||
@@ -90,19 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ) {
         console.error("Game 1 setup error: one or more required HTML elements are missing.");
         console.error(
-            "Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, deleteModeBtn, snapModeBtn, saveBoardBtn, loadBoardBtn, clearBoardBtn, wireTypeSelect, wireLabelInput, wirePropertiesPanel, selectedWireInfo, wireEditLabelInput, wireEditTypeSelect, applyWirePropertiesBtn, deleteSelectedWireBtn, clearWireSelectionBtn, partPropertiesPanel, selectedPartPath, partTagInput, partDescriptionInput, partVoltageSelect, partOutputTypeSelect, partContactTypeSelect, applyPartPropertiesBtn, clearPartSelectionBtn."
+            "Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, deleteModeBtn, snapModeBtn, saveBoardBtn, loadBoardBtn, clearBoardBtn, wireTypeSelect, wirePropertiesPanel, selectedWireInfo, wireEditLabelInput, applyWirePropertiesBtn, deleteSelectedWireBtn, clearWireSelectionBtn, partPropertiesPanel, selectedPartPath, partTagInput, partDescriptionInput, partVoltageSelect, partOutputTypeSelect, partContactTypeSelect, applyPartPropertiesBtn, clearPartSelectionBtn."
         );
-        console.error(
-            "Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, deleteModeBtn, snapModeBtn, saveBoardBtn, loadBoardBtn, clearBoardBtn, wireTypeSelect."
-        );
-        console.error(
-            "Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, deleteModeBtn, snapModeBtn, wireTypeSelect."
-        );
-        console.error(
-            "Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, deleteModeBtn, wireTypeSelect."
-        );
-        console.error("Game 1 setup error: one or more required HTML elements are missing.");
-        console.error("Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, wireTypeSelect.");
         return;
     }
 
@@ -118,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         defaultCanvasWidth: 800,
         defaultCanvasHeight: 500,
         itemWidth: 150,
-        itemHeight: 60,
+        itemHeight: 90,
         gridSize: 25,
         previewOpacity: "0.75",
         movingOpacity: "0.4",
@@ -142,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let activeItem = null;
     let previewItem = null;
     let isNewItem = false;
+    let activePointerElement = null;
 
     let offsetX = 0;
     let offsetY = 0;
@@ -731,6 +719,7 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.height = CONFIG.defaultCanvasHeight;
 
     //setupSplashScreen();
+    partsMenuTree.innerHTML = "";
     buildPartsMenu(partsCatalog, partsMenuTree, []);
     updateModeButtons();
     clearPartSelection();
@@ -774,8 +763,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-        Creates one expandable dropdown category in the Parts Menu.
-    */
+    Creates one expandable dropdown category in the Parts Menu.
+    Categories are closed by default when the page loads.
+*/
     function createCategoryNode(item, parentElement, currentPath, categoryClass) {
         const details = document.createElement("details");
         const summary = document.createElement("summary");
@@ -794,21 +784,44 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-        Creates one draggable part button in the Parts Menu.
-    */
+    Creates one draggable part button in the Parts Menu.
+
+    Supports:
+    - Text-only parts
+    - Image thumbnail parts
+    - Safe fallback if no image exists
+*/
     function createPartButton(item, parentElement, currentPath, categoryClass) {
         const button = document.createElement("button");
+        const label = item.shortLabel || item.label || "Part";
+        const imagePath = item.image || "";
 
         button.type = "button";
-        button.textContent = item.label;
 
         button.classList.add("drag-item");
         button.classList.add(categoryClass);
 
-        button.dataset.label = item.shortLabel || item.label;
+        button.dataset.label = label;
         button.dataset.fullPath = currentPath.join(" > ");
         button.dataset.categoryClass = categoryClass;
-        button.dataset.partId = makePartId(currentPath);
+        button.dataset.partId = item.partId || makePartId(currentPath);
+        button.dataset.image = imagePath;
+
+        if (imagePath) {
+            button.innerHTML = `
+            <span class="drag-item-content">
+                <span class="drag-item-thumb-wrap">
+                    <img
+                        class="drag-item-thumb"
+                        src="${imagePath}"
+                        alt="${label}">
+                </span>
+                <span class="drag-item-text">${label}</span>
+            </span>
+        `;
+        } else {
+            button.textContent = item.label;
+        }
 
         parentElement.appendChild(button);
     }
@@ -1252,20 +1265,28 @@ document.addEventListener("DOMContentLoaded", () => {
     */
 
     /*
-        Creates the HTML element that appears inside the gray drop zone
-        after a part is dragged from the Parts Menu.
-    */
+    Creates the HTML element that appears inside the gray drop zone
+    after a part is dragged from the Parts Menu.
+
+    Supports:
+    - Image-based parts
+    - Text fallback
+    - Terminals
+    - Part properties
+*/
     function createPlacedItem(partButton) {
         const item = document.createElement("div");
 
         item.classList.add("placed-item");
         item.classList.add(partButton.dataset.categoryClass || "part-generic");
 
-        item.dataset.partId = partButton.dataset.partId;
-        item.dataset.fullPath = partButton.dataset.fullPath;
-        item.dataset.categoryClass = partButton.dataset.categoryClass;
+        item.dataset.partId = partButton.dataset.partId || "";
+        item.dataset.fullPath = partButton.dataset.fullPath || "";
+        item.dataset.categoryClass = partButton.dataset.categoryClass || "part-generic";
         item.dataset.label = partButton.dataset.label || partButton.textContent.trim();
+        item.dataset.image = partButton.dataset.image || "";
         item.dataset.instanceId = `part-${nextInstanceId}`;
+
         item.dataset.tagName = "";
         item.dataset.description = "";
         item.dataset.voltage = "";
@@ -1274,17 +1295,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
         nextInstanceId += 1;
 
-        item.title = partButton.dataset.fullPath;
+        item.title = item.dataset.fullPath;
         item.style.left = "0px";
         item.style.top = "0px";
 
-        addPlacedItemLabel(item);
-
+        buildPlacedItemBody(item);
         createConnectionTerminals(item);
         updatePlacedItemLabel(item);
+
         item.addEventListener("pointerdown", startMovingPlacedItem);
 
         return item;
+    }
+
+    /*
+    Builds the visible body of a dropped part.
+
+    If the part has an image, the image is shown.
+    If no image exists, a simple visual placeholder is shown.
+
+    The part name is shown only once in .placed-item-label.
+*/
+    function buildPlacedItemBody(item) {
+        const imagePath = item.dataset.image || "";
+        const label = item.dataset.label || "Part";
+
+        item.innerHTML = `
+        <div class="placed-item-visual">
+            ${
+                imagePath
+                    ? `<img class="placed-item-image" src="${imagePath}" alt="${label}">`
+                    : `<div class="placed-item-fallback" aria-hidden="true">⚙</div>`
+            }
+        </div>
+
+        <div class="placed-item-label">${label}</div>
+    `;
     }
 
     /*
@@ -1543,16 +1589,20 @@ document.addEventListener("DOMContentLoaded", () => {
     */
 
     /*
-        Creates the floating preview box that follows the pointer while
-        a part is being dragged.
-    */
+    Creates the floating preview box that follows the pointer while
+    a part is being dragged.
+*/
     function createPreviewItem(sourceItem, clientX, clientY) {
         previewItem = document.createElement("div");
 
         previewItem.classList.add("drag-preview");
         previewItem.classList.add(sourceItem.dataset.categoryClass || "part-generic");
 
-        previewItem.textContent = sourceItem.dataset.label || sourceItem.textContent.trim();
+        previewItem.dataset.label = sourceItem.dataset.label || sourceItem.textContent.trim();
+        previewItem.dataset.image = sourceItem.dataset.image || "";
+
+        buildPlacedItemBody(previewItem);
+
         previewItem.style.opacity = CONFIG.previewOpacity;
 
         document.body.appendChild(previewItem);
@@ -1698,16 +1748,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-        Checks whether the pointer is currently inside the drop zone.
-    */
+    Checks whether the pointer or the preview is inside the drop zone.
+    This makes dropping easier with larger image-based parts.
+*/
     function isPointerInsideDropZone(event) {
-        const rect = dropZone.getBoundingClientRect();
+        const dropZoneRect = dropZone.getBoundingClientRect();
+        const tolerance = 12;
+
+        const pointerIsInside =
+            event.clientX >= dropZoneRect.left - tolerance &&
+            event.clientX <= dropZoneRect.right + tolerance &&
+            event.clientY >= dropZoneRect.top - tolerance &&
+            event.clientY <= dropZoneRect.bottom + tolerance;
+
+        if (pointerIsInside) {
+            return true;
+        }
+
+        return isPreviewOverDropZone();
+    }
+
+    /*
+    Checks whether the floating preview overlaps the drop zone.
+*/
+    function isPreviewOverDropZone() {
+        if (!previewItem) return false;
+
+        const previewRect = previewItem.getBoundingClientRect();
+        const dropZoneRect = dropZone.getBoundingClientRect();
 
         return (
-            event.clientX >= rect.left &&
-            event.clientX <= rect.right &&
-            event.clientY >= rect.top &&
-            event.clientY <= rect.bottom
+            previewRect.right >= dropZoneRect.left &&
+            previewRect.left <= dropZoneRect.right &&
+            previewRect.bottom >= dropZoneRect.top &&
+            previewRect.top <= dropZoneRect.bottom
         );
     }
 
@@ -1756,49 +1830,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return clampToDropZone(snapped.x, snapped.y);
     }
-
-    /*
-    Sets up the splash screen.
-
-    The splash screen:
-    - Plays the dark-to-light logo transition.
-    - Disappears when clicked, tapped, or activated by keyboard.
-    - Reveals the main interface underneath.
-*/
-    /**
-function setupSplashScreen() {
-    if (!splashScreen) return;
-
-    let splashDismissed = false;
-
-    document.body.classList.add("splash-active");
-
-    function dismissSplashScreen() {
-        if (splashDismissed) return;
-
-        splashDismissed = true;
-
-        splashScreen.classList.add("splash-hidden");
-        document.body.classList.remove("splash-active");
-
-        window.setTimeout(() => {
-            if (splashScreen && splashScreen.parentElement) {
-                splashScreen.remove();
-            }
-        }, 700);
-    }
-
-    splashScreen.addEventListener("pointerdown", dismissSplashScreen);
-
-    document.addEventListener("keydown", event => {
-        const allowedKeys = ["Enter", " ", "Escape"];
-
-        if (allowedKeys.includes(event.key)) {
-            dismissSplashScreen();
-        }
-    });
-}
-    **/
     /*
         ============================================================
         CONNECTION SELECTION FUNCTIONS
@@ -1949,7 +1980,10 @@ function setupSplashScreen() {
     - From terminal
     - To terminal
     - Wire type
-    - Wire label
+    - Default wire label
+
+    The wire label can be edited later by clicking the wire
+    and using the Wire Properties panel.
 */
     function createConnectionBetweenTerminals(firstTerminal, secondTerminal) {
         const firstItem = firstTerminal.closest(".placed-item");
@@ -1958,7 +1992,6 @@ function setupSplashScreen() {
         if (!firstItem || !secondItem) return;
 
         const wireType = wireTypeSelect.value;
-        const typedLabel = wireLabelInput.value.trim();
 
         const newConnection = {
             connectionId: `wire-${nextConnectionId}`,
@@ -1967,7 +2000,7 @@ function setupSplashScreen() {
             toInstanceId: secondItem.dataset.instanceId,
             toTerminalId: secondTerminal.dataset.terminalId,
             wireType: wireType,
-            wireLabel: typedLabel || getDefaultWireLabel(wireType)
+            wireLabel: getDefaultWireLabel(wireType)
         };
 
         if (!connectionAlreadyExists(newConnection)) {
@@ -2034,16 +2067,25 @@ function setupSplashScreen() {
     */
 
     /*
-        Starts dragging a new part from the Parts Menu.
-    */
+    Starts dragging a new part from the Parts Menu.
+*/
     function startDraggingNewPart(partButton, event) {
         event.preventDefault();
 
         isNewItem = true;
         activeItem = createPlacedItem(partButton);
+        activePointerElement = partButton;
 
         offsetX = CONFIG.itemWidth / 2;
         offsetY = CONFIG.itemHeight / 2;
+
+        if (partButton.setPointerCapture && event.pointerId !== undefined) {
+            try {
+                partButton.setPointerCapture(event.pointerId);
+            } catch (error) {
+                console.warn("Pointer capture was not available for this drag.", error);
+            }
+        }
 
         createPreviewItem(partButton, event.clientX, event.clientY);
         addDragListeners();
@@ -2062,6 +2104,8 @@ function setupSplashScreen() {
 
     Delete Mode:
     - Deletes the clicked part.
+    
+    Starts moving a part that is already inside the drop zone.
 */
     function startMovingPlacedItem(event) {
         if (deleteMode) {
@@ -2081,6 +2125,7 @@ function setupSplashScreen() {
 
         isNewItem = false;
         activeItem = event.currentTarget;
+        activePointerElement = activeItem;
 
         const itemRect = activeItem.getBoundingClientRect();
 
@@ -2091,6 +2136,14 @@ function setupSplashScreen() {
         originalTop = parseFloat(activeItem.style.top) || 0;
 
         activeItem.style.opacity = CONFIG.movingOpacity;
+
+        if (activeItem.setPointerCapture && event.pointerId !== undefined) {
+            try {
+                activeItem.setPointerCapture(event.pointerId);
+            } catch (error) {
+                console.warn("Pointer capture was not available for this drag.", error);
+            }
+        }
 
         createPreviewItem(activeItem, event.clientX, event.clientY);
         addDragListeners();
@@ -2249,11 +2302,12 @@ function setupSplashScreen() {
     }
 
     /*
-        Resets all drag-related state after a drag is complete.
-    */
+    Resets all drag-related state after a drag is complete.
+*/
     function resetDrag() {
         activeItem = null;
         isNewItem = false;
+        activePointerElement = null;
 
         removePreview();
         removeDragListeners();
@@ -2395,6 +2449,7 @@ function setupSplashScreen() {
                 instanceId: item.dataset.instanceId,
                 left: parseFloat(item.style.left) || 0,
                 top: parseFloat(item.style.top) || 0,
+                image: item.dataset.image || "",
 
                 tagName: item.dataset.tagName || "",
                 description: item.dataset.description || "",
@@ -2484,7 +2539,7 @@ function setupSplashScreen() {
         const partLabel = item.dataset.label || "Part";
 
         if (tagName) {
-            label.textContent = `${tagName}\n${partLabel}`;
+            label.textContent = `${tagName} — ${partLabel}`;
         } else {
             label.textContent = partLabel;
         }
@@ -2580,7 +2635,9 @@ function setupSplashScreen() {
         item.dataset.fullPath = savedPart.fullPath || savedPart.label || "";
         item.dataset.categoryClass = savedPart.categoryClass || "part-generic";
         item.dataset.label = savedPart.label || "Part";
+        item.dataset.image = savedPart.image || "";
         item.dataset.instanceId = savedPart.instanceId || `part-${nextInstanceId}`;
+
         item.dataset.tagName = savedPart.tagName || "";
         item.dataset.description = savedPart.description || "";
         item.dataset.voltage = savedPart.voltage || "";
@@ -2595,7 +2652,7 @@ function setupSplashScreen() {
         item.style.left = `${savedPart.left || 0}px`;
         item.style.top = `${savedPart.top || 0}px`;
 
-        addPlacedItemLabel(item);
+        buildPlacedItemBody(item);
         createConnectionTerminals(item);
         updatePlacedItemLabel(item);
 
