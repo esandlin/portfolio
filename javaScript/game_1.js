@@ -33,6 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const loadBoardBtn = document.getElementById("loadBoardBtn");
     const clearBoardBtn = document.getElementById("clearBoardBtn");
     const wireTypeSelect = document.getElementById("wireTypeSelect");
+    const wireLabelInput = document.getElementById("wireLabelInput");
+    const wirePropertiesPanel = document.getElementById("wirePropertiesPanel");
+    const selectedWireInfo = document.getElementById("selectedWireInfo");
+    const wireEditLabelInput = document.getElementById("wireEditLabelInput");
+    const applyWirePropertiesBtn = document.getElementById("applyWirePropertiesBtn");
+    const deleteSelectedWireBtn = document.getElementById("deleteSelectedWireBtn");
+    const clearWireSelectionBtn = document.getElementById("clearWireSelectionBtn");
     const partPropertiesPanel = document.getElementById("partPropertiesPanel");
     const selectedPartPath = document.getElementById("selectedPartPath");
     const partTagInput = document.getElementById("partTagInput");
@@ -63,8 +70,28 @@ document.addEventListener("DOMContentLoaded", () => {
         !saveBoardBtn ||
         !loadBoardBtn ||
         !clearBoardBtn ||
-        !wireTypeSelect
+        !wireTypeSelect ||
+        !wireLabelInput ||
+        !wirePropertiesPanel ||
+        !selectedWireInfo ||
+        !wireEditLabelInput ||
+        !applyWirePropertiesBtn ||
+        !deleteSelectedWireBtn ||
+        !clearWireSelectionBtn ||
+        !partPropertiesPanel ||
+        !selectedPartPath ||
+        !partTagInput ||
+        !partDescriptionInput ||
+        !partVoltageSelect ||
+        !partOutputTypeSelect ||
+        !partContactTypeSelect ||
+        !applyPartPropertiesBtn ||
+        !clearPartSelectionBtn
     ) {
+        console.error("Game 1 setup error: one or more required HTML elements are missing.");
+        console.error(
+            "Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, deleteModeBtn, snapModeBtn, saveBoardBtn, loadBoardBtn, clearBoardBtn, wireTypeSelect, wireLabelInput, wirePropertiesPanel, selectedWireInfo, wireEditLabelInput, wireEditTypeSelect, applyWirePropertiesBtn, deleteSelectedWireBtn, clearWireSelectionBtn, partPropertiesPanel, selectedPartPath, partTagInput, partDescriptionInput, partVoltageSelect, partOutputTypeSelect, partContactTypeSelect, applyPartPropertiesBtn, clearPartSelectionBtn."
+        );
         console.error(
             "Required IDs: dropZone, canvas1, partsMenuTree, connectModeBtn, clearLinesBtn, deleteModeBtn, snapModeBtn, saveBoardBtn, loadBoardBtn, clearBoardBtn, wireTypeSelect."
         );
@@ -122,6 +149,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let originalTop = 0;
 
     let selectedPart = null;
+
+    let nextConnectionId = 1;
+    let selectedConnectionId = null;
 
     const connections = [];
 
@@ -703,6 +733,7 @@ document.addEventListener("DOMContentLoaded", () => {
     buildPartsMenu(partsCatalog, partsMenuTree, []);
     updateModeButtons();
     clearPartSelection();
+    clearWireSelection();
     renderCanvas();
 
     /*
@@ -800,6 +831,70 @@ document.addEventListener("DOMContentLoaded", () => {
         CANVAS RENDERING FUNCTIONS
         ============================================================
     */
+
+    /*
+    Draws a readable label near the middle of a wire.
+*/
+    function drawWireLabel(connection, fromPoint, toPoint, wireStyle, isSelected) {
+        const label = connection.wireLabel || getDefaultWireLabel(connection.wireType);
+
+        if (!label) return;
+
+        const midX = (fromPoint.x + toPoint.x) / 2;
+        const midY = (fromPoint.y + toPoint.y) / 2;
+
+        ctx.save();
+
+        ctx.font = "bold 13px Arial";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        const paddingX = 7;
+        const paddingY = 4;
+        const textWidth = ctx.measureText(label).width;
+        const boxWidth = textWidth + paddingX * 2;
+        const boxHeight = 20;
+
+        ctx.fillStyle = getWireLabelBackgroundColor(isSelected);
+        ctx.strokeStyle = isSelected ? "#ffd700" : wireStyle.color;
+        ctx.lineWidth = 2;
+
+        ctx.beginPath();
+        ctx.roundRect(midX - boxWidth / 2, midY - boxHeight / 2, boxWidth, boxHeight, 6);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = getWireLabelTextColor();
+        ctx.fillText(label, midX, midY + paddingY - 3);
+
+        ctx.restore();
+    }
+
+    /*
+    Returns wire label background color based on theme and selection.
+*/
+    function getWireLabelBackgroundColor(isSelected) {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+
+        if (isSelected) {
+            return currentTheme === "dark" ? "#4a3d00" : "#fff8d6";
+        }
+
+        return currentTheme === "dark" ? "#1e1e1e" : "#ffffff";
+    }
+
+    /*
+    Returns wire label text color based on theme.
+*/
+    function getWireLabelTextColor() {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+
+        if (currentTheme === "dark") {
+            return "#ffd700";
+        }
+
+        return "#111111";
+    }
 
     /*
         Redraws the entire canvas layer.
@@ -924,21 +1019,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-        Draws one wire connection between two terminals.
-    */
+    Draws one wire connection between two terminals.
+
+    If the wire is selected:
+    - It is drawn slightly thicker.
+    - It gets a soft highlight effect.
+*/
     function drawSingleConnection(connection, fromTerminal, toTerminal) {
         const fromPoint = getTerminalCanvasPoint(fromTerminal);
         const toPoint = getTerminalCanvasPoint(toTerminal);
         const wireStyle = wireTypes[connection.wireType] || wireTypes.signal;
+        const isSelected = connection.connectionId === selectedConnectionId;
 
         ctx.save();
+
+        if (isSelected) {
+            ctx.beginPath();
+            ctx.moveTo(fromPoint.x, fromPoint.y);
+            ctx.lineTo(toPoint.x, toPoint.y);
+
+            ctx.strokeStyle = "rgba(255, 215, 0, 0.85)";
+            ctx.lineWidth = wireStyle.lineWidth + 8;
+            ctx.lineCap = "round";
+            ctx.setLineDash([]);
+            ctx.stroke();
+        }
 
         ctx.beginPath();
         ctx.moveTo(fromPoint.x, fromPoint.y);
         ctx.lineTo(toPoint.x, toPoint.y);
 
         ctx.strokeStyle = wireStyle.color;
-        ctx.lineWidth = wireStyle.lineWidth;
+        ctx.lineWidth = isSelected ? wireStyle.lineWidth + 2 : wireStyle.lineWidth;
         ctx.lineCap = "round";
         ctx.setLineDash(wireStyle.dash);
         ctx.stroke();
@@ -947,6 +1059,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         drawConnectionEndpoint(fromPoint, wireStyle.color);
         drawConnectionEndpoint(toPoint, wireStyle.color);
+        drawWireLabel(connection, fromPoint, toPoint, wireStyle, isSelected);
 
         ctx.restore();
     }
@@ -1055,6 +1168,7 @@ document.addEventListener("DOMContentLoaded", () => {
             connectMode = false;
             clearConnectionSelection();
             clearPartSelection();
+            clearWireSelection();
         }
 
         updateModeButtons();
@@ -1074,6 +1188,7 @@ document.addEventListener("DOMContentLoaded", () => {
             deleteMode = false;
             clearConnectionSelection();
             clearPartSelection();
+            clearWireSelection();
         }
 
         updateModeButtons();
@@ -1149,6 +1264,11 @@ document.addEventListener("DOMContentLoaded", () => {
         item.dataset.categoryClass = partButton.dataset.categoryClass;
         item.dataset.label = partButton.dataset.label || partButton.textContent.trim();
         item.dataset.instanceId = `part-${nextInstanceId}`;
+        item.dataset.tagName = "";
+        item.dataset.description = "";
+        item.dataset.voltage = "";
+        item.dataset.outputType = "";
+        item.dataset.contactType = "";
 
         nextInstanceId += 1;
 
@@ -1465,6 +1585,105 @@ document.addEventListener("DOMContentLoaded", () => {
     */
 
     /*
+    Handles pointer down on the empty drop zone.
+
+    Normal Mode:
+    - Click near a wire to select it.
+    - Click empty board space to clear both property panels.
+
+    Delete Mode:
+    - Click near a wire to delete it.
+*/
+    function handleDropZonePointerDown(event) {
+        if (event.target.closest(".placed-item")) return;
+        if (event.target.closest(".connection-terminal")) return;
+
+        const connection = findConnectionNearPointer(event);
+
+        if (!connection) {
+            clearWireSelection();
+            clearPartSelection();
+            return;
+        }
+
+        if (deleteMode) {
+            deleteWireConnectionById(connection.connectionId);
+            return;
+        }
+
+        if (!connectMode) {
+            selectWireConnection(connection.connectionId);
+        }
+    }
+
+    /*
+    Finds the first wire close enough to the pointer to be selected.
+*/
+    function findConnectionNearPointer(event) {
+        const pointer = getCanvasPointerFromEvent(event);
+        const hitTolerance = 10;
+
+        for (let i = connections.length - 1; i >= 0; i--) {
+            const connection = connections[i];
+
+            const fromTerminal = getTerminalElement(connection.fromInstanceId, connection.fromTerminalId);
+            const toTerminal = getTerminalElement(connection.toInstanceId, connection.toTerminalId);
+
+            if (!fromTerminal || !toTerminal) continue;
+
+            const fromPoint = getTerminalCanvasPoint(fromTerminal);
+            const toPoint = getTerminalCanvasPoint(toTerminal);
+
+            const distance = getDistanceFromPointToSegment(pointer, fromPoint, toPoint);
+
+            if (distance <= hitTolerance) {
+                return connection;
+            }
+        }
+
+        return null;
+    }
+
+    /*
+    Converts a pointer event into canvas coordinates.
+*/
+    function getCanvasPointerFromEvent(event) {
+        const dropZoneRect = dropZone.getBoundingClientRect();
+
+        const scaleX = canvas.width / dropZoneRect.width;
+        const scaleY = canvas.height / dropZoneRect.height;
+
+        return {
+            x: (event.clientX - dropZoneRect.left) * scaleX,
+            y: (event.clientY - dropZoneRect.top) * scaleY
+        };
+    }
+
+    /*
+    Calculates the shortest distance from a point to a line segment.
+*/
+    function getDistanceFromPointToSegment(point, segmentStart, segmentEnd) {
+        const dx = segmentEnd.x - segmentStart.x;
+        const dy = segmentEnd.y - segmentStart.y;
+
+        if (dx === 0 && dy === 0) {
+            return Math.hypot(point.x - segmentStart.x, point.y - segmentStart.y);
+        }
+
+        const t = Math.max(
+            0,
+            Math.min(1, ((point.x - segmentStart.x) * dx + (point.y - segmentStart.y) * dy) / (dx * dx + dy * dy))
+        );
+
+        const closestPoint = {
+            x: segmentStart.x + t * dx,
+            y: segmentStart.y + t * dy
+        };
+
+        return Math.hypot(point.x - closestPoint.x, point.y - closestPoint.y);
+    }
+
+    /*
         Converts a pointer event into coordinates relative to the drop zone.
     */
     function getDropZonePosition(event) {
@@ -1543,6 +1762,106 @@ document.addEventListener("DOMContentLoaded", () => {
     */
 
     /*
+    Selects a wire connection and opens only the Wire Properties Panel.
+    The Part Properties Panel is hidden when a wire is selected.
+*/
+    function selectWireConnection(connectionId) {
+        const connection = getConnectionById(connectionId);
+
+        if (!connection) return;
+
+        clearPartSelection();
+        clearConnectionSelection();
+
+        selectedConnectionId = connectionId;
+
+        wirePropertiesPanel.classList.add("panel-visible");
+        wirePropertiesPanel.setAttribute("aria-hidden", "false");
+
+        selectedWireInfo.textContent = getWireSummary(connection);
+
+        wireEditLabelInput.value = connection.wireLabel || "";
+
+        renderCanvas();
+    }
+
+    /*
+    Clears the selected wire and hides the Wire Properties Panel.
+*/
+    function clearWireSelection() {
+        selectedConnectionId = null;
+
+        wirePropertiesPanel.classList.remove("panel-visible");
+        wirePropertiesPanel.setAttribute("aria-hidden", "true");
+
+        selectedWireInfo.textContent = "Select a wire to edit its properties.";
+        wireEditLabelInput.value = "";
+
+        renderCanvas();
+    }
+
+    /*
+    Applies the Wire Properties Panel label value to the selected wire.
+    The wire type is not changed here.
+*/
+function applyWireProperties() {
+    const connection = getConnectionById(selectedConnectionId);
+
+    if (!connection) {
+        window.alert("Select a wire first.");
+        return;
+    }
+
+    connection.wireLabel =
+        wireEditLabelInput.value.trim() ||
+        getDefaultWireLabel(connection.wireType);
+
+    selectedWireInfo.textContent = getWireSummary(connection);
+
+    renderCanvas();
+}
+
+    /*
+    Deletes the currently selected wire.
+*/
+    function deleteSelectedWire() {
+        if (!selectedConnectionId) return;
+
+        deleteWireConnectionById(selectedConnectionId);
+    }
+
+    /*
+    Deletes one wire connection by ID.
+*/
+    function deleteWireConnectionById(connectionId) {
+        const index = connections.findIndex((connection) => connection.connectionId === connectionId);
+
+        if (index === -1) return;
+
+        connections.splice(index, 1);
+
+        clearWireSelection();
+        renderCanvas();
+    }
+
+    /*
+    Finds a connection object by its unique wire ID.
+*/
+    function getConnectionById(connectionId) {
+        return connections.find((connection) => connection.connectionId === connectionId);
+    }
+
+    /*
+    Builds a readable summary for the selected wire.
+*/
+    function getWireSummary(connection) {
+        const wireTypeLabel = getDefaultWireLabel(connection.wireType);
+        const wireLabel = connection.wireLabel || wireTypeLabel;
+
+        return `${wireLabel} — ${wireTypeLabel}`;
+    }
+
+    /*
         Handles clicking/tapping a terminal while Connect Mode is active.
 
         First terminal click:
@@ -1581,25 +1900,49 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-        Creates a stored connection object between two terminals.
-    */
+    Creates a stored connection object between two terminals.
+
+    The connection stores:
+    - Unique wire ID
+    - From terminal
+    - To terminal
+    - Wire type
+    - Wire label
+*/
     function createConnectionBetweenTerminals(firstTerminal, secondTerminal) {
         const firstItem = firstTerminal.closest(".placed-item");
         const secondItem = secondTerminal.closest(".placed-item");
 
         if (!firstItem || !secondItem) return;
 
+        const wireType = wireTypeSelect.value;
+        const typedLabel = wireLabelInput.value.trim();
+
         const newConnection = {
+            connectionId: `wire-${nextConnectionId}`,
             fromInstanceId: firstItem.dataset.instanceId,
             fromTerminalId: firstTerminal.dataset.terminalId,
             toInstanceId: secondItem.dataset.instanceId,
             toTerminalId: secondTerminal.dataset.terminalId,
-            wireType: wireTypeSelect.value
+            wireType: wireType,
+            wireLabel: typedLabel || getDefaultWireLabel(wireType)
         };
 
         if (!connectionAlreadyExists(newConnection)) {
             connections.push(newConnection);
+            nextConnectionId += 1;
         }
+    }
+
+    /*
+    Returns a default label for a new wire based on the selected wire type.
+*/
+    function getDefaultWireLabel(wireType) {
+        if (wireTypes[wireType]) {
+            return wireTypes[wireType].label;
+        }
+
+        return "Wire";
     }
 
     /*
@@ -1889,6 +2232,7 @@ document.addEventListener("DOMContentLoaded", () => {
             version: 1,
             savedAt: new Date().toISOString(),
             nextInstanceId: nextInstanceId,
+            nextConnectionId: nextConnectionId,
             settings: {
                 snapMode: snapMode,
                 selectedWireType: wireTypeSelect.value
@@ -1924,6 +2268,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             nextInstanceId = Math.max(saveData.nextInstanceId || 1, getNextInstanceIdFromPlacedItems());
 
+            nextConnectionId = Math.max(saveData.nextConnectionId || 1, getNextConnectionIdFromConnections());
+
             clearConnectionSelection();
             updateModeButtons();
             renderCanvas();
@@ -1950,7 +2296,9 @@ document.addEventListener("DOMContentLoaded", () => {
         activeItem = null;
         previewItem = null;
 
+        clearConnectionSelection();
         clearPartSelection();
+        clearWireSelection();
         removePreview();
         renderCanvas();
     }
@@ -1962,6 +2310,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function clearBoard() {
         clearBoardFromScreen();
         nextInstanceId = 1;
+        nextConnectionId = 1;
         showTemporaryButtonText(clearBoardBtn, "Cleared!");
     }
 
@@ -1991,13 +2340,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-    Selects a dropped part and loads its saved properties into the
-    Part Properties Panel.
-    Selects a dropped part and opens the Part Properties Panel.
+    Selects a dropped part and opens only the Part Properties Panel.
+    The Wire Properties Panel is hidden when a part is selected.
 */
     function selectPlacedItem(item) {
         if (!item) return;
 
+        clearWireSelection();
         clearPartSelection();
 
         selectedPart = item;
@@ -2016,8 +2365,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-    Clears the currently selected part and resets the Part Properties Panel.
-
     Clears the selected part and hides the Part Properties Panel.
 */
     function clearPartSelection() {
@@ -2093,11 +2440,13 @@ document.addEventListener("DOMContentLoaded", () => {
     function getSavedConnections() {
         return connections.map((connection) => {
             return {
+                connectionId: connection.connectionId,
                 fromInstanceId: connection.fromInstanceId,
                 fromTerminalId: connection.fromTerminalId,
                 toInstanceId: connection.toInstanceId,
                 toTerminalId: connection.toTerminalId,
-                wireType: connection.wireType
+                wireType: connection.wireType,
+                wireLabel: connection.wireLabel || ""
             };
         });
     }
@@ -2120,13 +2469,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         savedConnections.forEach((connection) => {
             if (isValidSavedConnection(connection)) {
-                connections.push({
+                const restoredConnection = {
+                    connectionId: connection.connectionId || `wire-${nextConnectionId}`,
                     fromInstanceId: connection.fromInstanceId,
                     fromTerminalId: connection.fromTerminalId,
                     toInstanceId: connection.toInstanceId,
                     toTerminalId: connection.toTerminalId,
-                    wireType: connection.wireType || "signal"
-                });
+                    wireType: connection.wireType || "signal",
+                    wireLabel: connection.wireLabel || getDefaultWireLabel(connection.wireType || "signal")
+                };
+
+                connections.push(restoredConnection);
+
+                if (!connection.connectionId) {
+                    nextConnectionId += 1;
+                }
             }
         });
     }
@@ -2174,6 +2531,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         addPlacedItemLabel(item);
         createConnectionTerminals(item);
+        updatePlacedItemLabel(item);
 
         item.addEventListener("pointerdown", startMovingPlacedItem);
 
@@ -2203,6 +2561,24 @@ document.addEventListener("DOMContentLoaded", () => {
         placedItems.forEach((item) => {
             const instanceId = item.dataset.instanceId || "";
             const match = instanceId.match(/^part-(\d+)$/);
+
+            if (match) {
+                highestIdNumber = Math.max(highestIdNumber, Number(match[1]));
+            }
+        });
+
+        return highestIdNumber + 1;
+    }
+
+    /*
+    Finds the next safe wire number based on currently loaded connections.
+*/
+    function getNextConnectionIdFromConnections() {
+        let highestIdNumber = 0;
+
+        connections.forEach((connection) => {
+            const connectionId = connection.connectionId || "";
+            const match = connectionId.match(/^wire-(\d+)$/);
 
             if (match) {
                 highestIdNumber = Math.max(highestIdNumber, Number(match[1]));
@@ -2254,6 +2630,27 @@ document.addEventListener("DOMContentLoaded", () => {
     */
 
     /*
+    Applies edited wire label/type to the selected wire.
+*/
+    applyWirePropertiesBtn.addEventListener("click", () => {
+        applyWireProperties();
+    });
+
+    /*
+    Deletes only the currently selected wire.
+*/
+    deleteSelectedWireBtn.addEventListener("click", () => {
+        deleteSelectedWire();
+    });
+
+    /*
+    Clears the selected wire and hides the Wire Properties Panel.
+*/
+    clearWireSelectionBtn.addEventListener("click", () => {
+        clearWireSelection();
+    });
+
+    /*
         Turns Connect Mode on or off.
 
         When Connect Mode is ON:
@@ -2285,6 +2682,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearLinesBtn.addEventListener("click", () => {
         connections.length = 0;
         clearConnectionSelection();
+        clearWireSelection();
         renderCanvas();
     });
 
@@ -2340,6 +2738,13 @@ document.addEventListener("DOMContentLoaded", () => {
 */
     snapModeBtn.addEventListener("click", () => {
         setSnapMode(!snapMode);
+    });
+
+    /*
+    Allows the user to click/tap near a wire to select or delete it.
+*/
+    dropZone.addEventListener("pointerdown", (event) => {
+        handleDropZonePointerDown(event);
     });
 
     /*
