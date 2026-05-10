@@ -3,7 +3,6 @@
    Theme + Navigation + Drag/Drop + Wire Connection Styling
    ============================================================ */
 
-
 /* ============================================================
    GLOBAL THEME VARIABLES
    ============================================================ */
@@ -103,7 +102,6 @@ html[data-theme="dark"] {
     --wrapper-shadow: 10px 80px 80px rgba(0, 0, 0, 0.85);
 }
 
-
 /* ============================================================
    GLOBAL RESET + BASE PAGE STYLING
    ============================================================ */
@@ -128,9 +126,7 @@ html {
 body {
     min-height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at top left, rgba(0, 123, 255, 0.08), transparent 32rem),
-        var(--bg-light);
+    background: radial-gradient(circle at top left, rgba(0, 123, 255, 0.08), transparent 32rem), var(--bg-light);
     color: var(--text-color);
     text-align: center;
     transition:
@@ -177,7 +173,6 @@ select {
 button {
     touch-action: none;
 }
-
 
 /* ============================================================
    HEADER + NAVIGATION THEME
@@ -235,7 +230,6 @@ header a:hover,
     text-decoration: none;
     transform: translateY(-1px);
 }
-
 
 /* ============================================================
    HAMBURGER MENU SUPPORT
@@ -325,7 +319,6 @@ header a:hover,
         margin: 0;
     }
 }
-
 
 /* ============================================================
    LOGO + THEME TOGGLE SUPPORT
@@ -430,7 +423,6 @@ html[data-theme="light"] .logo-container img:hover {
     margin-top: 1.5rem;
 }
 
-
 /* ============================================================
    LEFT PARTS MENU PANEL
    ============================================================ */
@@ -439,9 +431,7 @@ html[data-theme="light"] .logo-container img:hover {
     width: 100%;
     max-width: 240px;
     padding: 1rem;
-    background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent),
-        var(--panel-bg);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent), var(--panel-bg);
     color: var(--panel-text);
     border: 1px solid var(--panel-border);
     border-radius: var(--radius-lg);
@@ -546,7 +536,6 @@ html[data-theme="light"] .logo-container img:hover {
     background-color: var(--panel-button-active-bg);
     transform: translateY(0);
 }
-
 
 /* ============================================================
    GAME BOARD PANEL
@@ -880,7 +869,6 @@ html[data-theme="dark"] .part-properties-panel textarea {
     background-color: #004d80;
 }
 
-
 /* ============================================================
    DROP ZONE + CANVAS WIRE LAYER
    ============================================================ */
@@ -906,7 +894,6 @@ html[data-theme="dark"] .part-properties-panel textarea {
     background-color: var(--drop-bg);
     pointer-events: none;
 }
-
 
 /* ============================================================
    DROPPED PARTS + DRAG PREVIEW
@@ -953,7 +940,6 @@ html[data-theme="dark"] .part-properties-panel textarea {
     pointer-events: none;
 }
 
-
 /* ============================================================
    PART CATEGORY COLORS
    Used by menu buttons, dropped parts, and drag preview.
@@ -993,7 +979,6 @@ html[data-theme="dark"] .part-properties-panel textarea {
     color: #111111;
 }
 
-
 /* Backward-compatible old test classes */
 .motor {
     background-color: #2f80ed;
@@ -1010,7 +995,6 @@ html[data-theme="dark"] .part-properties-panel textarea {
 .gear {
     background-color: #9b51e0;
 }
-
 
 /* ============================================================
    CONNECTION TERMINALS
@@ -1051,7 +1035,6 @@ html[data-theme="dark"] .part-properties-panel textarea {
         0 0 18px rgba(255, 215, 0, 0.9);
 }
 
-
 /* ============================================================
    DARK MODE REFINEMENTS
    ============================================================ */
@@ -1076,7 +1059,6 @@ html[data-theme="dark"] .connection-btn.active {
     color: #ffffff;
 }
 
-
 /* ============================================================
    FOOTER THEME SUPPORT
    ============================================================ */
@@ -1090,7 +1072,6 @@ footer {
     text-align: center;
     font-size: 0.875rem;
 }
-
 
 /* ============================================================
    RESPONSIVE GAME LAYOUT
@@ -1121,6 +1102,11 @@ footer {
 @media (max-width: 700px) {
     .wrapper {
         padding: 0.75rem;
+    }
+    
+    .wire-label-input {
+        width: 100%;
+        max-width: none;
     }
 
     header ul,
@@ -1156,16 +1142,78 @@ footer {
     #canvas1 {
         width: 100%;
     }
-    
+
     /* ============================================================
-   PART PROPERTIES PANEL VISIBILITY FIX
+   WIRE LABEL INPUT
    ============================================================ */
 
-.part-properties-panel {
+.wire-label-input {
+    min-height: 42px;
+    max-width: 260px;
+    padding: 0.65rem 0.9rem;
+    background-color: #ffffff;
+    color: #111111;
+    border: 1px solid var(--legend-border);
+    border-radius: var(--radius-sm);
+    font: inherit;
+    font-weight: 700;
+}
+
+html[data-theme="dark"] .wire-label-input {
+    background-color: #2c2c2c;
+    color: #ffd700;
+    border-color: rgba(255, 215, 0, 0.25);
+}
+
+/* ============================================================
+   WIRE PROPERTIES PANEL
+   ============================================================ */
+
+.wire-properties-panel {
+    display: none;
+    padding: 0.95rem;
+    background-color: var(--page-surface);
+    color: var(--text-color);
+    border: 1px solid var(--legend-border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 12px var(--box-shadow);
+    text-align: left;
+}
+
+.wire-properties-panel.panel-visible {
+    display: block;
+}
+
+.wire-properties-panel input,
+.wire-properties-panel select {
+    width: 100%;
+    padding: 0.65rem 0.7rem;
+    border: 1px solid var(--legend-border);
+    border-radius: var(--radius-sm);
+    background-color: #ffffff;
+    color: #111111;
+    font: inherit;
+}
+
+html[data-theme="dark"] .wire-properties-panel input,
+html[data-theme="dark"] .wire-properties-panel select {
+    background-color: #2c2c2c;
+    color: #ffd700;
+    border-color: rgba(255, 215, 0, 0.25);
+}
+
+/* ============================================================
+   PROPERTY PANEL VISIBILITY CONTROL
+   Both panels are hidden until a part or wire is selected.
+   ============================================================ */
+
+.part-properties-panel,
+.wire-properties-panel {
     display: none;
 }
 
-.part-properties-panel.panel-visible {
+.part-properties-panel.panel-visible,
+.wire-properties-panel.panel-visible {
     display: block;
 }
 
@@ -1176,6 +1224,18 @@ footer {
 
 .placed-item-label {
     pointer-events: none;
+}}
+    /* ============================================================
+   PROPERTY PANEL VISIBILITY CONTROL
+   Both panels are hidden until an item or wire is selected.
+   ============================================================ */
+
+.part-properties-panel,
+.wire-properties-panel {
+    display: none;
 }
-    
+
+.part-properties-panel.panel-visible,
+.wire-properties-panel.panel-visible {
+    display: block;
 }
