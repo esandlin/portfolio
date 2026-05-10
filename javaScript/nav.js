@@ -123,21 +123,29 @@ function checkPasscode() {
     if (inputValue === correctPasscode) {
         localStorage.setItem("isLoggedIn", "true");
 
-        // JSGamesLogIn.html is inside navPages, so go up one folder,
-        // then into the JSGames folder.
-        window.location.href = "../JSGames/game_1.html";
-    } else {
-        window.alert("Incorrect passcode. Please try again.");
+        const path = window.location.pathname;
 
-        if (pageInput) {
-            pageInput.value = "";
-            pageInput.focus();
+        if (path.includes("/navPages/")) {
+            window.location.href = "../JSGames/game_1.html";
+        } else if (path.includes("/JSGames/")) {
+            window.location.href = "game_1.html";
+        } else {
+            window.location.href = "JSGames/game_1.html";
         }
 
-        if (modalInput) {
-            modalInput.value = "";
-            modalInput.focus();
-        }
+        return;
+    }
+
+    window.alert("Incorrect passcode. Please try again.");
+
+    if (pageInput) {
+        pageInput.value = "";
+        pageInput.focus();
+    }
+
+    if (modalInput) {
+        modalInput.value = "";
+        modalInput.focus();
     }
 }
 
