@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         DOM ELEMENTS
         ============================================================
     */
-
+    const splashScreen = document.getElementById("splashScreen");
     const dropZone = document.getElementById("dropZone");
     const canvas = document.getElementById("canvas1");
     const partsMenuTree = document.getElementById("partsMenuTree");
@@ -730,6 +730,7 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.width = CONFIG.defaultCanvasWidth;
     canvas.height = CONFIG.defaultCanvasHeight;
 
+    setupSplashScreen();
     buildPartsMenu(partsCatalog, partsMenuTree, []);
     updateModeButtons();
     clearPartSelection();
@@ -1756,6 +1757,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
+    Sets up the splash screen.
+
+    The splash screen:
+    - Plays the dark-to-light logo transition.
+    - Disappears when clicked, tapped, or activated by keyboard.
+    - Reveals the main interface underneath.
+*/
+function setupSplashScreen() {
+    if (!splashScreen) return;
+
+    let splashDismissed = false;
+
+    document.body.classList.add("splash-active");
+
+    function dismissSplashScreen() {
+        if (splashDismissed) return;
+
+        splashDismissed = true;
+
+        splashScreen.classList.add("splash-hidden");
+        document.body.classList.remove("splash-active");
+
+        window.setTimeout(() => {
+            if (splashScreen && splashScreen.parentElement) {
+                splashScreen.remove();
+            }
+        }, 700);
+    }
+
+    splashScreen.addEventListener("pointerdown", dismissSplashScreen);
+
+    document.addEventListener("keydown", event => {
+        const allowedKeys = ["Enter", " ", "Escape"];
+
+        if (allowedKeys.includes(event.key)) {
+            dismissSplashScreen();
+        }
+    });
+}
+    
+    /*
         ============================================================
         CONNECTION SELECTION FUNCTIONS
         ============================================================
@@ -1804,22 +1846,20 @@ document.addEventListener("DOMContentLoaded", () => {
     Applies the Wire Properties Panel label value to the selected wire.
     The wire type is not changed here.
 */
-function applyWireProperties() {
-    const connection = getConnectionById(selectedConnectionId);
+    function applyWireProperties() {
+        const connection = getConnectionById(selectedConnectionId);
 
-    if (!connection) {
-        window.alert("Select a wire first.");
-        return;
+        if (!connection) {
+            window.alert("Select a wire first.");
+            return;
+        }
+
+        connection.wireLabel = wireEditLabelInput.value.trim() || getDefaultWireLabel(connection.wireType);
+
+        selectedWireInfo.textContent = getWireSummary(connection);
+
+        renderCanvas();
     }
-
-    connection.wireLabel =
-        wireEditLabelInput.value.trim() ||
-        getDefaultWireLabel(connection.wireType);
-
-    selectedWireInfo.textContent = getWireSummary(connection);
-
-    renderCanvas();
-}
 
     /*
     Deletes the currently selected wire.
