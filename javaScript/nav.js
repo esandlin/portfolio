@@ -118,8 +118,8 @@ function checkPasscode() {
     const inputValue = (modalInput && modalInput.value) || (pageInput && pageInput.value) || "";
 
     if (inputValue === correctPasscode) {
-        const inNavPages = window.location.pathname.includes("/navPages/");
-        window.location.href = inNavPages ? "GDTA.html" : "navPages/GDTA.html";
+        const inNavPages = window.location.pathname.includes("/JSGames/");
+        window.location.href = inNavPages ? "game_1.html" : "JSGames/game_1.html";
     } else {
         alert("Incorrect passcode. Please try again.");
     }
