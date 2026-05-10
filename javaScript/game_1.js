@@ -730,7 +730,7 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.width = CONFIG.defaultCanvasWidth;
     canvas.height = CONFIG.defaultCanvasHeight;
 
-    setupSplashScreen();
+    //setupSplashScreen();
     buildPartsMenu(partsCatalog, partsMenuTree, []);
     updateModeButtons();
     clearPartSelection();
@@ -1764,6 +1764,7 @@ document.addEventListener("DOMContentLoaded", () => {
     - Disappears when clicked, tapped, or activated by keyboard.
     - Reveals the main interface underneath.
 */
+    /**
 function setupSplashScreen() {
     if (!splashScreen) return;
 
@@ -1796,7 +1797,7 @@ function setupSplashScreen() {
         }
     });
 }
-    
+    **/
     /*
         ============================================================
         CONNECTION SELECTION FUNCTIONS

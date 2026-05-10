@@ -117,8 +117,11 @@ function checkPasscode() {
     const modalInput = document.getElementById("passcode-input");
     const pageInput = document.getElementById("passcode");
 
-    const inputValue = ((modalInput && modalInput.value) || (pageInput && pageInput.value) || "")
-        .trim();
+    const inputValue = (
+        (modalInput && modalInput.value) ||
+        (pageInput && pageInput.value) ||
+        ""
+    ).trim();
 
     if (inputValue === correctPasscode) {
         localStorage.setItem("isLoggedIn", "true");
@@ -126,11 +129,11 @@ function checkPasscode() {
         const path = window.location.pathname;
 
         if (path.includes("/navPages/")) {
-            window.location.href = "../JSGames/game_1.html";
+            window.location.href = "../JSGames/JSGamesMenu.html";
         } else if (path.includes("/JSGames/")) {
-            window.location.href = "game_1.html";
+            window.location.href = "JSGamesMenu.html";
         } else {
-            window.location.href = "JSGames/game_1.html";
+            window.location.href = "JSGames/JSGamesMenu.html";
         }
 
         return;
@@ -148,68 +151,6 @@ function checkPasscode() {
         modalInput.focus();
     }
 }
-
-// =====================
-// RESUME DROPDOWN LOGIC
-// =====================
-document.addEventListener('DOMContentLoaded', function () {
-    const options = document.querySelectorAll('.resume-option');
-    const previewImg = document.getElementById('resume-preview');
-    const htmlLink = document.getElementById('resume-html-link');
-    const pdfLink = document.getElementById('resume-pdf-link');
-    const titleEl = document.getElementById('resume-title');
-    const dropLabel = document.getElementById('dropbtn-label');
-
-    if (!options.length || !previewImg || !htmlLink || !pdfLink || !titleEl || !dropLabel) return;
-    // Make dropdown usable on touch/mobile (no hover)
-    const dropBtn = document.querySelector(".dropbtn");
-    if (dropBtn) dropBtn.addEventListener("click", toggleDropdown);
-
-
-    options.forEach(option => {
-        option.addEventListener('click', function (e) {
-            e.preventDefault();
-            const img = this.dataset.img;
-            const html = this.dataset.html;
-            const pdf = this.dataset.pdf;
-            const title = this.dataset.title;
-            const alt = this.dataset.alt;
-
-            if (img) previewImg.src = img;
-            if (alt) previewImg.alt = alt;
-            if (html) htmlLink.href = html;
-            if (pdf) pdfLink.href = pdf;
-            if (title) {
-                titleEl.textContent = title;
-                dropLabel.textContent = title;
-            }
-
-            options.forEach(o => o.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
-
-    // Set initial label to active resume title
-    const active = document.querySelector('.resume-option.active');
-    if (active && active.dataset.title) {
-        dropLabel.textContent = active.dataset.title;
-    }
-});
-
-    function toggleDropdown() {
-        const menu = document.getElementById("resumeDropdownMenu");
-        menu.style.display = (menu.style.display === "block") ? "none" : "block";
-    }
-
-    // Optional: Close dropdown when clicking outside
-    window.addEventListener('click', function(e) {
-        const btn = document.querySelector('.dropbtn');
-        const menu = document.getElementById("resumeDropdownMenu");
-        if (!btn || !menu) return;
-        if (!btn.contains(e.target) && !menu.contains(e.target)) {
-            menu.style.display = "none";
-        }
-    });
 
 // =====================
 // Slideshow 

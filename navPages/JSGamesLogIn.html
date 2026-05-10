@@ -1,116 +1,129 @@
-<!DOCTYPE html>
+<!doctype html>
 <!-- Declares the document as HTML5 -->
 
 <html lang="en" data-theme="light">
-<!-- Sets the document language to English and applies a light theme via data attribute -->
+    <!-- Sets the document language to English and applies a light theme via data attribute -->
 
-<head>
-    <!-- Sets character encoding for the document to UTF-8 -->
-    <meta charset="UTF-8" />
+    <head>
+        <!-- Sets character encoding for the document to UTF-8 -->
+        <meta charset="UTF-8" />
 
-    <!-- Ensures compatibility mode is disabled for older IE browsers -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- Ensures compatibility mode is disabled for older IE browsers -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- Enables responsive design by controlling layout on mobile devices -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Enables responsive design by controlling layout on mobile devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Basic SEO metadata for description and keywords -->
-    <meta name="description" content="A SE portfolio for Eric Sandlin" />
-    <meta name="keywords" content="Eric Sandlin, portfolio" />
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="MobileOptimized" content="320" />
-    <meta http-equiv="cleartype" content="on" />
-    <meta name="author" content="Eric Sandlin" />
+        <!-- Basic SEO metadata for description and keywords -->
+        <meta name="description" content="A SE portfolio for Eric Sandlin" />
+        <meta name="keywords" content="Eric Sandlin, portfolio" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta http-equiv="cleartype" content="on" />
+        <meta name="author" content="Eric Sandlin" />
 
-    <!-- Open Graph metadata for link previews on social media -->
-    <meta property="og:title" content="Eric Sandlin – Portfolio">
-    <meta property="og:image" content="path-to-profile.jpg">
-    <meta property="og:description" content="22+ year Navy veteran and engineer specializing in maintenance, leadership and tech.">
-    <meta property="og:url" content="https://ericsandlin.com">
+        <!-- Open Graph metadata for link previews on social media -->
+        <meta property="og:title" content="Eric Sandlin – Portfolio" />
+        <meta property="og:image" content="path-to-profile.jpg" />
+        <meta
+            property="og:description"
+            content="22+ year Navy veteran and engineer specializing in maintenance, leadership and tech." />
+        <meta property="og:url" content="https://ericsandlin.com" />
 
-    <!-- Title displayed in the browser tab -->
-    <title>Game Login</title>
+        <!-- Title displayed in the browser tab -->
+        <title>Game Login</title>
 
-    <!-- Custom CSS for styling this login page -->
-    <link rel="stylesheet" href="../styles/index.css">
+        <!-- Custom CSS for styling this login page -->
+        <link rel="stylesheet" href="../styles/index.css" />
+    </head>
 
-</head>
+    <body class="wrapper">
+        <!-- Main wrapper for site layout -->
 
-<body class="wrapper">
-    <!-- Main wrapper for site layout -->
+        <!-- Header section containing hamburger menu and site navigation -->
+        <header role="banner">
+            <!-- Hamburger icon used for toggling navigation (especially on mobile) -->
+            <div class="menu-icon" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
 
-    <!-- Header section containing hamburger menu and site navigation -->
-    <header role="banner">
-        <!-- Hamburger icon used for toggling navigation (especially on mobile) -->
-        <div class="menu-icon" id="menu-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+            <!-- Navigation links -->
+            <nav class="nav" id="nav-menu">
+                <ul>
+                    <!-- Navigation items linking to various site sections -->
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="resumes.html" target="_blank" rel="noopener noreferrer">Résumé</a></li>
+                    <li><a href="certifications.html">Certifications</a></li>
+                </ul>
+            </nav>
+        </header>
 
-        <!-- Navigation links -->
-        <nav class="nav" id="nav-menu">
-            <ul>
-                <!-- Navigation items linking to various site sections -->
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="resumes.html" target="_blank" rel="noopener noreferrer">Résumé</a></li>
-                <li><a href="certifications.html">Certifications</a></li>
-            </ul>
-        </nav>
-    </header>
+        <!-- Main content area -->
+        <main>
+            <!-- Page title and warning message -->
+            <h1>Portfolio of Projects</h1>
+            <h2>Authorized Personnel Only</h2>
+            <h2>Enter Passcode to Access the Link</h2>
 
-    <!-- Main content area -->
-    <main>
-        <!-- Page title and warning message -->
-        <h1>Portfolio of Projects</h1>
-        <h2>Authorized Personnel Only</h2>
-        <h2>Enter Passcode to Access the Link</h2>
+            <!-- Passcode form for access control -->
+            <form id="passcodeForm">
+                <!-- Password input field with placeholder -->
+                <input type="password" id="passcode" placeholder="Enter passcode" required />
 
-        <!-- Passcode form for access control -->
-        <form id="passcodeForm">
-            <!-- Password input field with placeholder -->
-            <input type="password" id="passcode" placeholder="Enter passcode" required />
+                <!-- Submit button -->
+                <button type="submit">Submit</button>
+            </form>
 
-            <!-- Submit button -->
-            <button type="submit">Submit</button>
-        </form>
+            <section class="legal-banner">
+                <h3>🔒 Private Access Disclaimer</h3>
+                <p>
+                    This section of the website is restricted and accessible only to authorized individuals with a valid
+                    password. By entering, you agree to the following terms:
+                </p>
+                <ul>
+                    <li>
+                        All materials within this area are confidential and intended solely for the authorized viewer.
+                    </li>
+                    <li>
+                        No part of this content may be copied, shared, downloaded, distributed, or disclosed without
+                        prior written permission from Eric Sandlin.
+                    </li>
+                    <li>Access credentials (passwords or links) must not be shared with others.</li>
+                    <li>
+                        Any unauthorized access, use, or attempt to bypass access controls may result in legal action.
+                    </li>
+                    <li>
+                        Eric Sandlin assumes no liability for any damages arising from unauthorized access or misuse of
+                        this content.
+                    </li>
+                    <li>
+                        If you have received access in error or no longer require it, please notify Eric Sandlin
+                        immediately and refrain from viewing further.
+                    </li>
+                </ul>
+            </section>
+        </main>
 
-        <section class="legal-banner">
-            <h3>🔒 Private Access Disclaimer</h3>
-            <p>This section of the website is restricted and accessible only to authorized individuals with a valid password. By entering, you agree to the following terms:</p>
-            <ul>
-                <li>All materials within this area are confidential and intended solely for the authorized viewer.</li>
-                <li>No part of this content may be copied, shared, downloaded, distributed, or disclosed without prior written permission from Eric Sandlin.</li>
-                <li>Access credentials (passwords or links) must not be shared with others.</li>
-                <li>Any unauthorized access, use, or attempt to bypass access controls may result in legal action.</li>
-                <li>Eric Sandlin assumes no liability for any damages arising from unauthorized access or misuse of this content.</li>
-                <li>If you have received access in error or no longer require it, please notify Eric Sandlin immediately and refrain from viewing further.</li>
-            </ul>
-        </section>
+        <!-- Footer with no copyright (legal warnign above)-->
+        <footer></footer>
 
+        <script>
+            const passcodeForm = document.getElementById("passcodeForm");
 
-    </main>
+            if (passcodeForm) {
+                passcodeForm.addEventListener("submit", function (e) {
+                    e.preventDefault();
+                    checkPasscode();
+                });
+            }
+        </script>
 
-    <!-- Footer with no copyright (legal warnign above)-->
-    <footer>
-        
-    </footer>
-
-    <script>
-        // JavaScript that handles passcode submission on Enter key or button click
-        document.getElementById('passcodeForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent page reload on submit
-            checkPasscode(); // Custom function to validate passcode (defined in external JS file)
-        });
-
-    </script>
-
-
-<!-- Footer containing navigation JavaScript -->
-<footer>
-    <!-- JavaScript functionality for login page, loaded after HTML parses-->
-    <script src="../javaScript/nav.js" defer></script>
-</footer>
-
-</body>
+        <!-- Footer containing navigation JavaScript -->
+        <footer>
+            <!-- JavaScript functionality for login page, loaded after HTML parses-->
+            <script src="../javaScript/nav.js" defer></script>
+        </footer>
+    </body>
 </html>
