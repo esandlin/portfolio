@@ -113,15 +113,31 @@ if (logoutBtn) {
 // =====================
 function checkPasscode() {
     const correctPasscode = "ericsandlin";
+
     const modalInput = document.getElementById("passcode-input");
     const pageInput = document.getElementById("passcode");
-    const inputValue = (modalInput && modalInput.value) || (pageInput && pageInput.value) || "";
+
+    const inputValue = ((modalInput && modalInput.value) || (pageInput && pageInput.value) || "")
+        .trim();
 
     if (inputValue === correctPasscode) {
-        const inNavPages = window.location.pathname.includes("/JSGames/");
-        window.location.href = inNavPages ? "game_1.html" : "JSGames/game_1.html";
+        localStorage.setItem("isLoggedIn", "true");
+
+        // JSGamesLogIn.html is inside navPages, so go up one folder,
+        // then into the JSGames folder.
+        window.location.href = "../JSGames/game_1.html";
     } else {
-        alert("Incorrect passcode. Please try again.");
+        window.alert("Incorrect passcode. Please try again.");
+
+        if (pageInput) {
+            pageInput.value = "";
+            pageInput.focus();
+        }
+
+        if (modalInput) {
+            modalInput.value = "";
+            modalInput.focus();
+        }
     }
 }
 
