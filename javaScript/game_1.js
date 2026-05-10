@@ -229,11 +229,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     children: [
                         {
                             label: "Normally Open",
-                            shortLabel: "Limit Switch NO"
+                            shortLabel: "Limit Switch NO",
+                            image: "../images/parts/Sensors/limit-switch-no.png"
                         },
                         {
                             label: "Normally Closed",
-                            shortLabel: "Limit Switch NC"
+                            shortLabel: "Limit Switch NC",
+                            image: "../images/parts/Sensors/limit-switch-nc.png"
                         }
                     ]
                 },
@@ -242,11 +244,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     children: [
                         {
                             label: "Capacitive",
-                            shortLabel: "Capacitive Prox"
+                            shortLabel: "Capacitive Prox",
+                            image: "../images/parts/Sensors/capacitive-prox.png"
                         },
                         {
                             label: "Inductive",
-                            shortLabel: "Inductive Prox"
+                            shortLabel: "Inductive Prox",
+                            image: "../images/parts/Sensors/inductive-prox.png"
                         }
                     ]
                 },
@@ -255,15 +259,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     children: [
                         {
                             label: "Float Switch",
-                            shortLabel: "Float Level"
+                            shortLabel: "Float Level",
+                            image: "../images/parts/Sensors/float.png"
                         },
                         {
                             label: "Ultrasonic Level Sensor",
-                            shortLabel: "Ultrasonic Level"
+                            shortLabel: "Ultrasonic Level",
+                            image: "../images/parts/Sensors/ultrasonic.png"
                         },
                         {
                             label: "Radar Level Sensor",
-                            shortLabel: "Radar Level"
+                            shortLabel: "Radar Level",
+                            image: "../images/parts/Sensors/radar.png"
                         }
                     ]
                 },
@@ -272,19 +279,23 @@ document.addEventListener("DOMContentLoaded", () => {
                     children: [
                         {
                             label: "Thermocouple",
-                            shortLabel: "Thermocouple"
+                            shortLabel: "Thermocouple",
+                            image: "../images/parts/Sensors/thermocouple.png"
                         },
                         {
                             label: "RTD",
-                            shortLabel: "RTD"
+                            shortLabel: "RTD",
+                            image: "../images/parts/Sensors/rtd.png"
                         },
                         {
                             label: "Thermistor",
-                            shortLabel: "Thermistor"
+                            shortLabel: "Thermistor",
+                            image: "../images/parts/Sensors/thermistor.png"
                         },
                         {
                             label: "Infrared Temperature Sensor",
-                            shortLabel: "IR Temp Sensor"
+                            shortLabel: "IR Temp Sensor",
+                            image: "../images/parts/Sensors/infared.png"
                         }
                     ]
                 },
@@ -293,19 +304,23 @@ document.addEventListener("DOMContentLoaded", () => {
                     children: [
                         {
                             label: "Turbine Flow Sensor",
-                            shortLabel: "Turbine Flow"
+                            shortLabel: "Turbine Flow",
+                            image: "../images/parts/Sensors/turbine.png"
                         },
                         {
                             label: "Magnetic Flow Meter",
-                            shortLabel: "Mag Flow"
+                            shortLabel: "Mag Flow",
+                            image: "../images/parts/Sensors/magnetic-flow.png"
                         },
                         {
                             label: "Ultrasonic Flow Meter",
-                            shortLabel: "Ultrasonic Flow"
+                            shortLabel: "Ultrasonic Flow",
+                            image: "../images/parts/Sensors/ultra-flow.png"
                         },
                         {
                             label: "Differential Pressure Flow",
-                            shortLabel: "DP Flow"
+                            shortLabel: "DP Flow",
+                            image: "../images/parts/Sensors/diff-flow.png"
                         }
                     ]
                 },
@@ -314,19 +329,23 @@ document.addEventListener("DOMContentLoaded", () => {
                     children: [
                         {
                             label: "Gauge Pressure",
-                            shortLabel: "Gauge Pressure"
+                            shortLabel: "Gauge Pressure",
+                            image: "../images/parts/Sensors/pressure.png"
                         },
                         {
                             label: "Absolute Pressure",
-                            shortLabel: "Absolute Pressure"
+                            shortLabel: "Absolute Pressure",
+                            image: "../images/parts/Sensors/press-abs.png"
                         },
                         {
                             label: "Differential Pressure",
-                            shortLabel: "DP Sensor"
+                            shortLabel: "DP Sensor",
+                            image: "../images/parts/Sensors/press-diff.png"
                         },
                         {
                             label: "Vacuum Pressure",
-                            shortLabel: "Vacuum Sensor"
+                            shortLabel: "Vacuum Sensor",
+                            image: "../images/parts/Sensors/vacuum.png"
                         }
                     ]
                 },
@@ -335,19 +354,23 @@ document.addEventListener("DOMContentLoaded", () => {
                     children: [
                         {
                             label: "Compression Load Cell",
-                            shortLabel: "Compression LC"
+                            shortLabel: "Compression LC",
+                            image: "../images/parts/Sensors/compression.png"
                         },
                         {
                             label: "Tension Load Cell",
-                            shortLabel: "Tension LC"
+                            shortLabel: "Tension LC",
+                            image: "../images/parts/Sensors/tension.png"
                         },
                         {
                             label: "S-Beam Load Cell",
-                            shortLabel: "S-Beam LC"
+                            shortLabel: "S-Beam LC",
+                            image: "../images/parts/Sensors/s-beam.png"
                         },
                         {
                             label: "Shear Beam Load Cell",
-                            shortLabel: "Shear Beam LC"
+                            shortLabel: "Shear Beam LC",
+                            image: "../images/parts/Sensors/shear.png"
                         }
                     ]
                 }
@@ -362,11 +385,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     children: [
                         {
                             label: "Single Phase AC Motor",
-                            shortLabel: "1PH AC Motor"
+                            shortLabel: "1PH AC Motor",
+                            image: "../images/parts/Motors/1ph-ac-motor.png"
                         },
                         {
                             label: "Three Phase AC Motor",
-                            shortLabel: "3PH AC Motor"
+                            shortLabel: "3PH AC Motor",
+                            image: "../images/parts/Motors/3ph-ac-motor.png"
                         }
                     ]
                 },
@@ -375,11 +400,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     children: [
                         {
                             label: "Brushed DC Motor",
-                            shortLabel: "Brushed DC"
+                            shortLabel: "Brushed DC",
+                            image: "../images/parts/Motors/brush-dc-motor.png"
                         },
                         {
                             label: "Brushless DC Motor",
-                            shortLabel: "BLDC Motor"
+                            shortLabel: "BLDC Motor",
+                            image: "../images/parts/Motors/brushless-dc-motor.png"
                         }
                     ]
                 },
@@ -388,11 +415,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     children: [
                         {
                             label: "AC Servo",
-                            shortLabel: "AC Servo"
+                            shortLabel: "AC Servo",
+                            image: "../images/parts/Motors/ac-servo.png"
                         },
                         {
                             label: "DC Servo",
-                            shortLabel: "DC Servo"
+                            shortLabel: "DC Servo",
+                            image: "../images/parts/Motors/dc-servo.png"
                         }
                     ]
                 },
@@ -401,11 +430,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     children: [
                         {
                             label: "Bipolar Stepper",
-                            shortLabel: "Bipolar Stepper"
+                            shortLabel: "Bipolar Stepper",
+                            image: "../images/parts/Motors/bi-stepper.png"
                         },
                         {
                             label: "Unipolar Stepper",
-                            shortLabel: "Unipolar Stepper"
+                            shortLabel: "Unipolar Stepper",
+                            image: "../images/parts/Motors/uni-stepper.png"
                         }
                     ]
                 }
@@ -420,23 +451,28 @@ document.addEventListener("DOMContentLoaded", () => {
                     children: [
                         {
                             label: "PLC Processor",
-                            shortLabel: "PLC CPU"
+                            shortLabel: "PLC CPU",
+                            image: "../images/parts/Controls/plc.png"
                         },
                         {
                             label: "Digital Input Module",
-                            shortLabel: "Digital Input"
+                            shortLabel: "Digital Input",
+                            image: "../images/parts/Controls/digital-input.png"
                         },
                         {
                             label: "Digital Output Module",
-                            shortLabel: "Digital Output"
+                            shortLabel: "Digital Output",
+                            image: "../images/parts/Controls/digital-output.png"
                         },
                         {
                             label: "Analog Input Module",
-                            shortLabel: "Analog Input"
+                            shortLabel: "Analog Input",
+                            image: "../images/parts/Controls/analog-input.png"
                         },
                         {
                             label: "Analog Output Module",
-                            shortLabel: "Analog Output"
+                            shortLabel: "Analog Output",
+                            image: "../images/parts/Controls/analog-output.png"
                         }
                     ]
                 },
@@ -445,19 +481,23 @@ document.addEventListener("DOMContentLoaded", () => {
                     children: [
                         {
                             label: "Push Button",
-                            shortLabel: "Push Button"
+                            shortLabel: "Push Button",
+                            image: "../images/parts/Controls/push-button.png"
                         },
                         {
                             label: "Selector Switch",
-                            shortLabel: "Selector Switch"
+                            shortLabel: "Selector Switch",
+                            image: "../images/parts/Controls/selector.png"
                         },
                         {
                             label: "Pilot Light",
-                            shortLabel: "Pilot Light"
+                            shortLabel: "Pilot Light",
+                            image: "../images/parts/Controls/pilot-lamp.png"
                         },
                         {
                             label: "HMI Screen",
-                            shortLabel: "HMI"
+                            shortLabel: "HMI",
+                            image: "../images/parts/Controls/hmi.png"
                         }
                     ]
                 },
@@ -466,19 +506,23 @@ document.addEventListener("DOMContentLoaded", () => {
                     children: [
                         {
                             label: "Contactor",
-                            shortLabel: "Contactor"
+                            shortLabel: "Contactor",
+                            image: "../images/parts/Controls/contactor.png"
                         },
                         {
                             label: "Motor Starter",
-                            shortLabel: "Motor Starter"
+                            shortLabel: "Motor Starter",
+                            image: "../images/parts/Controls/motor-starter.png"
                         },
                         {
                             label: "VFD",
-                            shortLabel: "VFD"
+                            shortLabel: "VFD",
+                            image: "../images/parts/Controls/vfd.png"
                         },
                         {
                             label: "Overload Relay",
-                            shortLabel: "Overload"
+                            shortLabel: "Overload",
+                            image: "../images/parts/Controls/overload-relay.png"
                         }
                     ]
                 }
