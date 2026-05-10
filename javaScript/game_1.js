@@ -736,6 +736,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearPartSelection();
     clearWireSelection();
     renderCanvas();
+    loadBoardFromUrlIfRequested();
 
     /*
         ============================================================
@@ -2271,6 +2272,8 @@ function setupSplashScreen() {
     function saveBoardToLocalStorage() {
         const saveData = {
             version: 1,
+            boardName: getBoardNameForSave(),
+            templateName: "CAD Parts Repair",
             savedAt: new Date().toISOString(),
             nextInstanceId: nextInstanceId,
             nextConnectionId: nextConnectionId,
@@ -2285,6 +2288,28 @@ function setupSplashScreen() {
         localStorage.setItem(CONFIG.storageKey, JSON.stringify(saveData));
 
         showTemporaryButtonText(saveBoardBtn, "Saved!");
+    }
+
+    /*
+    Returns the display name used on the Saved Boards page.
+    Later, this can come from a project-name input field.
+*/
+    function getBoardNameForSave() {
+        return "CAD Parts Repair Board";
+    }
+
+    /*
+    Loads a saved board automatically when the URL requests it.
+    Example:
+    game_1.html?load=latest
+*/
+    function loadBoardFromUrlIfRequested() {
+        const params = new URLSearchParams(window.location.search);
+        const requestedBoard = params.get("load");
+
+        if (requestedBoard === "latest") {
+            loadBoardFromLocalStorage();
+        }
     }
 
     /*

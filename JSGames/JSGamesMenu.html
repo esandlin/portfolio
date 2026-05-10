@@ -1,165 +1,148 @@
 <!doctype html>
 
 <html lang="en" data-theme="light">
-<head>
-    <title>Industrial Automation Menu</title>
+    <head>
+        <title>Industrial Automation Menu</title>
 
-    <link rel="stylesheet" href="../styles/JSGamesMenu.css" />
+        <link rel="stylesheet" href="../styles/JSGamesMenu.css" />
 
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="Industrial automation training menu" />
-    <meta name="keywords" content="Industrial Automation, Conveyor, CAD Parts, Sensors, Controls" />
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="MobileOptimized" content="320" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="cleartype" content="on" />
-    <meta name="author" content="Eric Sandlin" />
-</head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="Industrial automation training menu" />
+        <meta name="keywords" content="Industrial Automation, Conveyor, CAD Parts, Sensors, Controls" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="cleartype" content="on" />
+        <meta name="author" content="Eric Sandlin" />
+    </head>
 
-<body>
-    <!-- Splash screen -->
-    <div id="splashScreen" class="splash-screen" aria-label="Industrial automation splash screen">
-        <div class="splash-logo-frame">
-            <img
-                src="../images/Icon.png"
-                alt="Dark mode Eric Sandlin icon"
-                class="splash-logo splash-logo-dark" />
+    <body>
+        <!-- Splash screen -->
+        <div id="splashScreen" class="splash-screen" aria-label="Industrial automation splash screen">
+            <div class="splash-logo-frame">
+                <img src="../images/Icon.png" alt="Dark mode Eric Sandlin icon" class="splash-logo splash-logo-dark" />
 
-            <img
-                src="../images/Icon_2.png"
-                alt="Light mode Eric Sandlin icon"
-                class="splash-logo splash-logo-light" />
+                <img
+                    src="../images/Icon_2.png"
+                    alt="Light mode Eric Sandlin icon"
+                    class="splash-logo splash-logo-light" />
+            </div>
+
+            <p class="splash-tap-text">Tap or click to enter</p>
         </div>
 
-        <p class="splash-tap-text">Tap or click to enter</p>
-    </div>
+        <!-- Main Menu -->
+        <main id="mainMenu" class="menu-wrapper menu-hidden">
+            <section class="menu-hero">
+                <h1>Industrial Automation Control</h1>
+                <p>Search conveyor locations, parts, sensors, repair tools, and training modules.</p>
 
-    <!-- Main Menu -->
-    <main id="mainMenu" class="menu-wrapper menu-hidden">
-        <section class="menu-hero">
-            <h1>Industrial Automation Control</h1>
-            <p>
-                Search conveyor locations, parts, sensors, repair tools, and training modules.
-            </p>
+                <div class="menu-search-box">
+                    <label for="menuSearch" class="visually-hidden">Search menu</label>
+                    <input
+                        id="menuSearch"
+                        type="search"
+                        placeholder="Search: conveyor, CAD, sensors, parts, motor, PLC, repair..."
+                        autocomplete="off" />
+                </div>
+            </section>
 
-            <div class="menu-search-box">
-                <label for="menuSearch" class="visually-hidden">Search menu</label>
-                <input
-                    id="menuSearch"
-                    type="search"
-                    placeholder="Search: conveyor, CAD, sensors, parts, motor, PLC, repair..."
-                    autocomplete="off" />
-            </div>
-        </section>
+            <section class="menu-grid" aria-label="Main menu options">
+                <a
+                    class="menu-card featured-card"
+                    href="game_1.html"
+                    data-search-keywords="cad parts repair drag drop wiring simulator sensors motors plc controls">
+                    <div class="menu-card-icon">🧩</div>
+                    <h2>CAD Parts Repair</h2>
+                    <p>Open the drag-and-drop CAD repair board with parts, wiring, terminals, and saved layouts.</p>
+                    <span>Open CAD Board →</span>
+                </a>
 
-        <section class="menu-grid" aria-label="Main menu options">
-            <a
-                class="menu-card featured-card"
-                href="game_1.html"
-                data-search-keywords="cad parts repair drag drop wiring simulator sensors motors plc controls">
-                <div class="menu-card-icon">🧩</div>
-                <h2>CAD Parts Repair</h2>
-                <p>
-                    Open the drag-and-drop CAD repair board with parts, wiring, terminals, and saved layouts.
-                </p>
-                <span>Open CAD Board →</span>
-            </a>
+                <a
+                    class="menu-card"
+                    href="ConveyorLocations.html"
+                    data-search-keywords="conveyor location inbound outbound sorter merge divert belt roller scan tunnel spiral">
+                    <div class="menu-card-icon">🏭</div>
+                    <h2>Conveyor Locations</h2>
+                    <p>Browse conveyor areas and equipment zones.</p>
 
-            <article
-                class="menu-card"
-                data-search-keywords="conveyor location inbound outbound sorter merge divert belt roller scan tunnel spiral">
-                <div class="menu-card-icon">🏭</div>
-                <h2>Conveyor Locations</h2>
-                <p>
-                    Browse conveyor areas and equipment zones.
-                </p>
+                    <ul>
+                        <li>Inbound Conveyor</li>
+                        <li>Outbound Conveyor</li>
+                        <li>Sorter Line</li>
+                        <li>Merge / Divert Area</li>
+                        <li>Scan Tunnel</li>
+                        <li>Spiral Conveyor</li>
+                    </ul>
 
-                <ul>
-                    <li>Inbound Conveyor</li>
-                    <li>Outbound Conveyor</li>
-                    <li>Sorter Line</li>
-                    <li>Merge / Divert Area</li>
-                    <li>Scan Tunnel</li>
-                    <li>Spiral Conveyor</li>
-                </ul>
-            </article>
+                    <span>Open Conveyor Locations →</span>
+                </a>
 
-            <article
-                class="menu-card"
-                data-search-keywords="parts sensors motors controls safety pneumatics hydraulics electrical terminal block">
-                <div class="menu-card-icon">⚙️</div>
-                <h2>Parts</h2>
-                <p>
-                    Browse the major industrial part families used in the simulator.
-                </p>
+                <a
+                    class="menu-card"
+                    href="PartsLibrary.html"
+                    data-search-keywords="parts lookup with parts breakdown">
+                    <div class="menu-card-icon">⚙️</div>
+                    <h2>Parts</h2>
+                    <p>
+                        Browse industrial parts lookup/breakdowns including sensors, motors, PLC controls, safety devices, pneumatics,
+                        hydraulics, and electrical components.
+                    </p>
 
-                <ul>
-                    <li>Sensors</li>
-                    <li>Motors</li>
-                    <li>PLC Controls</li>
-                    <li>Safety Devices</li>
-                    <li>Pneumatics</li>
-                    <li>Hydraulics</li>
-                    <li>Electrical</li>
-                </ul>
-            </article>
+                    <ul>
+                        <li>Sensors</li>
+                        <li>Motors</li>
+                        <li>PLC Controls</li>
+                        <li>Safety Devices</li>
+                        <li>Pneumatics</li>
+                        <li>Hydraulics</li>
+                        <li>Electrical</li>
+                    </ul>
 
-            <article
-                class="menu-card"
-                data-search-keywords="sensor limit switch proximity level temperature flow pressure load cell">
-                <div class="menu-card-icon">📡</div>
-                <h2>Sensors</h2>
-                <p>
-                    Quick reference for common automation sensors.
-                </p>
+                    <span>Open Parts Library →</span>
+                </a>
 
-                <ul>
-                    <li>Limit Switches</li>
-                    <li>Proximity Sensors</li>
-                    <li>Level Sensors</li>
-                    <li>Temperature Sensors</li>
-                    <li>Flow Sensors</li>
-                    <li>Pressure Sensors</li>
-                    <li>Load Cells</li>
-                </ul>
-            </article>
+                <a
+                    class="menu-card"
+                    href="TrainingBoards.html"
+                    data-search-keywords="training videos circuit wiring troubleshooting plc motor starter safety sensor pneumatic control">
+                    <div class="menu-card-icon">📘</div>
+                    <h2>Training Boards</h2>
+                    <p>Training Video and troubleshooting exercises.</p>
 
-            <article
-                class="menu-card"
-                data-search-keywords="training examples circuit wiring troubleshooting plc motor starter safety">
-                <div class="menu-card-icon">📘</div>
-                <h2>Training Boards</h2>
-                <p>
-                    Future area for loading example circuits and troubleshooting exercises.
-                </p>
+                    <ul>
+                        <li>Sensor to PLC Input</li>
+                        <li>Motor Starter Circuit</li>
+                        <li>E-Stop Safety Circuit</li>
+                        <li>Pneumatic Cylinder Control</li>
+                    </ul>
 
-                <ul>
-                    <li>Sensor to PLC Input</li>
-                    <li>Motor Starter Circuit</li>
-                    <li>E-Stop Safety Circuit</li>
-                    <li>Pneumatic Cylinder Control</li>
-                </ul>
-            </article>
+                    <span>Open Training Boards →</span>
+                </a>
 
-            <article
-                class="menu-card"
-                data-search-keywords="saved board load local storage previous layout continue work">
-                <div class="menu-card-icon">💾</div>
-                <h2>Saved Boards</h2>
-                <p>
-                    Continue working from a previously saved CAD repair board.
-                </p>
+                <a
+                    class="menu-card"
+                    href="SavedBoards.html"
+                    data-search-keywords="saved board load local storage previous layout continue work date time stamp equipment template">
+                    <div class="menu-card-icon">💾</div>
+                    <h2>Saved Boards</h2>
+                    <p>View saved CAD boards by date, time, and equipment template name.</p>
 
-                <a class="small-card-link" href="game_1.html">Go to saved board area →</a>
-            </article>
-        </section>
+                    <ul>
+                        <li>Saved layouts</li>
+                        <li>Date / time stamp</li>
+                        <li>Equipment template name</li>
+                        <li>Open saved board</li>
+                    </ul>
 
-        <p id="noResultsMessage" class="no-results-message">
-            No matching menu items found.
-        </p>
-    </main>
+                    <span>Open Saved Boards →</span>
+                </a>
+            </section>
 
-    <script src="../javaScript/JSGamesMenu.js"></script>
-</body>
+            <p id="noResultsMessage" class="no-results-message">No matching menu items found.</p>
+        </main>
+
+        <script src="../javaScript/JSGamesMenu.js"></script>
+    </body>
 </html>

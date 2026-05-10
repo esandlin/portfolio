@@ -444,3 +444,72 @@ html[data-theme="dark"] #menuSearch {
         min-height: auto;
     }
 }
+
+/* ============================================================
+   SAVED BOARDS LIST
+   ============================================================ */
+
+.saved-boards-list {
+    display: grid;
+    gap: 1rem;
+    width: min(100%, 900px);
+    margin: 0 auto;
+}
+
+.saved-board-card {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
+    padding: 1.15rem;
+
+    background-color: var(--card-bg);
+    color: var(--text-color);
+
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+
+    text-decoration: none;
+
+    transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+.saved-board-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(13, 110, 253, 0.45);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+}
+
+.saved-board-main h2 {
+    margin: 0 0 0.5rem;
+}
+
+.saved-board-main p {
+    margin: 0.3rem 0;
+    color: var(--muted-text);
+}
+
+.saved-board-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.4rem;
+
+    font-weight: 800;
+    color: var(--accent-blue);
+}
+
+@media (max-width: 700px) {
+    .saved-board-card {
+        flex-direction: column;
+    }
+
+    .saved-board-meta {
+        align-items: flex-start;
+    }
+}

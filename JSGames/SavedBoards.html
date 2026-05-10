@@ -1,0 +1,35 @@
+<!doctype html>
+
+<html lang="en" data-theme="light">
+<head>
+    <title>Saved Boards</title>
+
+    <link rel="stylesheet" href="../styles/JSGamesMenu.css" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <main class="menu-wrapper">
+        <section class="menu-hero">
+            <h1>Saved Boards</h1>
+            <p>
+                Open a saved CAD board by date, time, and equipment template name.
+            </p>
+
+            <p>
+                <a class="small-card-link" href="JSGamesMenu.html">← Back to Main Menu</a>
+            </p>
+        </section>
+
+        <section id="savedBoardsList" class="saved-boards-list" aria-label="Saved CAD boards"></section>
+
+        <p id="emptySavedBoardsMessage" class="no-results-message">
+            No saved boards were found.
+        </p>
+    </main>
+
+    <script src="../javaScript/SavedBoards.js"></script>
+</body>
+</html>
