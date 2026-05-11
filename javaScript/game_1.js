@@ -48,6 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const partContactTypeSelect = document.getElementById("partContactTypeSelect");
     const applyPartPropertiesBtn = document.getElementById("applyPartPropertiesBtn");
     const clearPartSelectionBtn = document.getElementById("clearPartSelectionBtn");
+    const boardScrollArea = document.getElementById("boardScrollArea");
+    const boardWorld = document.getElementById("boardWorld");
+
 
     /*
         ============================================================
@@ -61,6 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (
         !dropZone ||
         !canvas ||
+        !boardScrollArea ||
+        !boardWorld ||
         !partsMenuTree ||
         !connectModeBtn ||
         !clearLinesBtn ||
@@ -109,7 +114,10 @@ document.addEventListener("DOMContentLoaded", () => {
         gridSize: 25,
         previewOpacity: "0.75",
         movingOpacity: "0.4",
-        storageKey: "industrialAutomationControlBoard"
+        storageKey: "industrialAutomationControlBoard",
+        minZoom: 0.5,
+        maxZoom: 2.5,
+        zoomStep: 0.1
     };
 
     /*
@@ -140,6 +148,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let nextConnectionId = 1;
     let selectedConnectionId = null;
+
+    let zoomScale = 1;
+    let isPinching = false;
+    let pinchStartDistance = 0;
+    let pinchStartZoom = 1;
 
     const connections = [];
 
@@ -771,6 +784,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     canvas.width = CONFIG.defaultCanvasWidth;
     canvas.height = CONFIG.defaultCanvasHeight;
+    applyBoardZoom();
+    setupBoardZoomControls();
 
     //setupSplashScreen();
     partsMenuTree.innerHTML = "";
@@ -1152,22 +1167,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-        Converts a terminal's screen position into canvas coordinates.
-        This keeps lines accurate even if CSS scales the canvas visually.
-    */
+    Converts a terminal's screen position into canvas coordinates while zoomed.
+*/
     function getTerminalCanvasPoint(terminal) {
         const terminalRect = terminal.getBoundingClientRect();
-        const dropZoneRect = dropZone.getBoundingClientRect();
+        const boardRect = boardWorld.getBoundingClientRect();
 
         const centerX = terminalRect.left + terminalRect.width / 2;
         const centerY = terminalRect.top + terminalRect.height / 2;
 
-        const scaleX = canvas.width / dropZoneRect.width;
-        const scaleY = canvas.height / dropZoneRect.height;
+        const scaleX = canvas.width / boardRect.width;
+        const scaleY = canvas.height / boardRect.height;
 
         return {
-            x: (centerX - dropZoneRect.left) * scaleX,
-            y: (centerY - dropZoneRect.top) * scaleY
+            x: (centerX - boardRect.left) * scaleX,
+            y: (centerY - boardRect.top) * scaleY
         };
     }
 
@@ -1501,9 +1515,24 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function getSwitchTerminals() {
         return [
-            { id: "com", label: "COM", x: 0, y: 50 },
-            { id: "no", label: "NO", x: 100, y: 35 },
-            { id: "nc", label: "NC", x: 100, y: 65 }
+            {
+                id: "com",
+                label: "COM",
+                x: 0,
+                y: 50
+            },
+            {
+                id: "no",
+                label: "NO",
+                x: 100,
+                y: 35
+            },
+            {
+                id: "nc",
+                label: "NC",
+                x: 100,
+                y: 65
+            }
         ];
     }
 
@@ -1512,9 +1541,24 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function getThreeWireSensorTerminals() {
         return [
-            { id: "positive", label: "+24V", x: 0, y: 25 },
-            { id: "common", label: "0V", x: 0, y: 75 },
-            { id: "signal", label: "Signal", x: 100, y: 50 }
+            {
+                id: "positive",
+                label: "+24V",
+                x: 0,
+                y: 25
+            },
+            {
+                id: "common",
+                label: "0V",
+                x: 0,
+                y: 75
+            },
+            {
+                id: "signal",
+                label: "Signal",
+                x: 100,
+                y: 50
+            }
         ];
     }
 
@@ -1523,9 +1567,24 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function getTemperatureSensorTerminals() {
         return [
-            { id: "positive", label: "+", x: 0, y: 35 },
-            { id: "negative", label: "-", x: 0, y: 65 },
-            { id: "signal", label: "Signal", x: 100, y: 50 }
+            {
+                id: "positive",
+                label: "+",
+                x: 0,
+                y: 35
+            },
+            {
+                id: "negative",
+                label: "-",
+                x: 0,
+                y: 65
+            },
+            {
+                id: "signal",
+                label: "Signal",
+                x: 100,
+                y: 50
+            }
         ];
     }
 
@@ -1534,10 +1593,30 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function getLoadCellTerminals() {
         return [
-            { id: "excitation-positive", label: "EX+", x: 0, y: 25 },
-            { id: "excitation-negative", label: "EX-", x: 0, y: 75 },
-            { id: "signal-positive", label: "SIG+", x: 100, y: 35 },
-            { id: "signal-negative", label: "SIG-", x: 100, y: 65 }
+            {
+                id: "excitation-positive",
+                label: "EX+",
+                x: 0,
+                y: 25
+            },
+            {
+                id: "excitation-negative",
+                label: "EX-",
+                x: 0,
+                y: 75
+            },
+            {
+                id: "signal-positive",
+                label: "SIG+",
+                x: 100,
+                y: 35
+            },
+            {
+                id: "signal-negative",
+                label: "SIG-",
+                x: 100,
+                y: 65
+            }
         ];
     }
 
@@ -1546,12 +1625,42 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function getThreePhaseMotorTerminals() {
         return [
-            { id: "l1", label: "L1", x: 0, y: 20 },
-            { id: "l2", label: "L2", x: 0, y: 50 },
-            { id: "l3", label: "L3", x: 0, y: 80 },
-            { id: "t1", label: "T1", x: 100, y: 20 },
-            { id: "t2", label: "T2", x: 100, y: 50 },
-            { id: "t3", label: "T3", x: 100, y: 80 }
+            {
+                id: "l1",
+                label: "L1",
+                x: 0,
+                y: 20
+            },
+            {
+                id: "l2",
+                label: "L2",
+                x: 0,
+                y: 50
+            },
+            {
+                id: "l3",
+                label: "L3",
+                x: 0,
+                y: 80
+            },
+            {
+                id: "t1",
+                label: "T1",
+                x: 100,
+                y: 20
+            },
+            {
+                id: "t2",
+                label: "T2",
+                x: 100,
+                y: 50
+            },
+            {
+                id: "t3",
+                label: "T3",
+                x: 100,
+                y: 80
+            }
         ];
     }
 
@@ -1560,14 +1669,54 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function getContactorTerminals() {
         return [
-            { id: "a1", label: "A1", x: 35, y: 0 },
-            { id: "a2", label: "A2", x: 65, y: 0 },
-            { id: "l1", label: "L1", x: 0, y: 25 },
-            { id: "l2", label: "L2", x: 0, y: 50 },
-            { id: "l3", label: "L3", x: 0, y: 75 },
-            { id: "t1", label: "T1", x: 100, y: 25 },
-            { id: "t2", label: "T2", x: 100, y: 50 },
-            { id: "t3", label: "T3", x: 100, y: 75 }
+            {
+                id: "a1",
+                label: "A1",
+                x: 35,
+                y: 0
+            },
+            {
+                id: "a2",
+                label: "A2",
+                x: 65,
+                y: 0
+            },
+            {
+                id: "l1",
+                label: "L1",
+                x: 0,
+                y: 25
+            },
+            {
+                id: "l2",
+                label: "L2",
+                x: 0,
+                y: 50
+            },
+            {
+                id: "l3",
+                label: "L3",
+                x: 0,
+                y: 75
+            },
+            {
+                id: "t1",
+                label: "T1",
+                x: 100,
+                y: 25
+            },
+            {
+                id: "t2",
+                label: "T2",
+                x: 100,
+                y: 50
+            },
+            {
+                id: "t3",
+                label: "T3",
+                x: 100,
+                y: 75
+            }
         ];
     }
 
@@ -1576,10 +1725,30 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function getPlcModuleTerminals() {
         return [
-            { id: "positive", label: "+24V", x: 0, y: 25 },
-            { id: "common", label: "0V", x: 0, y: 75 },
-            { id: "channel-1", label: "CH1", x: 100, y: 30 },
-            { id: "channel-2", label: "CH2", x: 100, y: 70 }
+            {
+                id: "positive",
+                label: "+24V",
+                x: 0,
+                y: 25
+            },
+            {
+                id: "common",
+                label: "0V",
+                x: 0,
+                y: 75
+            },
+            {
+                id: "channel-1",
+                label: "CH1",
+                x: 100,
+                y: 30
+            },
+            {
+                id: "channel-2",
+                label: "CH2",
+                x: 100,
+                y: 70
+            }
         ];
     }
 
@@ -1588,9 +1757,24 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function getSolenoidValveTerminals() {
         return [
-            { id: "positive", label: "+24V", x: 0, y: 35 },
-            { id: "common", label: "0V", x: 0, y: 65 },
-            { id: "output", label: "OUT", x: 100, y: 50 }
+            {
+                id: "positive",
+                label: "+24V",
+                x: 0,
+                y: 35
+            },
+            {
+                id: "common",
+                label: "0V",
+                x: 0,
+                y: 65
+            },
+            {
+                id: "output",
+                label: "OUT",
+                x: 100,
+                y: 50
+            }
         ];
     }
 
@@ -1599,8 +1783,18 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function getCylinderTerminals() {
         return [
-            { id: "port-a", label: "Port A", x: 0, y: 50 },
-            { id: "port-b", label: "Port B", x: 100, y: 50 }
+            {
+                id: "port-a",
+                label: "Port A",
+                x: 0,
+                y: 50
+            },
+            {
+                id: "port-b",
+                label: "Port B",
+                x: 100,
+                y: 50
+            }
         ];
     }
 
@@ -1609,10 +1803,30 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function getPowerSupplyTerminals() {
         return [
-            { id: "line", label: "L", x: 0, y: 35 },
-            { id: "neutral", label: "N", x: 0, y: 65 },
-            { id: "positive", label: "+24V", x: 100, y: 35 },
-            { id: "common", label: "0V", x: 100, y: 65 }
+            {
+                id: "line",
+                label: "L",
+                x: 0,
+                y: 35
+            },
+            {
+                id: "neutral",
+                label: "N",
+                x: 0,
+                y: 65
+            },
+            {
+                id: "positive",
+                label: "+24V",
+                x: 100,
+                y: 35
+            },
+            {
+                id: "common",
+                label: "0V",
+                x: 100,
+                y: 65
+            }
         ];
     }
 
@@ -1621,8 +1835,18 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function getTerminalBlockTerminals() {
         return [
-            { id: "left", label: "Left", x: 0, y: 50 },
-            { id: "right", label: "Right", x: 100, y: 50 }
+            {
+                id: "left",
+                label: "Left",
+                x: 0,
+                y: 50
+            },
+            {
+                id: "right",
+                label: "Right",
+                x: 100,
+                y: 50
+            }
         ];
     }
 
@@ -1631,8 +1855,18 @@ document.addEventListener("DOMContentLoaded", () => {
     */
     function getGenericTerminals() {
         return [
-            { id: "input", label: "Input", x: 0, y: 50 },
-            { id: "output", label: "Output", x: 100, y: 50 }
+            {
+                id: "input",
+                label: "Input",
+                x: 0,
+                y: 50
+            },
+            {
+                id: "output",
+                label: "Output",
+                x: 100,
+                y: 50
+            }
         ];
     }
 
@@ -1723,31 +1957,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-    Finds the first wire close enough to the pointer to be selected.
+    Converts a pointer event into canvas coordinates while zoomed.
 */
-    function findConnectionNearPointer(event) {
-        const pointer = getCanvasPointerFromEvent(event);
-        const hitTolerance = 10;
+    function getCanvasPointerFromEvent(event) {
+        const boardRect = boardWorld.getBoundingClientRect();
 
-        for (let i = connections.length - 1; i >= 0; i--) {
-            const connection = connections[i];
+        const scaleX = canvas.width / boardRect.width;
+        const scaleY = canvas.height / boardRect.height;
 
-            const fromTerminal = getTerminalElement(connection.fromInstanceId, connection.fromTerminalId);
-            const toTerminal = getTerminalElement(connection.toInstanceId, connection.toTerminalId);
-
-            if (!fromTerminal || !toTerminal) continue;
-
-            const fromPoint = getTerminalCanvasPoint(fromTerminal);
-            const toPoint = getTerminalCanvasPoint(toTerminal);
-
-            const distance = getDistanceFromPointToSegment(pointer, fromPoint, toPoint);
-
-            if (distance <= hitTolerance) {
-                return connection;
-            }
-        }
-
-        return null;
+        return {
+            x: (event.clientX - boardRect.left) * scaleX,
+            y: (event.clientY - boardRect.top) * scaleY
+        };
     }
 
     /*
@@ -1789,15 +2010,20 @@ document.addEventListener("DOMContentLoaded", () => {
         return Math.hypot(point.x - closestPoint.x, point.y - closestPoint.y);
     }
 
+
     /*
-        Converts a pointer event into coordinates relative to the drop zone.
-    */
+    Converts a pointer event into board-world coordinates.
+    This keeps drag/drop accurate while zoomed.
+*/
     function getDropZonePosition(event) {
-        const rect = dropZone.getBoundingClientRect();
+        const boardRect = boardWorld.getBoundingClientRect();
+
+        const scaleX = CONFIG.defaultCanvasWidth / boardRect.width;
+        const scaleY = CONFIG.defaultCanvasHeight / boardRect.height;
 
         return {
-            x: event.clientX - rect.left,
-            y: event.clientY - rect.top
+            x: (event.clientX - boardRect.left) * scaleX,
+            y: (event.clientY - boardRect.top) * scaleY
         };
     }
 
@@ -1840,11 +2066,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /*
-        Keeps a dropped part inside the visible gray drop zone.
-    */
+    Keeps a dropped part inside the fixed 800x500 board coordinate space.
+*/
     function clampToDropZone(x, y) {
-        const maxX = dropZone.clientWidth - CONFIG.itemWidth;
-        const maxY = dropZone.clientHeight - CONFIG.itemHeight;
+        const maxX = CONFIG.defaultCanvasWidth - CONFIG.itemWidth;
+        const maxY = CONFIG.defaultCanvasHeight - CONFIG.itemHeight;
 
         return {
             x: Math.max(0, Math.min(x, maxX)),
@@ -2336,8 +2562,141 @@ document.addEventListener("DOMContentLoaded", () => {
         activeItem.style.opacity = "1";
 
         if (isNewItem) {
-            dropZone.appendChild(activeItem);
+            boardWorld.appendChild(activeItem);
         }
+    }
+
+    /*
+    Sets up mouse-wheel zoom and two-finger touch pinch zoom.
+*/
+    function setupBoardZoomControls() {
+        dropZone.addEventListener("wheel", handleBoardWheelZoom, {
+            passive: false
+        });
+
+        dropZone.addEventListener("touchstart", handlePinchStart, {
+            passive: false
+        });
+
+        dropZone.addEventListener("touchmove", handlePinchMove, {
+            passive: false
+        });
+
+        dropZone.addEventListener("touchend", handlePinchEnd);
+        dropZone.addEventListener("touchcancel", handlePinchEnd);
+    }
+
+    /*
+        Handles mouse wheel zoom.
+        Scroll up = zoom in.
+        Scroll down = zoom out.
+    */
+    function handleBoardWheelZoom(event) {
+        event.preventDefault();
+
+        const direction = event.deltaY < 0 ? 1 : -1;
+        const nextZoom = zoomScale + direction * CONFIG.zoomStep;
+
+        setBoardZoom(nextZoom, event.clientX, event.clientY);
+    }
+
+    /*
+        Starts two-finger pinch zoom on touch screens.
+    */
+    function handlePinchStart(event) {
+        if (event.touches.length !== 2) return;
+
+        event.preventDefault();
+
+        isPinching = true;
+        pinchStartDistance = getTouchDistance(event.touches[0], event.touches[1]);
+        pinchStartZoom = zoomScale;
+    }
+
+    /*
+        Updates two-finger pinch zoom on touch screens.
+    */
+    function handlePinchMove(event) {
+        if (!isPinching || event.touches.length !== 2) return;
+
+        event.preventDefault();
+
+        const currentDistance = getTouchDistance(event.touches[0], event.touches[1]);
+        const pinchCenter = getTouchCenter(event.touches[0], event.touches[1]);
+
+        const nextZoom = pinchStartZoom * (currentDistance / pinchStartDistance);
+
+        setBoardZoom(nextZoom, pinchCenter.x, pinchCenter.y);
+    }
+
+    /*
+        Ends pinch zoom mode.
+    */
+    function handlePinchEnd(event) {
+        if (event.touches.length < 2) {
+            isPinching = false;
+        }
+    }
+
+    /*
+        Applies a new board zoom level and keeps the zoom centered
+        around the mouse pointer or pinch center.
+    */
+    function setBoardZoom(nextZoom, focalClientX, focalClientY) {
+        const oldZoom = zoomScale;
+        const newZoom = clampNumber(nextZoom, CONFIG.minZoom, CONFIG.maxZoom);
+
+        if (newZoom === oldZoom) return;
+
+        const viewportRect = dropZone.getBoundingClientRect();
+
+        const focalBoardX = (dropZone.scrollLeft + (focalClientX - viewportRect.left)) / oldZoom;
+        const focalBoardY = (dropZone.scrollTop + (focalClientY - viewportRect.top)) / oldZoom;
+
+        zoomScale = newZoom;
+        applyBoardZoom();
+
+        dropZone.scrollLeft = focalBoardX * newZoom - (focalClientX - viewportRect.left);
+        dropZone.scrollTop = focalBoardY * newZoom - (focalClientY - viewportRect.top);
+
+        renderCanvas();
+    }
+
+    /*
+        Applies the visual zoom transform and updates the scrollable area.
+    */
+    function applyBoardZoom() {
+        boardWorld.style.transform = `scale(${zoomScale})`;
+
+        boardScrollArea.style.width = `${CONFIG.defaultCanvasWidth * zoomScale}px`;
+        boardScrollArea.style.height = `${CONFIG.defaultCanvasHeight * zoomScale}px`;
+    }
+
+    /*
+        Calculates the distance between two touch points.
+    */
+    function getTouchDistance(firstTouch, secondTouch) {
+        return Math.hypot(
+            firstTouch.clientX - secondTouch.clientX,
+            firstTouch.clientY - secondTouch.clientY
+        );
+    }
+
+    /*
+        Calculates the center point between two touch points.
+    */
+    function getTouchCenter(firstTouch, secondTouch) {
+        return {
+            x: (firstTouch.clientX + secondTouch.clientX) / 2,
+            y: (firstTouch.clientY + secondTouch.clientY) / 2
+        };
+    }
+
+    /*
+        Keeps a number inside a min/max range.
+    */
+    function clampNumber(value, min, max) {
+        return Math.max(min, Math.min(value, max));
     }
 
     /*
@@ -2632,7 +2991,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function restoreParts(savedParts) {
         savedParts.forEach((savedPart) => {
             const restoredItem = createPlacedItemFromSavedData(savedPart);
-            dropZone.appendChild(restoredItem);
+            boardWorld.appendChild(restoredItem);
         });
     }
 
