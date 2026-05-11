@@ -2,205 +2,208 @@
 <!-- Declares the document as HTML5 -->
 
 <html lang="en" data-theme="light">
-    <!-- Root HTML element with language set to English and a custom data-theme attribute for light/dark mode toggle -->
+<!-- Root HTML element with language set to English and a custom data-theme attribute for light/dark mode toggle -->
 
-    <head>
-        <!-- Title displayed in the browser tab -->
-        <title>Industrial Automation Control Simulator</title>
+<head>
+    <!-- Title displayed in the browser tab -->
+    <title>Industrial Automation Control Simulator</title>
 
-        <!-- Link to external stylesheet for global styles -->
-        <link rel="stylesheet" href="../styles/Game1Style.css" />
+    <!-- Link to external stylesheet for global styles -->
+    <link rel="stylesheet" href="../styles/Game1Style.css" />
 
-        <!-- Character encoding: UTF-8 covers most characters and symbols -->
-        <meta charset="utf-8" />
+    <!-- Character encoding: UTF-8 covers most characters and symbols -->
+    <meta charset="utf-8" />
 
-        <!-- Ensures the latest rendering engine is used in IE and Chrome -->
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Ensures the latest rendering engine is used in IE and Chrome -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <!-- Meta tags for SEO and mobile responsiveness (currently empty descriptions/keywords) -->
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
+    <!-- Meta tags for SEO and mobile responsiveness (currently empty descriptions/keywords) -->
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
 
-        <!-- Improves rendering on mobile and handheld devices -->
-        <meta name="HandheldFriendly" content="True" />
-        <meta name="MobileOptimized" content="320" />
+    <!-- Improves rendering on mobile and handheld devices -->
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
 
-        <!-- Enables responsive layout on all devices -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Enables responsive layout on all devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <!-- Enables ClearType text rendering on Windows devices -->
-        <meta http-equiv="cleartype" content="on" />
+    <!-- Enables ClearType text rendering on Windows devices -->
+    <meta http-equiv="cleartype" content="on" />
 
-        <!-- Author of the page -->
-        <meta name="author" content="Eric Sandlin" />
-    </head>
+    <!-- Author of the page -->
+    <meta name="author" content="Eric Sandlin" />
+</head>
 
-    <body class="wrapper">
-        <!-- Wrapper class likely used for consistent layout/styling across pages -->
+<body class="wrapper">
+    <!-- Wrapper class likely used for consistent layout/styling across pages -->
 
-        <!-- Main content heading -->
-        <h1>Industrial Automation Control</h1>
+    <!-- Main content heading -->
+    <h1>Industrial Automation Control</h1>
 
-        <!-- Search for anything -->
-        <search>
-            <form action="/search-results-page" method="get">
-                <label for="site-search">Search the site:</label>
-                <input type="search" id="site-search" name="q" placeholder="Search..." />
-                <button type="submit">Search</button>
-            </form>
-        </search>
+    <!-- Search for anything -->
+    <search>
+        <form action="/search-results-page" method="get">
+            <label for="site-search">Search the site:</label>
+            <input type="search" id="site-search" name="q" placeholder="Search..." />
+            <button type="submit">Search</button>
+        </form>
+    </search>
 
-        <section class="game-layout">
-            <aside id="dragMenu" class="drag-menu">
-                <h4>Parts Menu</h4>
-                <div id="partsMenuTree" class="parts-menu-tree"></div>
-            </aside>
+    <section class="game-layout">
+        <aside id="dragMenu" class="drag-menu">
+            <h4>Parts Menu</h4>
+            <div id="partsMenuTree" class="parts-menu-tree"></div>
+        </aside>
 
-            <div class="game-board">
-                <details class="wire-legend-dropdown">
-                    <summary>Wire Legend</summary>
+        <div class="game-board">
+            <details class="wire-legend-dropdown">
+                <summary>Wire Legend</summary>
 
-                    <div class="wire-legend">
-                        <div><span class="legend-line wire-power"></span>24VDC Power</div>
-                        <div><span class="legend-line wire-common"></span>0VDC Common / Ground</div>
-                        <div><span class="legend-line wire-signal"></span>Sensor Signal</div>
-                        <div><span class="legend-line wire-safety"></span>Safety Circuit</div>
-                        <div><span class="legend-line wire-network"></span>Ethernet / Network</div>
-                        <div><span class="legend-line wire-analog"></span>Analog Signal</div>
-                        <div><span class="legend-line wire-ac-control"></span>AC Control Power</div>
-                        <div><span class="legend-line wire-pneumatic"></span>Pneumatic Line</div>
-                        <div><span class="legend-line wire-hydraulic"></span>Hydraulic Line</div>
+                <div class="wire-legend">
+                    <div><span class="legend-line wire-power"></span>24VDC Power</div>
+                    <div><span class="legend-line wire-common"></span>0VDC Common / Ground</div>
+                    <div><span class="legend-line wire-signal"></span>Sensor Signal</div>
+                    <div><span class="legend-line wire-safety"></span>Safety Circuit</div>
+                    <div><span class="legend-line wire-network"></span>Ethernet / Network</div>
+                    <div><span class="legend-line wire-analog"></span>Analog Signal</div>
+                    <div><span class="legend-line wire-ac-control"></span>AC Control Power</div>
+                    <div><span class="legend-line wire-pneumatic"></span>Pneumatic Line</div>
+                    <div><span class="legend-line wire-hydraulic"></span>Hydraulic Line</div>
+                </div>
+            </details>
+
+            <div id="dropZone" class="drop-zone">
+                <div id="boardScrollArea" class="board-scroll-area">
+                    <div id="boardWorld" class="board-world">
+                        <canvas id="canvas1" width="800" height="500"></canvas>
                     </div>
-                </details>
+                </div>
+            </div>
 
-                <div id="dropZone" class="drop-zone">
-                    <canvas id="canvas1" width="800" height="500"></canvas>
+            <div class="connection-controls">
+                <button id="connectModeBtn" type="button" class="connection-btn">Connect Mode: OFF</button>
+
+                <label for="wireTypeSelect" class="wire-label">Wire Type:</label>
+
+                <select id="wireTypeSelect" class="wire-select">
+                    <option value="power">24VDC Power</option>
+                    <option value="common">0VDC Common</option>
+                    <option value="signal">Sensor Signal</option>
+                    <option value="safety">Safety Circuit</option>
+                    <option value="network">Ethernet / Network</option>
+                    <option value="analog">Analog Signal</option>
+                    <option value="ac-control">AC Control Power</option>
+                    <option value="pneumatic">Pneumatic Line</option>
+                    <option value="hydraulic">Hydraulic Line</option>
+                </select>
+
+                <button id="clearLinesBtn" type="button" class="connection-btn">Clear Lines</button>
+                <button id="deleteModeBtn" type="button" class="connection-btn delete-btn">Delete Mode: OFF</button>
+                <button id="snapModeBtn" type="button" class="connection-btn snap-btn active">Snap Grid: ON</button>
+                <button id="saveBoardBtn" type="button" class="connection-btn save-btn">Save Board</button>
+                <button id="loadBoardBtn" type="button" class="connection-btn load-btn">Load Board</button>
+                <button id="clearBoardBtn" type="button" class="connection-btn clear-board-btn">Clear Board</button>
+            </div>
+
+            <section id="wirePropertiesPanel" class="wire-properties-panel" aria-hidden="true">
+                <div class="properties-header">
+                    <h4>Wire Properties</h4>
+                    <p id="selectedWireInfo">Select a wire to edit its properties.</p>
                 </div>
 
-                <div class="connection-controls">
-                    <button id="connectModeBtn" type="button" class="connection-btn">Connect Mode: OFF</button>
-
-                    <label for="wireTypeSelect" class="wire-label">Wire Type:</label>
-
-                    <select id="wireTypeSelect" class="wire-select">
-                        <option value="power">24VDC Power</option>
-                        <option value="common">0VDC Common</option>
-                        <option value="signal">Sensor Signal</option>
-                        <option value="safety">Safety Circuit</option>
-                        <option value="network">Ethernet / Network</option>
-                        <option value="analog">Analog Signal</option>
-                        <option value="ac-control">AC Control Power</option>
-                        <option value="pneumatic">Pneumatic Line</option>
-                        <option value="hydraulic">Hydraulic Line</option>
-                    </select>
-
-                    <button id="clearLinesBtn" type="button" class="connection-btn">Clear Lines</button>
-                    <button id="deleteModeBtn" type="button" class="connection-btn delete-btn">Delete Mode: OFF</button>
-                    <button id="snapModeBtn" type="button" class="connection-btn snap-btn active">Snap Grid: ON</button>
-                    <button id="saveBoardBtn" type="button" class="connection-btn save-btn">Save Board</button>
-                    <button id="loadBoardBtn" type="button" class="connection-btn load-btn">Load Board</button>
-                    <button id="clearBoardBtn" type="button" class="connection-btn clear-board-btn">Clear Board</button>
+                <div class="properties-grid">
+                    <label>
+                        Wire Label:
+                        <input id="wireEditLabelInput" type="text" placeholder="Example: PE-101 Signal" />
+                    </label>
                 </div>
 
-                <section id="wirePropertiesPanel" class="wire-properties-panel" aria-hidden="true">
-                    <div class="properties-header">
-                        <h4>Wire Properties</h4>
-                        <p id="selectedWireInfo">Select a wire to edit its properties.</p>
-                    </div>
+                <div class="properties-actions">
+                    <button id="applyWirePropertiesBtn" type="button" class="connection-btn save-btn">
+                        Apply Wire
+                    </button>
 
-                    <div class="properties-grid">
-                        <label>
-                            Wire Label:
-                            <input id="wireEditLabelInput" type="text" placeholder="Example: PE-101 Signal" />
-                        </label>
-                    </div>
+                    <button id="deleteSelectedWireBtn" type="button" class="connection-btn delete-btn">
+                        Delete Wire
+                    </button>
 
-                    <div class="properties-actions">
-                        <button id="applyWirePropertiesBtn" type="button" class="connection-btn save-btn">
-                            Apply Wire
-                        </button>
+                    <button id="clearWireSelectionBtn" type="button" class="connection-btn clear-board-btn">
+                        Clear Wire Selection
+                    </button>
+                </div>
+            </section>
 
-                        <button id="deleteSelectedWireBtn" type="button" class="connection-btn delete-btn">
-                            Delete Wire
-                        </button>
+            <section id="partPropertiesPanel" class="part-properties-panel" aria-hidden="true">
+                <div class="properties-header">
+                    <h4>Part Properties</h4>
+                    <p id="selectedPartPath">Select a dropped part to edit its properties.</p>
+                </div>
 
-                        <button id="clearWireSelectionBtn" type="button" class="connection-btn clear-board-btn">
-                            Clear Wire Selection
-                        </button>
-                    </div>
-                </section>
-
-                <section id="partPropertiesPanel" class="part-properties-panel" aria-hidden="true">
-                    <div class="properties-header">
-                        <h4>Part Properties</h4>
-                        <p id="selectedPartPath">Select a dropped part to edit its properties.</p>
-                    </div>
-
-                    <div class="properties-grid">
-                        <label>
-                            Tag Name
-                            <input id="partTagInput" type="text" placeholder="Example: LS-101" />
-                        </label>
-
-                        <label>
-                            Voltage
-                            <select id="partVoltageSelect">
-                                <option value="">Not Set</option>
-                                <option value="24VDC">24VDC</option>
-                                <option value="120VAC">120VAC</option>
-                                <option value="240VAC">240VAC</option>
-                                <option value="480VAC">480VAC</option>
-                                <option value="Air">Air / Pneumatic</option>
-                                <option value="Hydraulic">Hydraulic</option>
-                            </select>
-                        </label>
-
-                        <label>
-                            Output Type
-                            <select id="partOutputTypeSelect">
-                                <option value="">Not Set</option>
-                                <option value="PNP">PNP</option>
-                                <option value="NPN">NPN</option>
-                                <option value="Relay">Relay</option>
-                                <option value="Analog 4-20mA">Analog 4-20mA</option>
-                                <option value="Analog 0-10V">Analog 0-10V</option>
-                                <option value="Ethernet">Ethernet</option>
-                                <option value="Pneumatic">Pneumatic</option>
-                                <option value="Hydraulic">Hydraulic</option>
-                            </select>
-                        </label>
-
-                        <label>
-                            Contact Type
-                            <select id="partContactTypeSelect">
-                                <option value="">Not Set</option>
-                                <option value="NO">Normally Open</option>
-                                <option value="NC">Normally Closed</option>
-                                <option value="NO/NC">NO / NC</option>
-                            </select>
-                        </label>
-                    </div>
-
-                    <label class="properties-notes-label">
-                        Notes
-                        <textarea
-                            id="partDescriptionInput"
-                            placeholder="Example: Detects box at end of conveyor."></textarea>
+                <div class="properties-grid">
+                    <label>
+                        Tag Name
+                        <input id="partTagInput" type="text" placeholder="Example: LS-101" />
                     </label>
 
-                    <div class="properties-actions">
-                        <button id="applyPartPropertiesBtn" type="button" class="connection-btn save-btn">
-                            Apply Properties
-                        </button>
+                    <label>
+                        Voltage
+                        <select id="partVoltageSelect">
+                            <option value="">Not Set</option>
+                            <option value="24VDC">24VDC</option>
+                            <option value="120VAC">120VAC</option>
+                            <option value="240VAC">240VAC</option>
+                            <option value="480VAC">480VAC</option>
+                            <option value="Air">Air / Pneumatic</option>
+                            <option value="Hydraulic">Hydraulic</option>
+                        </select>
+                    </label>
 
-                        <button id="clearPartSelectionBtn" type="button" class="connection-btn clear-board-btn">
-                            Clear Selection
-                        </button>
-                    </div>
-                </section>
-            </div>
-        </section>
+                    <label>
+                        Output Type
+                        <select id="partOutputTypeSelect">
+                            <option value="">Not Set</option>
+                            <option value="PNP">PNP</option>
+                            <option value="NPN">NPN</option>
+                            <option value="Relay">Relay</option>
+                            <option value="Analog 4-20mA">Analog 4-20mA</option>
+                            <option value="Analog 0-10V">Analog 0-10V</option>
+                            <option value="Ethernet">Ethernet</option>
+                            <option value="Pneumatic">Pneumatic</option>
+                            <option value="Hydraulic">Hydraulic</option>
+                        </select>
+                    </label>
 
-        <script src="../javaScript/game_1.js"></script>
-    </body>
+                    <label>
+                        Contact Type
+                        <select id="partContactTypeSelect">
+                            <option value="">Not Set</option>
+                            <option value="NO">Normally Open</option>
+                            <option value="NC">Normally Closed</option>
+                            <option value="NO/NC">NO / NC</option>
+                        </select>
+                    </label>
+                </div>
+
+                <label class="properties-notes-label">
+                    Notes
+                    <textarea id="partDescriptionInput" placeholder="Example: Detects box at end of conveyor."></textarea>
+                </label>
+
+                <div class="properties-actions">
+                    <button id="applyPartPropertiesBtn" type="button" class="connection-btn save-btn">
+                        Apply Properties
+                    </button>
+
+                    <button id="clearPartSelectionBtn" type="button" class="connection-btn clear-board-btn">
+                        Clear Selection
+                    </button>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <script src="../javaScript/game_1.js"></script>
+</body>
+
 </html>
