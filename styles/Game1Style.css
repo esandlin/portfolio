@@ -906,25 +906,55 @@ html[data-theme="dark"] .part-properties-panel textarea {
 /* ============================================================
    DROP ZONE + CANVAS WIRE LAYER
    ============================================================ */
+/* ============================================================
+   ZOOMABLE BOARD WORLD
+   dropZone = viewport
+   boardScrollArea = scrollable size holder
+   boardWorld = scaled CAD board
+   ============================================================ */
 
 .drop-zone {
     position: relative;
     width: 800px;
     height: 500px;
     max-width: 100%;
+
     background-color: var(--drop-bg);
     border: 3px solid var(--drop-border);
     border-radius: var(--radius-lg);
-    overflow: hidden;
+
+    overflow: auto;
     touch-action: none;
+
     box-shadow: var(--soft-shadow);
 }
 
+.board-scroll-area {
+    position: relative;
+    width: 800px;
+    height: 500px;
+}
+
+.board-world {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    width: 800px;
+    height: 500px;
+
+    transform-origin: 0 0;
+}
+
 #canvas1 {
+    position: absolute;
+    left: 0;
+    top: 0;
+
     display: block;
     width: 800px;
     height: 500px;
-    max-width: 100%;
+
     background-color: var(--drop-bg);
     pointer-events: none;
 }
