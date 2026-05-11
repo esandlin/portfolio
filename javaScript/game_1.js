@@ -537,7 +537,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     children: [
                         {
                             label: "E-Stop Normally Closed",
-                            shortLabel: "E-Stop NC"
+                            shortLabel: "E-Stop NC",
                             image: "../images/parts/Safety/e-stop"
                         },
                         {
@@ -599,12 +599,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         {
                             label: "Three-way Solenoid Valve",
                             shortLabel: "Three-way",
-                            image: "../images/parts/Pneumatics/two-way"
+                            image: "../images/parts/Pneumatics/Three-way"
                         },
                         {
                             label: "Four-way Solenoid Valve",
                             shortLabel: "Four-way valves",
-                            image: "../images/parts/Pneumatics/two-way"
+                            image: "../images/parts/Pneumatics/Four-way"
                         }
                     ]
                 },
