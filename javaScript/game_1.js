@@ -599,12 +599,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         {
                             label: "Three-way Solenoid Valve",
                             shortLabel: "Three-way",
-                            image: "../images/parts/Pneumatics/Three-way"
+                            image: "../images/parts/Pneumatics/three-way"
                         },
                         {
                             label: "Four-way Solenoid Valve",
                             shortLabel: "Four-way valves",
-                            image: "../images/parts/Pneumatics/Four-way"
+                            image: "../images/parts/Pneumatics/four-way"
                         }
                     ]
                 },
