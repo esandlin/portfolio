@@ -551,12 +551,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         {
                             label: "E-Stop Normally Closed",
                             shortLabel: "E-Stop NC",
-                            image: "../images/parts/Safety/e-stop"
+                            image: "../images/parts/Safety/e-stop.png"
                         },
                         {
                             label: "Pull Cord E-Stop",
                             shortLabel: "Pull Cord",
-                            image: "../images/parts/Safety/pull-cord"
+                            image: "../images/parts/Safety/pull-cord.png"
                         }
                     ]
                 },
@@ -566,17 +566,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         {
                             label: "Light Curtain",
                             shortLabel: "Light Curtain",
-                            image: "../images/parts/Safety/light-estop"
+                            image: "../images/parts/Safety/light-estop.png"
                         },
                         {
                             label: "Safety Interlock Switch",
                             shortLabel: "Interlock",
-                            image: "../images/parts/Safety/interlock"
+                            image: "../images/parts/Safety/interlock.png"
                         },
                         {
                             label: "Safety Mat",
                             shortLabel: "Safety Mat",
-                            image: "../images/parts/Safety/safety-mat"
+                            image: "../images/parts/Safety/safety-mat.png"
                         }
                     ]
                 },
@@ -586,12 +586,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         {
                             label: "Single Channel Safety Relay",
                             shortLabel: "1CH Safety Relay",
-                            image: "../images/parts/Safety/single-relay"
+                            image: "../images/parts/Safety/single-relay.png"
                         },
                         {
                             label: "Dual Channel Safety Relay",
                             shortLabel: "2CH Safety Relay",
-                            image: "../images/parts/Safety/duel-relay"
+                            image: "../images/parts/Safety/duel-relay.png"
                         }
                     ]
                 }
@@ -607,17 +607,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         {
                             label: "Two-way Solenoid Valve",
                             shortLabel: "Two-way valves",
-                            image: "../images/parts/Pneumatics/two-way"
+                            image: "../images/parts/Pneumatics/two-way.png"
                         },
                         {
                             label: "Three-way Solenoid Valve",
                             shortLabel: "Three-way",
-                            image: "../images/parts/Pneumatics/three-way"
+                            image: "../images/parts/Pneumatics/three-way.png"
                         },
                         {
                             label: "Four-way Solenoid Valve",
                             shortLabel: "Four-way valves",
-                            image: "../images/parts/Pneumatics/four-way"
+                            image: "../images/parts/Pneumatics/four-way.png"
                         }
                     ]
                 },
