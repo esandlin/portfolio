@@ -31,6 +31,34 @@ body {
     color: var(--text-color);
 }
 
+/* ============================================================
+   SHARED PARTS MENU
+   Uses the same part images as CAD Parts Repair.
+   ============================================================ */
+
+
+.conveyor-part-menu-content {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+.conveyor-part-menu-thumb {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    flex: 0 0 36px;
+    pointer-events: none;
+}
+
+.shared-part-menu-item {
+    text-align: left;
+}
+
+.shared-part-menu-item span {
+    pointer-events: none;
+}
+
 .conveyor-app {
     width: min(1400px, 100%);
     margin: 0 auto;
@@ -269,3 +297,265 @@ body {
     font-size: 1.3rem;
     opacity: 0.7;
 }
+
+/* ============================================================
+   ATTACHED PART INDICATOR
+   Shows when a part is mounted to a conveyor.
+   ============================================================ */
+
+.zone-item.attached-to-conveyor {
+    outline: 3px solid #198754;
+    box-shadow:
+        0 0 0 4px rgba(25, 135, 84, 0.2),
+        0 5px 14px rgba(0, 0, 0, 0.22);
+}
+
+.zone-item.attached-to-conveyor::before {
+    content: "●";
+    position: absolute;
+    top: -0.55rem;
+    right: -0.55rem;
+
+    width: 1.1rem;
+    height: 1.1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #198754;
+    color: #ffffff;
+
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: 900;
+}
+
+/* ============================================================
+   CONVEYOR RESIZE HANDLE
+   Allows conveyors to be stretched to match real-world layouts.
+   ============================================================ */
+
+.zone-item-label {
+    pointer-events: none;
+    padding: 0.25rem 1.25rem 0.25rem 0.5rem;
+    text-align: center;
+}
+
+.zone-resize-handle {
+    position: absolute;
+    right: -0.55rem;
+    bottom: -0.55rem;
+
+    width: 1.15rem;
+    height: 1.15rem;
+
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+
+    background-color: #0d6efd;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+
+    cursor: nwse-resize;
+    touch-action: none;
+    z-index: 20;
+}
+
+.zone-resize-handle:hover {
+    transform: scale(1.15);
+}
+
+.zone-preview .zone-resize-handle {
+    display: none;
+}
+
+/* ============================================================
+   ZONE ITEM IMAGES
+   Shows shared catalog part images on Conveyor Locations CAD.
+   ============================================================ */
+
+.zone-item-image {
+    max-width: 42px;
+    max-height: 42px;
+    object-fit: contain;
+    margin-right: 0.35rem;
+    pointer-events: none;
+}
+
+.zone-item[data-kind="part"] {
+    width: 90px;
+    height: 55px;
+    background-color: #d6f5d6;
+    font-size: 0.75rem;
+}
+
+.zone-item[data-kind="part"] .zone-item-label {
+    padding: 0.15rem;
+}
+
+/* ============================================================
+   CONVEYOR CAD SHARED PARTS MENU FORMATTING
+   Makes the shared parts catalog visually match the conveyor menu.
+   ============================================================ */
+
+.conveyor-parts-menu-tree {
+    max-height: 360px;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+}
+
+/* Main dropdown category wrapper */
+.conveyor-parts-menu-tree .parts-category {
+    margin-bottom: 0.55rem;
+}
+
+/* Dropdown category headers: Sensors, Motors, Controls, etc. */
+.conveyor-parts-menu-tree .parts-category > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 0.75rem;
+
+    border-radius: var(--radius-md);
+    background-color: #3d4a57;
+    color: #ffffff;
+
+    font-weight: 800;
+    cursor: pointer;
+    user-select: none;
+
+    list-style: none;
+}
+
+/* Remove default browser triangle */
+.conveyor-parts-menu-tree .parts-category > summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Custom dropdown arrow */
+.conveyor-parts-menu-tree .parts-category > summary::after {
+    content: "▸";
+    font-size: 0.85rem;
+    transition: transform 0.2s ease;
+}
+
+/* Rotate arrow when open */
+.conveyor-parts-menu-tree .parts-category[open] > summary::after {
+    transform: rotate(90deg);
+}
+
+/* Hover effect for category headers */
+.conveyor-parts-menu-tree .parts-category > summary:hover {
+    background-color: #4b5a68;
+}
+
+/* Nested content area */
+.conveyor-parts-menu-tree .parts-children {
+    margin-top: 0.45rem;
+    margin-left: 0.45rem;
+    padding-left: 0.55rem;
+
+    border-left: 2px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Nested categories should be slightly smaller/subdued */
+.conveyor-parts-menu-tree .parts-children .parts-category > summary {
+    padding: 0.65rem 0.7rem;
+    background-color: #33414d;
+    font-size: 0.9rem;
+}
+
+/* Actual draggable shared part buttons */
+.conveyor-parts-menu-tree .shared-part-menu-item {
+    display: block;
+    width: 100%;
+
+    margin-bottom: 0.5rem;
+    padding: 0.6rem 0.65rem;
+
+    border: none;
+    border-radius: var(--radius-md);
+
+    background-color: #263238;
+    color: #ffffff;
+
+    font-weight: 800;
+    text-align: left;
+
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.conveyor-parts-menu-tree .shared-part-menu-item:hover {
+    background-color: #0d6efd;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+}
+
+.conveyor-parts-menu-tree .shared-part-menu-item:active {
+    cursor: grabbing;
+    transform: translateY(0);
+}
+
+/* Thumbnail + label layout */
+.conveyor-part-menu-content {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+}
+
+/* Part thumbnails */
+.conveyor-part-menu-thumb {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+
+    object-fit: contain;
+
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 0.2rem;
+
+    pointer-events: none;
+}
+
+/* Prevent image/text inside button from stealing pointer events */
+.conveyor-part-menu-content,
+.conveyor-part-menu-content span,
+.conveyor-part-menu-thumb {
+    pointer-events: none;
+}
+
+/* Scrollbar cleanup for the shared parts list */
+.conveyor-parts-menu-tree::-webkit-scrollbar {
+    width: 8px;
+}
+
+.conveyor-parts-menu-tree::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+}
+
+.conveyor-parts-menu-tree::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+}
+
+.conveyor-parts-menu-tree::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.42);
+}
+
+
+
+
+
+
