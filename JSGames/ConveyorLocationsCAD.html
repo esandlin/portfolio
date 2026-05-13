@@ -1,0 +1,106 @@
+<!doctype html>
+
+<html lang="en" data-theme="light">
+    <head>
+        <title>Conveyor Locations</title>
+
+        <link rel="stylesheet" href="../styles/ConveyorLocationCAD.css" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+
+    <body class="conveyor-page">
+        <main class="conveyor-app">
+            <header class="conveyor-header">
+                <div>
+                    <h1>Conveyor Locations</h1>
+                    <p>Build a real-world layout of conveyors inside a named zone.</p>
+                </div>
+
+                <a class="back-link" href="JSGamesMenu.html">← Back to Main Menu</a>
+            </header>
+
+            <section class="zone-toolbar">
+                <label>
+                    Zone Name
+                    <input id="zoneNameInput" type="text" placeholder="Example: Zone 1 - Inbound Area - Belt 1" />
+                </label>
+
+                <button id="saveZoneBtn" type="button">Save Zone</button>
+                <button id="loadZoneBtn" type="button">Load Zone</button>
+                <button id="clearZoneBtn" type="button">Clear Zone</button>
+                <button id="snapZoneBtn" type="button">Snap Grid: ON</button>
+            </section>
+
+            <section class="conveyor-layout">
+                <aside class="conveyor-menu">
+                    <h2>Conveyor Menu</h2>
+
+                    <button class="conveyor-menu-item" data-type="straight-belt" data-label="Straight Belt Conveyor">
+                        Straight Belt
+                    </button>
+
+                    <button class="conveyor-menu-item" data-type="roller" data-label="Roller Conveyor">
+                        Roller Conveyor
+                    </button>
+
+                    <button class="conveyor-menu-item" data-type="curve-90" data-label="90° Curve Conveyor">
+                        90° Curve
+                    </button>
+
+                    <button class="conveyor-menu-item" data-type="merge" data-label="Merge Conveyor">Merge</button>
+
+                    <button class="conveyor-menu-item" data-type="divert" data-label="Divert Conveyor">Divert</button>
+
+                    <button class="conveyor-menu-item" data-type="spiral" data-label="Spiral Conveyor">Spiral</button>
+
+                    <hr />
+
+                    <h2>Parts</h2>
+
+                    <button class="conveyor-menu-item" data-type="photoeye" data-label="Photoeye">Photoeye</button>
+
+                    <button class="conveyor-menu-item" data-type="motor" data-label="Motor">Motor</button>
+
+                    <button class="conveyor-menu-item" data-type="e-stop" data-label="E-Stop">E-Stop</button>
+                </aside>
+
+                <section class="zone-board-wrap">
+                    <div id="zoneBoard" class="zone-board">
+                        <p class="zone-board-hint">Drop conveyors here</p>
+                    </div>
+                </section>
+
+                <aside id="zonePropertiesPanel" class="zone-properties-panel">
+                    <h2>Properties</h2>
+                    <p id="selectedZoneItemLabel">Select a conveyor or part.</p>
+
+                    <label>
+                        Label
+                        <input id="selectedItemNameInput" type="text" />
+                    </label>
+
+                    <label>
+                        Notes
+                        <textarea id="selectedItemNotesInput"></textarea>
+                    </label>
+
+                    <label>
+                        Rotation
+                        <input id="selectedItemRotationInput" type="number" step="90" value="0" />
+                    </label>
+
+                    <div class="property-button-row">
+                        <button id="rotateLeftBtn" type="button">Rotate Left</button>
+                        <button id="rotateRightBtn" type="button">Rotate Right</button>
+                    </div>
+
+                    <button id="applyZoneItemBtn" type="button">Apply</button>
+                    <button id="deleteZoneItemBtn" type="button">Delete</button>
+                </aside>
+            </section>
+        </main>
+
+        <script src="../javaScript/ConveyorLocationsCAD.js"></script>
+    </body>
+</html>
