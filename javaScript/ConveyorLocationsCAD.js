@@ -354,46 +354,57 @@ document.addEventListener("DOMContentLoaded", () => {
     /*
     Builds the visible content inside a conveyor or mounted part.
 
-    Conveyors get:
-    - A text label
-    - A resize handle
+    Conveyors:
+    - Use a large conveyor image if one exists.
+    - Keep the label visible on top.
+    - Keep the resize handle.
 
-    Shared parts get:
-    - An optional image
-    - A text label
+    Parts:
+    - Use a smaller part image.
+    - Stay above conveyors.
 */
-    function renderZoneItemContent(item) {
-        item.textContent = "";
+function renderZoneItemContent(item) {
+    item.textContent = "";
 
-        if (item.dataset.image) {
-            const image = document.createElement("img");
+    const isPart = isPartType(item);
+    const imagePath = item.dataset.image || "";
 
-            image.classList.add("zone-item-image");
-            image.src = item.dataset.image;
-            image.alt = item.dataset.label || "Part";
+    if (imagePath) {
+        const image = document.createElement("img");
 
-            item.appendChild(image);
+        image.classList.add("zone-item-image");
+
+        if (isPart) {
+            image.classList.add("zone-part-image");
+        } else {
+            image.classList.add("zone-conveyor-image");
         }
 
-        const label = document.createElement("span");
+        image.src = imagePath;
+        image.alt = item.dataset.label || "Zone item";
 
-        label.classList.add("zone-item-label");
-        label.textContent = item.dataset.label || "Item";
-
-        item.appendChild(label);
-
-        if (!isPartType(item)) {
-            const resizeHandle = document.createElement("button");
-
-            resizeHandle.type = "button";
-            resizeHandle.classList.add("zone-resize-handle");
-            resizeHandle.setAttribute("aria-label", "Resize conveyor");
-
-            resizeHandle.addEventListener("pointerdown", startResizingConveyor);
-
-            item.appendChild(resizeHandle);
-        }
+        item.appendChild(image);
     }
+
+    const label = document.createElement("span");
+
+    label.classList.add("zone-item-label");
+    label.textContent = item.dataset.label || "Item";
+
+    item.appendChild(label);
+
+    if (!isPart) {
+        const resizeHandle = document.createElement("button");
+
+        resizeHandle.type = "button";
+        resizeHandle.classList.add("zone-resize-handle");
+        resizeHandle.setAttribute("aria-label", "Resize conveyor");
+
+        resizeHandle.addEventListener("pointerdown", startResizingConveyor);
+
+        item.appendChild(resizeHandle);
+    }
+}
 
     /*
     Conveyor items are larger.
