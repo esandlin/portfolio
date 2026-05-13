@@ -303,14 +303,14 @@ body {
    Shows when a part is mounted to a conveyor.
    ============================================================ */
 
-.zone-item.attached-to-conveyor {
+.zone-item[data-kind="part"].attached-to-conveyor {
     outline: 3px solid #198754;
     box-shadow:
         0 0 0 4px rgba(25, 135, 84, 0.2),
         0 5px 14px rgba(0, 0, 0, 0.22);
 }
 
-.zone-item.attached-to-conveyor::before {
+.zone-item[data-kind="part"].attached-to-conveyor::before {
     content: "●";
     position: absolute;
     top: -0.55rem;
@@ -554,7 +554,48 @@ body {
     background-color: rgba(255, 255, 255, 0.42);
 }
 
+/* ============================================================
+   CONVEYOR / PART LAYERING
+   ------------------------------------------------------------
+   Conveyors are the base layer.
+   Mounted parts sit above conveyors.
+   Selected parts sit above everything else.
+   ============================================================ */
 
+/* Base conveyor layer */
+.zone-item[data-kind="conveyor"] {
+    z-index: 10;
+}
+
+/* Mounted parts should always appear above conveyors */
+.zone-item[data-kind="part"] {
+    z-index: 40;
+}
+
+/* Selected conveyor should highlight, but still stay below parts */
+.zone-item[data-kind="conveyor"].selected {
+    z-index: 20;
+}
+
+/* Selected parts should rise above everything */
+.zone-item[data-kind="part"].selected {
+    z-index: 70;
+}
+
+/* Attached parts should also stay above conveyors */
+.zone-item[data-kind="part"].attached-to-conveyor {
+    z-index: 60;
+}
+
+/* Resize handle needs to stay clickable on conveyors */
+.zone-item[data-kind="conveyor"] .zone-resize-handle {
+    z-index: 25;
+}
+
+/* Drag preview should always be on top while dragging */
+.zone-preview {
+    z-index: 9999;
+}
 
 
 
