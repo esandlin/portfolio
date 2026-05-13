@@ -375,10 +375,6 @@ body {
    ============================================================ */
 
 .zone-item-image {
-    max-width: 42px;
-    max-height: 42px;
-    object-fit: contain;
-    margin-right: 0.35rem;
     pointer-events: none;
 }
 
@@ -597,6 +593,70 @@ body {
     z-index: 9999;
 }
 
+/* ============================================================
+   CONVEYOR IMAGE DISPLAY
+   ------------------------------------------------------------
+   Conveyor images fill the conveyor block.
+   Part images stay small and readable.
+   ============================================================ */
 
+.zone-item {
+    overflow: visible;
+}
+
+/* Conveyor blocks become image containers */
+.zone-item[data-kind="conveyor"] {
+    background-color: transparent;
+}
+
+/* Main conveyor image */
+.zone-conveyor-image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: fill;
+    pointer-events: none;
+
+    border-radius: var(--radius-md);
+}
+
+/* Conveyor label sits on top of the conveyor image */
+.zone-item[data-kind="conveyor"] .zone-item-label {
+    position: relative;
+    z-index: 12;
+
+    padding: 0.25rem 0.55rem;
+
+    background-color: rgba(255, 255, 255, 0.82);
+    color: #111111;
+
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 900;
+
+    text-shadow: none;
+}
+
+/* Part image stays compact */
+.zone-part-image {
+    max-width: 42px;
+    max-height: 42px;
+    object-fit: contain;
+    margin-right: 0.35rem;
+    pointer-events: none;
+}
+
+/* Keep resize handle above the conveyor image */
+.zone-item[data-kind="conveyor"] .zone-resize-handle {
+    z-index: 30;
+}
+
+/* Keep selected outline visible above conveyor image */
+.zone-item.selected {
+    z-index: 80;
+}
 
 
