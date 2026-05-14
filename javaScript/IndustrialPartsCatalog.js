@@ -428,11 +428,13 @@ window.IndustrialPartsCatalog = [
                 children: [
                     {
                         label: "Single Acting Cylinder",
-                        shortLabel: "Single Cylinder"
+                        shortLabel: "Single Cylinder",
+                        image: "../images/parts/Pneumatics/four-way.png"
                     },
                     {
                         label: "Double Acting Cylinder",
-                        shortLabel: "Double Cylinder"
+                        shortLabel: "Double Cylinder",
+                        image: "../images/parts/Pneumatics/four-way.png"
                     }
                 ]
             },
@@ -441,19 +443,23 @@ window.IndustrialPartsCatalog = [
                 children: [
                     {
                         label: "Filter",
-                        shortLabel: "Air Filter"
+                        shortLabel: "Air Filter",
+                        image: "../images/parts/Pneumatics/air-filter.png"
                     },
                     {
                         label: "Regulator",
-                        shortLabel: "Regulator"
+                        shortLabel: "Regulator",
+                        image: "../images/parts/Pneumatics/regulator.png"
                     },
                     {
                         label: "Lubricator",
-                        shortLabel: "Lubricator"
+                        shortLabel: "Lubricator",
+                        image: "../images/parts/Pneumatics/lubricatior.png"
                     },
                     {
                         label: "FRL Combo",
-                        shortLabel: "FRL"
+                        shortLabel: "FRL",
+                        image: "../images/parts/Pneumatics/frl.png"
                     }
                 ]
             }
@@ -468,19 +474,23 @@ window.IndustrialPartsCatalog = [
                 children: [
                     {
                         label: "Directional Control Valve",
-                        shortLabel: "Directional Valve"
+                        shortLabel: "Directional Valve",
+                        image: "../images/parts/Hydraulics/direction.png"
                     },
                     {
                         label: "Pressure Relief Valve",
-                        shortLabel: "Relief Valve"
+                        shortLabel: "Relief Valve",
+                        image: "../images/parts/Hydraulics/pressure-relief.png"
                     },
                     {
                         label: "Flow Control Valve",
-                        shortLabel: "Flow Valve"
+                        shortLabel: "Flow Valve",
+                        image: "../images/parts/Hydraulics/flow-control.png"
                     },
                     {
                         label: "Check Valve",
-                        shortLabel: "Check Valve"
+                        shortLabel: "Check Valve",
+                        image: "../images/parts/Hydraulics/check-vlv.png"
                     }
                 ]
             },
@@ -489,11 +499,13 @@ window.IndustrialPartsCatalog = [
                 children: [
                     {
                         label: "Hydraulic Cylinder",
-                        shortLabel: "Hyd Cylinder"
+                        shortLabel: "Hyd Cylinder",
+                        image: "../images/parts/Hydraulics/hyd-cyl.png"
                     },
                     {
                         label: "Hydraulic Motor",
-                        shortLabel: "Hyd Motor"
+                        shortLabel: "Hyd Motor",
+                        image: "../images/parts/Hydraulics/hyd-motor.png"
                     }
                 ]
             },
@@ -502,15 +514,18 @@ window.IndustrialPartsCatalog = [
                 children: [
                     {
                         label: "Hydraulic Pump",
-                        shortLabel: "Hyd Pump"
+                        shortLabel: "Hyd Pump",
+                        image: "../images/parts/Hydraulics/hyd-pump.png"
                     },
                     {
                         label: "Reservoir",
-                        shortLabel: "Reservoir"
+                        shortLabel: "Reservoir",
+                        image: "../images/parts/Hydraulics/reservoir.png"
                     },
                     {
                         label: "Accumulator",
-                        shortLabel: "Accumulator"
+                        shortLabel: "Accumulator",
+                        image: "../images/parts/Hydraulics/accumulator.png"
                     }
                 ]
             }
@@ -525,15 +540,18 @@ window.IndustrialPartsCatalog = [
                 children: [
                     {
                         label: "Fuse",
-                        shortLabel: "Fuse"
+                        shortLabel: "Fuse",
+                        image: "../images/parts/Electrical/fuse.png"
                     },
                     {
                         label: "Circuit Breaker",
-                        shortLabel: "Breaker"
+                        shortLabel: "Breaker",
+                        image: "../images/parts/Electrical/cb.png"
                     },
                     {
                         label: "Surge Protector",
-                        shortLabel: "Surge Protect"
+                        shortLabel: "Surge Protect",
+                        image: "../images/parts/Electrical/surge.png"
                     }
                 ]
             },
@@ -542,15 +560,18 @@ window.IndustrialPartsCatalog = [
                 children: [
                     {
                         label: "24VDC Power Supply",
-                        shortLabel: "24VDC Supply"
+                        shortLabel: "24VDC Supply",
+                        image: "../images/parts/Electrical/24dc-supply.png"
                     },
                     {
                         label: "120VAC Transformer",
-                        shortLabel: "Transformer"
+                        shortLabel: "Transformer",
+                        image: "../images/parts/Electrical/120V-trans.png"
                     },
                     {
                         label: "480VAC Transformer",
-                        shortLabel: "480V XFMR"
+                        shortLabel: "480V XFMR",
+                        image: "../images/parts/Electrical/480vac-trans.png"
                     }
                 ]
             },
@@ -559,15 +580,18 @@ window.IndustrialPartsCatalog = [
                 children: [
                     {
                         label: "Terminal Block",
-                        shortLabel: "Terminal Block"
+                        shortLabel: "Terminal Block",
+                        image: "../images/parts/Electrical/terminal.png"
                     },
                     {
                         label: "Ground Terminal",
-                        shortLabel: "Ground Terminal"
+                        shortLabel: "Ground Terminal",
+                        image: "../images/parts/Electrical/ground.png"
                     },
                     {
                         label: "Fuse Terminal",
-                        shortLabel: "Fuse Terminal"
+                        shortLabel: "Fuse Terminal",
+                        image: "../images/parts/Electrical/fuse-block.png"
                     }
                 ]
             }
